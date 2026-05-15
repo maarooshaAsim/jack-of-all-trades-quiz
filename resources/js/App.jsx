@@ -1,10 +1,19 @@
 import React from 'react'
 import { BrowserRouter, Link, Route, Routes, useParams } from 'react-router-dom'
 
-function Shell({ children, tone = 'from-[#fff5df] via-[#fff8f1] to-[#ffe9cf]' }) {
+const logoDarkPath = '/storage/assets/joat_logo_dark.png'
+const landingStarsPath = '/storage/assets/landing_page_bg_stars.svg'
+
+function Shell({ children, tone = 'from-[#fffaf2] via-[#fffdf8] to-[#fff7eb]', fullBleed = false }) {
   return (
     <main className={`min-h-screen bg-gradient-to-br ${tone} text-[#18161d]`}>
-      <div className="mx-auto flex min-h-screen w-full max-w-6xl flex-col px-6 py-8 md:px-10">
+      <div
+        className={
+          fullBleed
+            ? 'flex min-h-screen w-full flex-col'
+            : 'mx-auto flex min-h-screen w-full max-w-6xl flex-col px-4 py-4 sm:px-6 sm:py-6 md:px-8'
+        }
+      >
         {children}
       </div>
     </main>
@@ -13,70 +22,57 @@ function Shell({ children, tone = 'from-[#fff5df] via-[#fff8f1] to-[#ffe9cf]' })
 
 function Logo() {
   return (
-    <div className="inline-flex items-center gap-3 self-start rounded-full border-2 border-[#18161d] bg-white/75 px-4 py-2 shadow-[6px_6px_0_0_#18161d] backdrop-blur">
-      <span className="text-2xl">✦</span>
-      <div>
-        <div className="text-xs font-black uppercase tracking-[0.35em] text-[#ff7a59]">Jack of All Trades</div>
-        <div className="text-sm font-semibold text-[#241c33]">The Polymath Type Quiz</div>
-      </div>
-    </div>
+    <img src={logoDarkPath} alt="Jack of All Trades" className="h-auto w-full max-w-[21rem] sm:max-w-[24rem]" />
   )
-}
-
-function Star({ className }) {
-  return <div className={`absolute text-3xl text-[#18161d] ${className}`}>✦</div>
 }
 
 function Landing() {
   return (
-    <Shell>
-      <div className="relative flex flex-1 flex-col justify-between overflow-hidden rounded-[2rem] border-2 border-[#18161d] bg-[rgba(255,255,255,0.62)] p-8 shadow-[10px_10px_0_0_#18161d] md:p-12">
-        <Star className="left-6 top-6 rotate-12 text-[#5bbfef]" />
-        <Star className="right-10 top-20 -rotate-12 text-[#ff7a59]" />
-        <Star className="bottom-28 left-10 rotate-6 text-[#f5c842]" />
-        <Star className="bottom-12 right-14 -rotate-6 text-[#7ae4b8]" />
+    <Shell tone="from-[#fbfbfa] via-[#fffdf9] to-[#f8f8f7]" fullBleed>
+      <section className="relative flex min-h-screen flex-1 flex-col items-center justify-between overflow-hidden bg-white px-5 py-6 text-center sm:px-8 sm:py-8">
+        <div
+          className="pointer-events-none absolute inset-0 bg-cover bg-no-repeat opacity-[0.82]"
+          style={{
+            backgroundImage: `url(${landingStarsPath})`,
+            backgroundPosition: 'center 12.5rem',
+            backgroundSize: '52rem auto',
+          }}
+        />
+        <div className="pointer-events-none absolute inset-x-0 top-[7.2rem] h-[13rem] bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.78)_0%,rgba(255,255,255,0.54)_38%,rgba(255,255,255,0.2)_72%,rgba(255,255,255,0)_100%)] sm:top-[8.5rem] sm:h-[14rem]" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 top-[10.5rem] bg-[linear-gradient(180deg,rgba(255,255,255,0)_0%,rgba(255,255,255,0.02)_18%,rgba(255,255,255,0.06)_40%,rgba(255,255,255,0.1)_62%,rgba(255,255,255,0.14)_100%)] sm:top-[12rem]" />
 
-        <Logo />
+        <div className="relative flex w-full justify-center">
+          <Logo />
+        </div>
 
-        <section className="grid flex-1 items-center gap-12 py-12 md:grid-cols-[1.2fr_0.8fr]">
-          <div className="max-w-3xl">
-            <p className="mb-4 inline-block rounded-full bg-[#18161d] px-4 py-2 text-sm font-bold uppercase tracking-[0.3em] text-white">
-              Student Project Prototype
-            </p>
-            <h1 className="max-w-3xl text-5xl font-black uppercase leading-none tracking-tight md:text-7xl">
-              Find your polymath pattern.
+        <div className="relative flex w-full max-w-[22rem] flex-1 flex-col items-center justify-center py-8 sm:max-w-[25rem] sm:py-10">
+          <div className="-mt-5 rounded-[3.2rem] bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.98)_0%,rgba(255,255,255,0.98)_38%,rgba(255,255,255,0.94)_56%,rgba(255,255,255,0.76)_72%,rgba(255,255,255,0.42)_88%,rgba(255,255,255,0.12)_97%,rgba(255,255,255,0)_100%)] px-10 pt-14 pb-10 sm:-mt-6 sm:px-12 sm:pt-16 sm:pb-11">
+            <h1 className="text-[1.7rem] font-black uppercase tracking-[-0.04em] text-[#18161d] sm:text-[2rem]">
+              The Polymath Type Quiz
             </h1>
-            <p className="mt-6 max-w-2xl text-lg leading-8 text-[#3a3348] md:text-xl">
-              A bold, fast 18-question quiz about how you learn, explore, and connect skills across different interests.
-            </p>
-          </div>
-
-          <div className="rounded-[1.75rem] border-2 border-[#18161d] bg-[#241c33] p-6 text-[#fff7ea] shadow-[8px_8px_0_0_#18161d]">
-            <p className="text-sm font-bold uppercase tracking-[0.3em] text-[#f5c842]">How it works</p>
-            <div className="mt-4 space-y-4 text-sm leading-7 text-white/85">
-              <p>18 fixed questions</p>
-              <p>6 categories</p>
-              <p>1 final archetype result</p>
-              <p>No saved progress if you leave mid-quiz</p>
+            <div className="mt-6 space-y-3 text-[0.95rem] leading-6 text-[#33303a] sm:text-base">
+              <p>Discover your archetype in the tension between mastery and exploration.</p>
+              <p>Are you a Deep Diver or an Infinite Explorer? A T-Shaped Bridge or a Renaissance Weaver.</p>
+              <p>18 questions. No right answers. Just honest self reflection.</p>
             </div>
           </div>
-        </section>
+        </div>
 
-        <div className="flex flex-col gap-4 sm:flex-row">
+        <div className="relative grid w-full max-w-[20rem] grid-cols-2 gap-5 pb-3 sm:max-w-[22rem]">
           <Link
             to="/explore/types"
-            className="inline-flex items-center justify-center rounded-full border-2 border-[#18161d] bg-white px-6 py-4 text-base font-black uppercase tracking-[0.2em] shadow-[6px_6px_0_0_#18161d] transition hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none"
+            className="inline-flex min-h-[3.65rem] items-center justify-center rounded-[0.8rem] bg-[#1d1d1f] px-4 text-base font-semibold text-white shadow-[0_4px_10px_rgba(0,0,0,0.22)] transition hover:translate-y-[1px]"
           >
             Explore Types
           </Link>
           <Link
             to="/quiz"
-            className="inline-flex items-center justify-center rounded-full border-2 border-[#18161d] bg-[#ff7a59] px-6 py-4 text-base font-black uppercase tracking-[0.2em] text-white shadow-[6px_6px_0_0_#18161d] transition hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none"
+            className="inline-flex min-h-[3.65rem] items-center justify-center rounded-[0.8rem] bg-[linear-gradient(90deg,#62b9ff_0%,#7db0ff_22%,#ff4a71_62%,#ffcc00_100%)] px-4 text-[1.45rem] font-black text-white shadow-[0_4px_10px_rgba(0,0,0,0.22)] transition hover:translate-y-[1px]"
           >
             Begin
           </Link>
         </div>
-      </div>
+      </section>
     </Shell>
   )
 }
@@ -86,7 +82,9 @@ function InfoPage() {
 
   return (
     <Shell tone="from-[#e9f7ff] via-[#fff9f1] to-[#fff1cf]">
-      <Logo />
+      <div className="flex justify-center sm:justify-start">
+        <Logo />
+      </div>
       <div className="mt-10 max-w-3xl rounded-[2rem] border-2 border-[#18161d] bg-white/80 p-8 shadow-[8px_8px_0_0_#18161d]">
         <p className="text-sm font-bold uppercase tracking-[0.3em] text-[#ff7a59]">Explore</p>
         <h1 className="mt-3 text-4xl font-black uppercase">{type === 'about' ? 'About the quiz' : 'Explore the types'}</h1>
@@ -108,7 +106,9 @@ function InfoPage() {
 function Quiz() {
   return (
     <Shell tone="from-[#5bbfef] via-[#8fd7f7] to-[#dff6ff]">
-      <Logo />
+      <div className="flex justify-center sm:justify-start">
+        <Logo />
+      </div>
       <div className="mt-10 max-w-3xl rounded-[2rem] border-2 border-[#18161d] bg-[#241c33] p-8 text-white shadow-[8px_8px_0_0_#18161d]">
         <p className="text-sm font-bold uppercase tracking-[0.3em] text-[#f5c842]">Quiz Placeholder</p>
         <h1 className="mt-3 text-4xl font-black uppercase">Question flow goes here</h1>
@@ -123,7 +123,9 @@ function Quiz() {
 function Result() {
   return (
     <Shell tone="from-[#fff4db] via-[#fffdf7] to-[#e8fff4]">
-      <Logo />
+      <div className="flex justify-center sm:justify-start">
+        <Logo />
+      </div>
       <div className="mt-10 max-w-3xl rounded-[2rem] border-2 border-[#18161d] bg-white/80 p-8 shadow-[8px_8px_0_0_#18161d]">
         <p className="text-sm font-bold uppercase tracking-[0.3em] text-[#5bbfef]">Result Placeholder</p>
         <h1 className="mt-3 text-4xl font-black uppercase">Your archetype will appear here</h1>
@@ -135,7 +137,9 @@ function Result() {
 function Admin() {
   return (
     <Shell tone="from-[#f6f0ff] via-[#fff9f1] to-[#f6fffa]">
-      <Logo />
+      <div className="flex justify-center sm:justify-start">
+        <Logo />
+      </div>
       <div className="mt-10 max-w-2xl rounded-[2rem] border-2 border-[#18161d] bg-white/80 p-8 shadow-[8px_8px_0_0_#18161d]">
         <p className="text-sm font-bold uppercase tracking-[0.3em] text-[#ff7a59]">Admin Placeholder</p>
         <h1 className="mt-3 text-4xl font-black uppercase">Export access UI goes here</h1>
