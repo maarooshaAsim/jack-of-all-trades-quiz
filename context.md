@@ -9,8 +9,8 @@
 
 **"Jack of All Trades — The Polymath Type Quiz"** is a web-based personality/archetype quiz. Users answer 18 questions across 6 categories and receive 1 of 12 possible outcome archetypes. The client is a student project.
 
-**Stack:** Laravel (API only, no Blade) + React (Vite) + SQLite (dev) / MySQL (prod)
-**Hosting target (free tier):** React on Vercel, Laravel on Railway or Render
+**Stack:** Laravel + React (inside Laravel via Vite) + SQLite (dev) / MySQL (prod)
+**Hosting target (free tier):** Single Laravel app on Railway or Render (serves both API and React build)
 
 ---
 
@@ -233,37 +233,144 @@ ADMIN_PASSWORD=replace-with-admin-password
 
 ---
 
-## React project structure
+## Project structure
+
+React lives **inside** the Laravel project under `resources/js/`. No separate repo or separate dev server for the frontend.
 
 ```
-src/
-  config/
-    questions.config.js     ← all 18 questions hardcoded here
-    outcomes.config.js      ← optional local copy of outcome titles for Result page
-  hooks/
-    useQuiz.js              ← all quiz state (current index, answers, submit)
-  pages/
-    Landing.jsx             ← logo, stars, "Explore Types" + "Begin" buttons
-    InfoPage.jsx            ← reusable, accepts type param, static content
-    Quiz.jsx                ← renders current question, uses useQuiz hook
-    Result.jsx              ← displays outcome after submit
-    Admin.jsx               ← password gate + download button
-  components/
-    QuestionCard.jsx        ← dark rounded card, question text + options
-    OptionButton.jsx        ← single A–E option row with letter badge
-    NavArrows.jsx           ← prev / next arrows, next disabled if no answer
-    Logo.jsx                ← the "Jack of All Trades" logo component
-  App.jsx                   ← React Router routes
-  main.jsx
+polymath-api/                        ← single Laravel project, one repo
+  app/
+    Http/
+      Controllers/Api/
+        SubmitController.php
+        AdminController.php
+      Middleware/
+        AdminPasswordMiddleware.php
+    Services/
+      OutcomeCalculator.php
+  database/
+    migrations/
+    seeders/
+      OutcomeSeeder.php
+  resources/
+    js/                              ← entire React app lives here
+      config/
+        questions.config.js          ← all 18 questions hardcoded here
+        outcomes.config.js           ← optional local copy for Result page
+      hooks/
+        useQuiz.js                   ← all quiz state (current index, answers, submit)
+      pages/
+        Landing.jsx                  ← logo, stars, "Explore Types" + "Begin" buttons
+        InfoPage.jsx                 ← reusable, accepts type param, static content
+        Quiz.jsx                     ← renders current question, uses useQuiz hook
+        Result.jsx                   ← displays outcome after submit
+        Admin.jsx                    ← password gate + download button
+      components/
+        QuestionCard.jsx             ← dark rounded card, question text + options
+        OptionButton.jsx             ← single A–E option row with letter badge
+        NavArrows.jsx                ← prev / next arrows, next disabled if no answer
+        Logo.jsx                     ← the "Jack of All Trades" logo component
+      App.jsx                        ← React Router routes
+      app.jsx                        ← entry point, mounts <App /> into #root
+    views/
+      app.blade.php                  ← single Blade file, never touch after setup
+    css/
+      app.css                        ← Tailwind entry (already exists)
+  routes/
+    api.php                          ← Laravel API routes (/api/*)
+    web.php                          ← catch-all → serves app.blade.php
+  vite.config.js
 ```
 
-### Routes
+### Vite config (current — already set up)
+
+```js
+import { defineConfig } from 'vite'
+import laravel from 'laravel-vite-plugin'
+import { bunny } from 'laravel-vite-plugin/fonts'
+import tailwindcss from '@tailwindcss/vite'
+import react from '@vitejs/plugin-react'          // ← added
+
+export default defineConfig({
+    plugins: [
+        laravel({
+            input: ['resources/css/app.css', 'resources/js/app.jsx'],  // ← .jsx
+            refresh: true,
+            fonts: [
+                bunny('Instrument Sans', { weights: [400, 500, 600] }),
+            ],
+        }),
+        tailwindcss(),
+        react(),                                   // ← added
+    ],
+    server: {
+        watch: { ignored: ['**/storage/framework/views/**'] },
+    },
+})
+```
+
+### `resources/views/app.blade.php` (single file — set once, never touch again)
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jack of All Trades</title>
+  @viteReactRefresh
+  @vite(['resources/css/app.css', 'resources/js/app.jsx'])
+</head>
+<body>
+  <div id="root"></div>
+</body>
+</html>
+```
+
+### `routes/web.php` — catch-all so React Router handles all frontend routes
+
+```php
+Route::get('/{any}', function () {
+    return view('app');
+})->where('any', '.*');
+```
+
+### `resources/js/app.jsx` — entry point
+
 ```jsx
-<Route path="/"             element={<Landing />} />
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import App from './App'
+import '../css/app.css'
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />)
+```
+
+### React Router routes (`resources/js/App.jsx`)
+
+```jsx
+<Route path="/"              element={<Landing />} />
 <Route path="/explore/:type" element={<InfoPage />} />
-<Route path="/quiz"         element={<Quiz />} />
-<Route path="/result"       element={<Result />} />
-<Route path="/admin"        element={<Admin />} />
+<Route path="/quiz"          element={<Quiz />} />
+<Route path="/result"        element={<Result />} />
+<Route path="/admin"         element={<Admin />} />
+```
+
+### Running locally (two terminals, one project folder)
+
+```bash
+# Terminal 1 — Laravel
+php artisan serve
+
+# Terminal 2 — Vite (React + Tailwind HMR)
+npm run dev
+```
+
+### Building for production
+
+```bash
+npm run build
+# Compiled assets land in public/build/ — Laravel serves them automatically
 ```
 
 ---
@@ -271,7 +378,7 @@ src/
 ## `useQuiz` hook
 
 ```js
-// src/hooks/useQuiz.js
+// resources/js/hooks/useQuiz.js
 import { useState, useEffect } from 'react'
 import { questions } from '../config/questions.config'
 import axios from 'axios'
@@ -342,13 +449,15 @@ export function useQuiz() {
 
 ## What you can build right now (no client content needed)
 
-- [ ] Laravel: create project, install `sanctum` + `maatwebsite/excel`
 - [ ] Laravel: write all 3 migrations and run them
 - [ ] Laravel: stub `SubmitController@store` and `AdminController@export` (return `['status' => 'ok']`)
-- [ ] Laravel: write `AdminPasswordMiddleware`
-- [ ] Laravel: register all routes in `api.php`
-- [ ] React: create Vite project, install `react-router-dom axios zustand`
-- [ ] React: create folder structure above
+- [ ] Laravel: write `AdminPasswordMiddleware` and register it in `bootstrap/app.php`
+- [ ] Laravel: register all routes in `api.php` and catch-all in `web.php`
+- [ ] React: `npm install react react-dom react-router-dom axios && npm install @vitejs/plugin-react --save-dev`
+- [ ] React: rename `resources/js/app.js` → `app.jsx`, update entry point code
+- [ ] React: update `vite.config.js` (add `react()` plugin, change input to `app.jsx`)
+- [ ] React: create `app.blade.php` with `@viteReactRefresh` and `@vite` directives
+- [ ] React: create full folder structure under `resources/js/`
 - [ ] React: build `useQuiz.js` hook (fully possible with placeholder questions)
 - [ ] React: build `QuestionCard.jsx` and `OptionButton.jsx` with placeholder content
 - [ ] React: build `NavArrows.jsx` (disabled state when no answer selected)
@@ -378,4 +487,4 @@ export function useQuiz() {
 | Info page access | Landing page only — no navbar |
 | DB (dev) | SQLite |
 | DB (prod) | MySQL (PlanetScale free tier or Railway) |
-| Hosting | Vercel (React) + Railway/Render (Laravel) — all free tier |
+| Hosting | Single app on Railway or Render (Laravel serves React build) — free tier |
