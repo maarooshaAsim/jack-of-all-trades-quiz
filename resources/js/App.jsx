@@ -4,6 +4,7 @@ import { categories } from './config/questions.config.js'
 import { useQuiz } from './hooks/useQuiz.js'
 
 const logoDarkPath = '/storage/assets/joat_logo_dark.png'
+const logoLightPath = '/storage/assets/joat_logo_light.png'
 const landingStarsPath = '/storage/assets/landing_page_bg_stars.svg'
 const questionStarsPath = '/storage/assets/question_page_bg_stars.svg'
 
@@ -23,9 +24,13 @@ function Shell({ children, tone = 'from-[#fffaf2] via-[#fffdf8] to-[#fff7eb]', f
   )
 }
 
-function Logo() {
+function Logo({ variant = 'dark', className = '' }) {
   return (
-    <img src={logoDarkPath} alt="Jack of All Trades" className="h-auto w-full max-w-[21rem] sm:max-w-[24rem]" />
+    <img
+      src={variant === 'light' ? logoLightPath : logoDarkPath}
+      alt="Jack of All Trades"
+      className={`h-auto w-full max-w-[21rem] sm:max-w-[24rem] ${className}`}
+    />
   )
 }
 
@@ -110,25 +115,82 @@ function getCategoryMeta(categoryId) {
   return categories.find((category) => category.id === categoryId) ?? categories[0]
 }
 
-function QuizOption({ option, isSelected, onSelect }) {
+function getQuestionTheme(categoryId) {
+  const themes = {
+    engagement_pattern: {
+      card: '#19385B',
+      accent: '#69B2F5',
+      accentText: '#0F2D4A',
+    },
+    education: {
+      card: '#6B4414',
+      accent: '#F4BE21',
+      accentText: '#4C330D',
+    },
+    decision_drivers: {
+      card: '#516E12',
+      accent: '#A9D90A',
+      accentText: '#324509',
+    },
+    regret_reflection: {
+      card: '#7B1F1C',
+      accent: '#F8453D',
+      accentText: '#4A1513',
+    },
+    identity_self_perception: {
+      card: '#7D2B17',
+      accent: '#FF5A2C',
+      accentText: '#571D10',
+    },
+    agency_energy: {
+      card: '#5F149B',
+      accent: '#9B21F0',
+      accentText: '#3C0D61',
+    },
+  }
+
+  return themes[categoryId] ?? themes.engagement_pattern
+}
+
+function QuizOption({ accentColor, accentTextColor, option, isSelected, onSelect }) {
   return (
     <button
       type="button"
       onClick={onSelect}
       className={`flex w-full items-start gap-4 rounded-[1.35rem] border-2 px-4 py-4 text-left transition sm:px-5 ${
         isSelected
-          ? 'border-[#f5c842] bg-white text-[#18161d] shadow-[0_8px_24px_rgba(245,200,66,0.26)]'
-          : 'border-white/18 bg-white/10 text-white hover:border-white/40 hover:bg-white/14'
+          ? 'border-white bg-white text-[#18161d] shadow-[0_8px_24px_rgba(0,0,0,0.16)]'
+          : 'border-[#20161a]/10 bg-white text-[#18161d] shadow-[0_6px_14px_rgba(0,0,0,0.12)] hover:-translate-y-[1px]'
       }`}
     >
       <span
-        className={`mt-0.5 inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border-2 text-sm font-black ${
-          isSelected ? 'border-[#18161d] bg-[#f5c842] text-[#18161d]' : 'border-white/65 bg-white/12 text-white'
-        }`}
+        className="mt-0.5 inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-[0.8rem] border-2 border-transparent text-sm font-black"
+        style={{
+          backgroundColor: accentColor,
+          color: accentTextColor,
+        }}
       >
         {option.key}
       </span>
       <span className="text-[0.98rem] leading-6 sm:text-[1.02rem]">{option.text}</span>
+    </button>
+  )
+}
+
+function NavArrow({ direction, disabled, label, onClick }) {
+  const isNext = direction === 'next'
+
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      disabled={disabled}
+      aria-label={label}
+      className={`inline-flex h-[3.15rem] w-[3.15rem] items-center justify-center rounded-full border-2 border-[#18161d] shadow-[0_8px_18px_rgba(0,0,0,0.18)] transition ${
+        isNext ? 'bg-[#18161d] text-white' : 'bg-white/72 text-[#18161d]'
+      } ${disabled ? 'cursor-not-allowed opacity-35' : 'hover:-translate-y-[1px]'}`}
+    >
+      <span className="text-[1.7rem] font-black leading-none">{isNext ? '›' : '‹'}</span>
     </button>
   )
 }
@@ -153,6 +215,7 @@ function Quiz() {
 
   const currentAnswer = answers[currentQuestion.id]
   const category = getCategoryMeta(currentQuestion.category)
+  const theme = getQuestionTheme(currentQuestion.category)
   const progressPercentage = ((currentIndex + 1) / totalQuestions) * 100
 
   const handleAdvance = async () => {
@@ -181,79 +244,115 @@ function Quiz() {
   }
 
   return (
-    <Shell tone="from-[#ecfbff] via-[#f8ffff] to-[#fffdf7]">
+    <Shell tone="from-[#ecfbff] via-[#f8ffff] to-[#fffdf7]" fullBleed>
       <section
-        className="relative min-h-screen overflow-hidden rounded-[1.75rem] px-4 py-5 sm:px-6 sm:py-6"
+        className="relative min-h-screen overflow-hidden px-5 py-5 sm:px-8 sm:py-7"
         style={{ backgroundColor: category.color }}
       >
         <div
-          className="pointer-events-none absolute inset-0 bg-cover bg-center bg-no-repeat opacity-[0.7]"
-          style={{ backgroundImage: `url(${questionStarsPath})`, backgroundSize: '60rem auto' }}
+          className="pointer-events-none absolute inset-0 bg-center bg-no-repeat opacity-[0.96]"
+          style={{
+            backgroundImage: `url(${questionStarsPath})`,
+            backgroundPosition: 'center 9.5rem',
+            backgroundSize: '48rem auto',
+          }}
         />
-        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.08)_0%,rgba(255,255,255,0)_32%,rgba(0,0,0,0.08)_100%)]" />
+        <div
+          className="pointer-events-none absolute left-1/2 top-[8.5rem] h-[26rem] w-[26rem] -translate-x-1/2 rounded-full blur-3xl sm:top-[9rem] sm:h-[30rem] sm:w-[30rem]"
+          style={{
+            background: `radial-gradient(circle at center, rgba(255,255,255,0.34) 0%, rgba(255,255,255,0.18) 38%, rgba(255,255,255,0.06) 68%, transparent 100%)`,
+          }}
+        />
+        <div
+          className="pointer-events-none absolute inset-x-0 bottom-0 top-[12rem] sm:top-[13rem]"
+          style={{
+            background: 'linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.015) 28%, rgba(255,255,255,0.04) 62%, rgba(255,255,255,0.06) 100%)',
+          }}
+        />
 
         <div className="relative flex min-h-[calc(100vh-2.5rem)] flex-col">
           <div className="flex justify-center">
-            <Logo />
+            <Logo variant="light" className="max-w-[9.5rem] sm:max-w-[11rem]" />
           </div>
 
-          <div className="mx-auto mt-6 w-full max-w-3xl">
-            <div className="flex items-center justify-between text-[0.7rem] font-black uppercase tracking-[0.22em] text-[#18161d]/75 sm:text-xs">
-              <span>{category.label}</span>
-              <span>
-                {currentIndex + 1}/{totalQuestions}
-              </span>
-            </div>
-            <div className="mt-3 h-3 overflow-hidden rounded-full bg-white/35">
-              <div
-                className="h-full rounded-full bg-[#18161d] transition-all duration-300"
-                style={{ width: `${progressPercentage}%` }}
-              />
+          <div
+            className="pointer-events-none relative mx-auto -mt-2 h-[7.5rem] w-full max-w-[22rem] sm:h-[8.5rem] sm:max-w-[24rem]"
+            style={{
+              background: `radial-gradient(ellipse at center, color-mix(in srgb, ${category.color} 70%, white) 0%, color-mix(in srgb, ${category.color} 52%, white) 34%, color-mix(in srgb, ${category.color} 24%, white) 68%, transparent 100%)`,
+            }}
+          />
+
+          <div className="mx-auto mt-4 w-full max-w-[24rem]">
+            <div className="flex justify-center gap-[0.18rem] sm:gap-1">
+              {Array.from({ length: totalQuestions }).map((_, index) => (
+                <span
+                  key={index}
+                  className={`h-[0.35rem] w-[0.35rem] rounded-full border border-[#18161d]/35 ${
+                    index <= currentIndex ? 'bg-[#18161d]/85' : 'bg-white/55'
+                  }`}
+                />
+              ))}
             </div>
           </div>
 
-          <div className="mx-auto flex w-full max-w-3xl flex-1 flex-col justify-center py-8 sm:py-10">
-            <div className="rounded-[2rem] bg-[#221d30] px-5 py-6 text-white shadow-[0_16px_40px_rgba(0,0,0,0.25)] sm:px-7 sm:py-8">
-              <p className="text-sm font-bold uppercase tracking-[0.28em] text-[#f5c842]">Question {currentIndex + 1}</p>
-              <h1 className="mt-4 text-[1.7rem] font-black leading-tight sm:text-[2.2rem]">
+          <div className="mx-auto flex w-full max-w-[26rem] flex-1 flex-col justify-center py-6 sm:max-w-[28rem] sm:py-8">
+            <div
+              className="rounded-[3rem] px-2 pt-9 pb-6 sm:px-3 sm:pt-11 sm:pb-7"
+              style={{
+                background: `radial-gradient(ellipse at center, color-mix(in srgb, ${category.color} 74%, white) 0%, color-mix(in srgb, ${category.color} 58%, white) 28%, color-mix(in srgb, ${category.color} 34%, white) 58%, color-mix(in srgb, ${category.color} 14%, white) 82%, transparent 100%)`,
+              }}
+            >
+              <p className="text-center text-[0.58rem] font-black uppercase tracking-[0.18em] text-white [text-shadow:0_1px_2px_rgba(0,0,0,0.16)]">
+                {category.label}
+              </p>
+              <h1 className="mt-3 text-center text-[1.2rem] font-bold leading-[1.45] text-[#15324f] [text-shadow:0_1px_0_rgba(255,255,255,0.18)] sm:text-[1.32rem]">
                 {currentQuestion.text}
               </h1>
 
-              <div className="mt-7 space-y-3">
-                {currentQuestion.options.map((option) => (
-                  <QuizOption
-                    key={option.key}
-                    option={option}
-                    isSelected={currentAnswer?.key === option.key}
-                    onSelect={() => selectAnswer(currentQuestion.id, option)}
-                  />
-                ))}
+              <div className="mt-6 space-y-3">
+                <div
+                  className="rounded-[1.65rem] px-3 py-3 shadow-[0_18px_42px_rgba(0,0,0,0.18)]"
+                  style={{ backgroundColor: theme.card }}
+                >
+                  <div className="space-y-3">
+                    {currentQuestion.options.map((option) => (
+                      <QuizOption
+                        accentColor={theme.accent}
+                        accentTextColor={theme.accentText}
+                        key={option.key}
+                        option={option}
+                        isSelected={currentAnswer?.key === option.key}
+                        onSelect={() => selectAnswer(currentQuestion.id, option)}
+                      />
+                    ))}
+                  </div>
+                </div>
               </div>
 
               {submitError ? (
-                <p className="mt-5 text-sm font-semibold text-[#ffb1b1]">{submitError}</p>
+                <p className="mt-4 text-center text-sm font-semibold text-[#9b1c1c]">{submitError}</p>
               ) : null}
             </div>
           </div>
 
-          <div className="mx-auto flex w-full max-w-3xl items-center justify-between gap-4 pb-2">
-            <button
-              type="button"
-              onClick={goPrev}
+          <div className="mx-auto flex w-full max-w-[26rem] items-center justify-between gap-4 pb-2 sm:max-w-[28rem]">
+            <NavArrow
+              direction="prev"
               disabled={isFirst || isSubmitting}
-              className="inline-flex min-h-[3.7rem] min-w-[5.5rem] items-center justify-center rounded-full border-2 border-[#18161d] bg-white/70 px-5 text-sm font-black uppercase tracking-[0.22em] text-[#18161d] shadow-[0_6px_16px_rgba(0,0,0,0.15)] disabled:cursor-not-allowed disabled:opacity-40"
-            >
-              Back
-            </button>
+              label="Previous question"
+              onClick={goPrev}
+            />
 
-            <button
-              type="button"
-              onClick={handleAdvance}
+            <div className="text-center text-[0.65rem] font-black uppercase tracking-[0.2em] text-[#18161d]/65">
+              {isSubmitting ? 'Submitting' : isLast ? 'Submit Quiz' : 'Next Question'}
+            </div>
+
+            <NavArrow
+              direction="next"
               disabled={!hasAnswered || isSubmitting}
-              className="inline-flex min-h-[3.9rem] min-w-[8rem] items-center justify-center rounded-full border-2 border-[#18161d] bg-[#18161d] px-6 text-sm font-black uppercase tracking-[0.22em] text-white shadow-[0_8px_18px_rgba(0,0,0,0.18)] disabled:cursor-not-allowed disabled:bg-[#18161d]/45"
-            >
-              {isSubmitting ? 'Submitting' : isLast ? 'Finish' : 'Next'}
-            </button>
+              label={isLast ? 'Submit quiz' : 'Next question'}
+              onClick={handleAdvance}
+            />
           </div>
         </div>
       </section>

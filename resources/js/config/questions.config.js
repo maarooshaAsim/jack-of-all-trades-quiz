@@ -11,12 +11,12 @@ const option = (key, text, breadth, depth, integration, output, recognition) => 
 })
 
 export const categories = [
-  { id: 'engagement_pattern', label: 'Engagement Pattern', color: '#5BBFEF' },
-  { id: 'education', label: 'Education & Credentials', color: '#F5C842' },
-  { id: 'decision_drivers', label: 'Decision Drivers', color: '#FF7A59' },
-  { id: 'regret_reflection', label: 'Regret & Reflection', color: '#8FD7F7' },
-  { id: 'identity_self_perception', label: 'Identity & Self-Perception', color: '#FFD9A8' },
-  { id: 'agency_energy', label: 'Agency & Energy', color: '#7AE4B8' },
+  { id: 'engagement_pattern', label: 'Engagement Pattern', color: '#69B2F5' },
+  { id: 'education', label: 'Education & Credentials', color: '#F4BE21' },
+  { id: 'decision_drivers', label: 'Decision Drivers', color: '#A9D90A' },
+  { id: 'regret_reflection', label: 'Regret & Reflection', color: '#F8453D' },
+  { id: 'identity_self_perception', label: 'Identity & Self-Perception', color: '#FF5A2C' },
+  { id: 'agency_energy', label: 'Agency & Energy', color: '#9B21F0' },
 ]
 
 export const questions = [
