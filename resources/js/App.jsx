@@ -253,14 +253,8 @@ function Quiz() {
           className="pointer-events-none absolute inset-0 bg-center bg-no-repeat opacity-[0.9]"
           style={{
             backgroundImage: `url(${questionStarsPath})`,
-            backgroundPosition: 'center 11.2rem',
+            backgroundPosition: 'center 22rem',
             backgroundSize: '56rem auto',
-          }}
-        />
-        <div
-          className="pointer-events-none absolute left-1/2 top-[7.4rem] h-[10.6rem] w-[21rem] -translate-x-1/2 rounded-full blur-3xl"
-          style={{
-            background: `radial-gradient(circle at center, color-mix(in srgb, ${category.color} 70%, white) 0%, color-mix(in srgb, ${category.color} 40%, white) 42%, transparent 100%)`,
           }}
         />
         <div
@@ -275,36 +269,27 @@ function Quiz() {
             <Logo variant="light" className="max-w-[13rem]" />
           </div>
 
-          <div
-            className="pointer-events-none relative mx-auto mt-1 h-[6.6rem] w-full max-w-[24rem]"
-            style={{
-              background: `radial-gradient(ellipse at center, color-mix(in srgb, ${category.color} 52%, white) 0%, color-mix(in srgb, ${category.color} 24%, white) 46%, transparent 100%)`,
-            }}
-          />
-
-          <div className="mx-auto mt-3 w-full max-w-[26rem]">
-            <div className="relative flex justify-center gap-[0.18rem] sm:gap-1">
-              <div className="pointer-events-none absolute left-0 right-0 top-1/2 h-[0.24rem] -translate-y-1/2 rounded-full bg-white/75" />
-              {Array.from({ length: totalQuestions }).map((_, index) => (
-                <span
-                  key={index}
-                  className={`relative h-[0.48rem] w-[0.48rem] rounded-full border border-[#18161d]/35 ${
-                    index <= currentIndex ? 'bg-[#18161d]/85' : 'bg-white'
-                  }`}
-                />
-              ))}
+          <div className="mx-auto mt-6 w-full max-w-[26rem]">
+            <div className="h-[0.38rem] overflow-hidden rounded-full bg-white/65 shadow-[inset_0_1px_2px_rgba(0,0,0,0.08)]">
+              <div
+                className="h-full rounded-full transition-all duration-300"
+                style={{
+                  width: `${progressPercentage}%`,
+                  backgroundColor: theme.card,
+                }}
+              />
             </div>
           </div>
 
-          <div className="mx-auto flex w-full max-w-[30rem] flex-1 flex-col justify-center py-8">
+          <div className="mx-auto flex w-full max-w-[30rem] flex-1 flex-col justify-center pt-4 pb-8">
+            <p className="pb-4 text-center text-[0.9rem] font-black uppercase tracking-[0.18em] text-white [text-shadow:0_1px_2px_rgba(0,0,0,0.18)]">
+              {category.label}
+            </p>
             <div
               className="rounded-[1.15rem] px-4 py-4 shadow-[0_16px_32px_rgba(0,0,0,0.2)]"
               style={{ backgroundColor: theme.card }}
             >
-              <p className="px-2 pt-1 text-center text-[0.64rem] font-black uppercase tracking-[0.15em] text-white/95">
-                {category.label}
-              </p>
-              <h1 className="px-6 pt-3 pb-4 text-center text-[1.12rem] font-medium leading-[1.45] text-white">
+              <h1 className="px-6 pt-2 pb-4 text-center text-[1.12rem] font-medium leading-[1.45] text-white">
                 {currentQuestion.text}
               </h1>
 
@@ -336,7 +321,7 @@ function Quiz() {
             />
 
             <div className="text-center text-[0.65rem] font-black uppercase tracking-[0.2em] text-[#18161d]/65">
-              {isSubmitting ? 'Submitting' : isLast ? 'Submit Quiz' : 'Next Question'}
+              {isSubmitting ? 'Submitting' : `${currentIndex + 1} / ${totalQuestions}`}
             </div>
 
             <NavArrow
