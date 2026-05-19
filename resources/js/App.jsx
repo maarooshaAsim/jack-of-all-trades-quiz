@@ -10,12 +10,12 @@ const questionStarsPath = '/storage/assets/question_page_bg_stars.svg'
 
 function Shell({ children, tone = 'from-[#fffaf2] via-[#fffdf8] to-[#fff7eb]', fullBleed = false }) {
   return (
-    <main className={`min-h-screen bg-gradient-to-br ${tone} text-[#18161d]`}>
+    <main className={`min-h-[100svh] bg-gradient-to-br ${tone} text-[#18161d]`}>
       <div
         className={
           fullBleed
-            ? 'flex min-h-screen w-full flex-col'
-            : 'mx-auto flex min-h-screen w-full max-w-6xl flex-col px-4 py-4 sm:px-6 sm:py-6 md:px-8'
+            ? 'flex min-h-[100svh] w-full flex-col'
+            : 'mx-auto flex min-h-[100svh] w-full max-w-6xl flex-col px-4 py-4 sm:px-6 sm:py-6 md:px-8'
         }
       >
         {children}
@@ -29,7 +29,7 @@ function Logo({ variant = 'dark', className = '' }) {
     <img
       src={variant === 'light' ? logoLightPath : logoDarkPath}
       alt="Jack of All Trades"
-      className={`h-auto w-full max-w-[21rem] sm:max-w-[24rem] ${className}`}
+      className={`h-auto w-full max-w-[18rem] sm:max-w-[21rem] md:max-w-[24rem] ${className}`}
     />
   )
 }
@@ -37,13 +37,13 @@ function Logo({ variant = 'dark', className = '' }) {
 function Landing() {
   return (
     <Shell tone="from-[#fbfbfa] via-[#fffdf9] to-[#f8f8f7]" fullBleed>
-      <section className="relative flex min-h-screen flex-1 flex-col items-center justify-between overflow-hidden bg-white px-5 py-6 text-center sm:px-8 sm:py-8">
+      <section className="relative flex min-h-[100svh] flex-1 flex-col items-center justify-between overflow-hidden bg-white px-4 py-5 text-center sm:px-8 sm:py-8">
         <div
           className="pointer-events-none absolute inset-0 bg-cover bg-no-repeat opacity-[0.82]"
           style={{
             backgroundImage: `url(${landingStarsPath})`,
             backgroundPosition: 'center 12.5rem',
-            backgroundSize: '52rem auto',
+            backgroundSize: '40rem auto',
           }}
         />
         <div className="pointer-events-none absolute inset-x-0 top-[7.2rem] h-[13rem] bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.78)_0%,rgba(255,255,255,0.54)_38%,rgba(255,255,255,0.2)_72%,rgba(255,255,255,0)_100%)] sm:top-[8.5rem] sm:h-[14rem]" />
@@ -53,12 +53,12 @@ function Landing() {
           <Logo />
         </div>
 
-        <div className="relative flex w-full max-w-[22rem] flex-1 flex-col items-center justify-center py-8 sm:max-w-[25rem] sm:py-10">
+        <div className="relative flex w-full max-w-[21rem] flex-1 flex-col items-center justify-center py-7 sm:max-w-[25rem] sm:py-10">
           <div className="-mt-5 rounded-[3.2rem] bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.98)_0%,rgba(255,255,255,0.98)_38%,rgba(255,255,255,0.94)_56%,rgba(255,255,255,0.76)_72%,rgba(255,255,255,0.42)_88%,rgba(255,255,255,0.12)_97%,rgba(255,255,255,0)_100%)] px-10 pt-14 pb-10 sm:-mt-6 sm:px-12 sm:pt-16 sm:pb-11">
-            <h1 className="text-[1.7rem] font-black uppercase tracking-[-0.04em] text-[#18161d] sm:text-[2rem]">
+            <h1 className="text-[1.45rem] font-black uppercase tracking-[-0.04em] text-[#18161d] sm:text-[2rem]">
               The Polymath Type Quiz
             </h1>
-            <div className="mt-6 space-y-3 text-[0.95rem] leading-6 text-[#33303a] sm:text-base">
+            <div className="mt-5 space-y-3 text-[0.9rem] leading-6 text-[#33303a] sm:mt-6 sm:text-base">
               <p>Discover your archetype in the tension between mastery and exploration.</p>
               <p>Are you a Deep Diver or an Infinite Explorer? A T-Shaped Bridge or a Renaissance Weaver.</p>
               <p>18 questions. No right answers. Just honest self reflection.</p>
@@ -66,7 +66,7 @@ function Landing() {
           </div>
         </div>
 
-        <div className="relative grid w-full max-w-[20rem] grid-cols-2 gap-5 pb-3 sm:max-w-[22rem]">
+        <div className="relative grid w-full max-w-[20rem] grid-cols-2 gap-3 pb-3 sm:max-w-[22rem] sm:gap-5">
           <Link
             to="/explore/types"
             className="inline-flex min-h-[3.65rem] items-center justify-center rounded-[0.8rem] bg-[#1d1d1f] px-4 text-base font-semibold text-white shadow-[0_4px_10px_rgba(0,0,0,0.22)] transition hover:translate-y-[1px]"
@@ -93,10 +93,10 @@ function InfoPage() {
       <div className="flex justify-center sm:justify-start">
         <Logo />
       </div>
-      <div className="mt-10 max-w-3xl rounded-[2rem] border-2 border-[#18161d] bg-white/80 p-8 shadow-[8px_8px_0_0_#18161d]">
+      <div className="mt-8 max-w-3xl rounded-[2rem] border-2 border-[#18161d] bg-white/80 p-6 shadow-[8px_8px_0_0_#18161d] sm:mt-10 sm:p-8">
         <p className="text-sm font-bold uppercase tracking-[0.3em] text-[#ff7a59]">Explore</p>
-        <h1 className="mt-3 text-4xl font-black uppercase">{type === 'about' ? 'About the quiz' : 'Explore the types'}</h1>
-        <p className="mt-6 text-lg leading-8 text-[#3a3348]">
+        <h1 className="mt-3 text-3xl font-black uppercase sm:text-4xl">{type === 'about' ? 'About the quiz' : 'Explore the types'}</h1>
+        <p className="mt-5 text-base leading-7 text-[#3a3348] sm:mt-6 sm:text-lg sm:leading-8">
           This page is a placeholder until the client delivers the final copy and images. Routing is working, and this
           is where the static info content will live.
         </p>
@@ -157,14 +157,16 @@ function QuizOption({ accentColor, accentTextColor, option, isSelected, onSelect
     <button
       type="button"
       onClick={onSelect}
-      className={`flex w-full items-start gap-3 rounded-[0.95rem] border px-3 py-2.5 text-left transition ${
+      className={`flex w-full items-start gap-3 rounded-[0.9rem] border px-3 py-2.5 text-left transition sm:rounded-[0.95rem] ${
         isSelected
-          ? 'border-white bg-white text-[#18161d] shadow-[0_8px_24px_rgba(0,0,0,0.16)]'
+          ? 'border-[#18161d] bg-[#fff7cf] text-[#18161d] shadow-[0_10px_24px_rgba(0,0,0,0.22)] ring-2 ring-white/85'
           : 'border-[#20161a]/10 bg-white text-[#18161d] shadow-[0_6px_14px_rgba(0,0,0,0.12)] hover:-translate-y-[1px]'
       }`}
     >
       <span
-        className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-[0.7rem] border border-transparent text-[0.78rem] font-black"
+        className={`mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-[0.7rem] border text-[0.78rem] font-black ${
+          isSelected ? 'border-[#18161d]' : 'border-transparent'
+        }`}
         style={{
           backgroundColor: accentColor,
           color: accentTextColor,
@@ -172,7 +174,18 @@ function QuizOption({ accentColor, accentTextColor, option, isSelected, onSelect
       >
         {option.key}
       </span>
-      <span className="text-[0.83rem] leading-5">{option.text}</span>
+      <div className="flex min-w-0 flex-1 items-start justify-between gap-3">
+        <span className="text-[0.84rem] leading-5 sm:text-[0.83rem]">{option.text}</span>
+        <span
+          className={`mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full border text-[0.8rem] font-black ${
+            isSelected
+              ? 'border-[#18161d] bg-[#18161d] text-white'
+              : 'border-[#18161d]/18 bg-white text-transparent'
+          }`}
+        >
+          ✓
+        </span>
+      </div>
     </button>
   )
 }
@@ -186,11 +199,11 @@ function NavArrow({ direction, disabled, label, onClick }) {
       onClick={onClick}
       disabled={disabled}
       aria-label={label}
-      className={`inline-flex h-[3.15rem] w-[3.15rem] items-center justify-center rounded-full border-2 border-[#18161d] shadow-[0_8px_18px_rgba(0,0,0,0.18)] transition ${
+      className={`inline-flex h-[2.9rem] w-[2.9rem] items-center justify-center rounded-full border-2 border-[#18161d] shadow-[0_8px_18px_rgba(0,0,0,0.18)] transition sm:h-[3.15rem] sm:w-[3.15rem] ${
         isNext ? 'bg-[#18161d] text-white' : 'bg-white/72 text-[#18161d]'
       } ${disabled ? 'cursor-not-allowed opacity-35' : 'hover:-translate-y-[1px]'}`}
     >
-      <span className="text-[1.7rem] font-black leading-none">{isNext ? '›' : '‹'}</span>
+      <span className="text-[1.55rem] font-black leading-none sm:text-[1.7rem]">{isNext ? '›' : '‹'}</span>
     </button>
   )
 }
@@ -246,17 +259,17 @@ function Quiz() {
   return (
     <Shell tone="from-[#ecfbff] via-[#f8ffff] to-[#fffdf7]" fullBleed>
       <section
-        className="relative min-h-screen overflow-hidden px-8 py-8"
+        className="relative min-h-[100svh] overflow-hidden px-5 py-6 sm:px-8 sm:py-8"
         style={{ backgroundColor: category.color }}
       >
         <div
-          className="pointer-events-none absolute inset-0 bg-center bg-no-repeat opacity-[0.9]"
-          style={{
-            backgroundImage: `url(${questionStarsPath})`,
-            backgroundPosition: 'center 22rem',
-            backgroundSize: '56rem auto',
-          }}
-        />
+        className="pointer-events-none absolute inset-0 bg-center bg-no-repeat opacity-[0.9]"
+        style={{
+          backgroundImage: `url(${questionStarsPath})`,
+          backgroundPosition: 'center 25rem',
+          backgroundSize: '42rem auto',
+        }}
+      />
         <div
           className="pointer-events-none absolute inset-x-0 bottom-0 top-[10rem]"
           style={{
@@ -264,12 +277,12 @@ function Quiz() {
           }}
         />
 
-        <div className="relative flex min-h-[calc(100vh-2.5rem)] flex-col">
+        <div className="relative flex min-h-[calc(100svh-2.5rem)] flex-col">
           <div className="flex justify-center">
-            <Logo variant="light" className="max-w-[13rem]" />
+            <Logo variant="light" className="max-w-[11.5rem] sm:max-w-[13rem]" />
           </div>
 
-          <div className="mx-auto mt-6 w-full max-w-[26rem]">
+          <div className="mx-auto mt-7 w-full max-w-[22rem] sm:mt-8 sm:max-w-[26rem]">
             <div className="h-[0.38rem] overflow-hidden rounded-full bg-white/65 shadow-[inset_0_1px_2px_rgba(0,0,0,0.08)]">
               <div
                 className="h-full rounded-full transition-all duration-300"
@@ -281,15 +294,15 @@ function Quiz() {
             </div>
           </div>
 
-          <div className="mx-auto flex w-full max-w-[30rem] flex-1 flex-col justify-center pt-4 pb-8">
-            <p className="pb-4 text-center text-[0.9rem] font-black uppercase tracking-[0.18em] text-white [text-shadow:0_1px_2px_rgba(0,0,0,0.18)]">
+          <div className="mx-auto flex w-full max-w-[22rem] flex-1 flex-col justify-center pt-4 pb-6 sm:max-w-[30rem] sm:pb-8">
+            <p className="pb-3 text-center text-[0.9rem] font-black uppercase tracking-[0.14em] text-white [text-shadow:0_1px_2px_rgba(0,0,0,0.18)] sm:pb-4 sm:text-[0.9rem] sm:tracking-[0.18em]">
               {category.label}
             </p>
             <div
-              className="rounded-[1.15rem] px-4 py-4 shadow-[0_16px_32px_rgba(0,0,0,0.2)]"
+              className="rounded-[1.05rem] px-2.5 py-3 shadow-[0_16px_32px_rgba(0,0,0,0.2)] sm:rounded-[1.15rem] sm:px-4 sm:py-4"
               style={{ backgroundColor: theme.card }}
             >
-              <h1 className="px-6 pt-2 pb-4 text-center text-[1.12rem] font-medium leading-[1.45] text-white">
+              <h1 className="px-2 pt-2 pb-3 text-center text-[1.08rem] font-medium leading-[1.38] text-white sm:px-6 sm:pb-4 sm:text-[1.12rem] sm:leading-[1.45]">
                 {currentQuestion.text}
               </h1>
 
@@ -312,7 +325,7 @@ function Quiz() {
             </div>
           </div>
 
-          <div className="mx-auto flex w-full max-w-[30rem] items-center justify-between gap-4 pb-2">
+          <div className="mx-auto flex w-full max-w-[22rem] items-center justify-between gap-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] sm:max-w-[30rem] sm:gap-4 sm:pb-2">
             <NavArrow
               direction="prev"
               disabled={isFirst || isSubmitting}
@@ -320,7 +333,7 @@ function Quiz() {
               onClick={goPrev}
             />
 
-            <div className="text-center text-[0.65rem] font-black uppercase tracking-[0.2em] text-[#18161d]/65">
+            <div className="text-center text-[0.58rem] font-black uppercase tracking-[0.16em] text-[#18161d]/65 sm:text-[0.65rem] sm:tracking-[0.2em]">
               {isSubmitting ? 'Submitting' : `${currentIndex + 1} / ${totalQuestions}`}
             </div>
 
@@ -356,10 +369,10 @@ function Result() {
         <div className="flex justify-center sm:justify-start">
           <Logo />
         </div>
-        <div className="mt-10 max-w-3xl rounded-[2rem] border-2 border-[#18161d] bg-white/80 p-8 shadow-[8px_8px_0_0_#18161d]">
+        <div className="mt-8 max-w-3xl rounded-[2rem] border-2 border-[#18161d] bg-white/80 p-6 shadow-[8px_8px_0_0_#18161d] sm:mt-10 sm:p-8">
           <p className="text-sm font-bold uppercase tracking-[0.3em] text-[#5bbfef]">Result</p>
-          <h1 className="mt-3 text-4xl font-black uppercase">No result loaded</h1>
-          <p className="mt-5 max-w-2xl text-lg leading-8 text-[#3a3348]">
+          <h1 className="mt-3 text-3xl font-black uppercase sm:text-4xl">No result loaded</h1>
+          <p className="mt-5 max-w-2xl text-base leading-7 text-[#3a3348] sm:text-lg sm:leading-8">
             Complete the quiz first so the app can calculate and display your dimension totals.
           </p>
           <Link
@@ -380,10 +393,10 @@ function Result() {
       <div className="flex justify-center sm:justify-start">
         <Logo />
       </div>
-      <div className="mt-10 max-w-4xl rounded-[2rem] border-2 border-[#18161d] bg-white/80 p-8 shadow-[8px_8px_0_0_#18161d]">
+      <div className="mt-8 max-w-4xl rounded-[2rem] border-2 border-[#18161d] bg-white/80 p-6 shadow-[8px_8px_0_0_#18161d] sm:mt-10 sm:p-8">
         <p className="text-sm font-bold uppercase tracking-[0.3em] text-[#5bbfef]">Result</p>
-        <h1 className="mt-3 text-4xl font-black uppercase">Your scoring breakdown</h1>
-        <p className="mt-5 max-w-2xl text-lg leading-8 text-[#3a3348]">
+        <h1 className="mt-3 text-3xl font-black uppercase sm:text-4xl">Your scoring breakdown</h1>
+        <p className="mt-5 max-w-2xl text-base leading-7 text-[#3a3348] sm:text-lg sm:leading-8">
           Outcome thresholds are still pending from the client, so this screen currently shows the full five-dimension
           total plus the placeholder outcome id returned by Laravel.
         </p>
@@ -419,9 +432,9 @@ function Admin() {
       <div className="flex justify-center sm:justify-start">
         <Logo />
       </div>
-      <div className="mt-10 max-w-2xl rounded-[2rem] border-2 border-[#18161d] bg-white/80 p-8 shadow-[8px_8px_0_0_#18161d]">
+      <div className="mt-8 max-w-2xl rounded-[2rem] border-2 border-[#18161d] bg-white/80 p-6 shadow-[8px_8px_0_0_#18161d] sm:mt-10 sm:p-8">
         <p className="text-sm font-bold uppercase tracking-[0.3em] text-[#ff7a59]">Admin Placeholder</p>
-        <h1 className="mt-3 text-4xl font-black uppercase">Export access UI goes here</h1>
+        <h1 className="mt-3 text-3xl font-black uppercase sm:text-4xl">Export access UI goes here</h1>
       </div>
     </Shell>
   )

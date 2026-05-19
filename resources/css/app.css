@@ -13,15 +13,16 @@
 
 html,
 body {
-    min-height: 100vh;
+    min-height: 100svh;
     background: #f8f8f7;
     color: #18161d;
 }
 
 body {
     margin: 0;
+    overflow-x: hidden;
 }
 
 #root {
-    min-height: 100vh;
+    min-height: 100svh;
 }
