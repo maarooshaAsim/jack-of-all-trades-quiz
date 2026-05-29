@@ -7,39 +7,27 @@ use PHPUnit\Framework\TestCase;
 
 class OutcomeCalculatorTest extends TestCase
 {
-    public function test_it_calculates_dimension_totals_and_grand_total(): void
+    public function test_it_calculates_total_score_and_matches_outcome_range(): void
     {
-        $calculator = new OutcomeCalculator;
+        $calculator = new OutcomeCalculator(dirname(__DIR__, 2).'/docs/score_type_link.csv');
 
-        $result = $calculator->calculate([
-            [
-                'question_id' => 'ep_q1',
-                'answer_key' => 'B',
-                'breadth' => 4,
-                'depth' => 2,
-                'integration' => 2,
-                'output' => 2,
-                'recognition' => 1,
+        $answers = array_map(
+            static fn (int $index): array => [
+                'question_id' => sprintf('q_%02d', $index + 1),
+                'answer_key' => 'A',
+                'score_value' => $index < 12 ? 1 : 3,
             ],
-            [
-                'question_id' => 'ep_q2',
-                'answer_key' => 'C',
-                'breadth' => 3,
-                'depth' => 2,
-                'integration' => 2,
-                'output' => 2,
-                'recognition' => 1,
-            ],
-        ]);
+            range(0, 17),
+        );
 
+        $result = $calculator->calculate($answers);
+
+        $this->assertSame(30, $result['total_score']);
         $this->assertSame([
-            'breadth' => 7,
-            'depth' => 4,
-            'integration' => 4,
-            'output' => 4,
-            'recognition' => 2,
-        ], $result['dimension_totals']);
-        $this->assertSame(21, $result['grand_total']);
-        $this->assertSame(1, $result['outcome_id']);
+            'base_type' => 'Linear Specialist',
+            'branch' => 'Assigned Specialist',
+            'score_range' => '30-38',
+            'description' => 'Specialization chosen by external pressure. Inherited path, not elected.',
+        ], $result['outcome']);
     }
 }

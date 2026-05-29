@@ -67,7 +67,7 @@ export function Quiz() {
           className="pointer-events-none absolute inset-0 bg-center bg-no-repeat opacity-[0.9]"
           style={{
             backgroundImage: `url(${questionStarsPath})`,
-            backgroundPosition: 'center 25rem',
+            backgroundPosition: 'center 30rem',
             backgroundSize: '42rem auto',
           }}
         />

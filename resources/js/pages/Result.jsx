@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { Logo } from '../components/Logo.jsx'
-import { ResultTotals } from '../components/ResultTotals.jsx'
 import { Shell } from '../components/Shell.jsx'
 
 export function Result() {
@@ -31,7 +30,7 @@ export function Result() {
     )
   }
 
-  const totals = result.dimension_totals
+  const outcome = result.outcome
 
   return (
     <Shell tone="from-[#fff4db] via-[#fffdf7] to-[#e8fff4]">
@@ -42,22 +41,21 @@ export function Result() {
         <p className="text-sm font-bold uppercase tracking-[0.3em] text-[#5bbfef]">Result</p>
         <h1 className="mt-3 text-3xl font-black uppercase sm:text-4xl">Your scoring breakdown</h1>
         <p className="mt-5 max-w-2xl text-base leading-7 text-[#3a3348] sm:text-lg sm:leading-8">
-          Outcome thresholds are still pending from the client, so this screen currently shows the full five-dimension
-          total plus the placeholder outcome id returned by Laravel.
+          Your answer scores have been summed and matched against the result ranges from the score type link.
         </p>
 
-        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          <ResultTotals label="Breadth" value={totals.breadth} />
-          <ResultTotals label="Depth" value={totals.depth} />
-          <ResultTotals label="Integration" value={totals.integration} />
-          <ResultTotals label="Output" value={totals.output} />
-          <ResultTotals label="Recognition" value={totals.recognition} />
-          <ResultTotals label="Grand Total" value={result.grand_total} />
+        <div className="mt-8 rounded-[1.3rem] border-2 border-[#18161d] bg-white/85 px-5 py-5 shadow-[0_6px_16px_rgba(0,0,0,0.08)]">
+          <p className="text-[0.7rem] font-black uppercase tracking-[0.24em] text-[#5b6170]">Total Score</p>
+          <p className="mt-2 text-4xl font-black text-[#18161d]">{result.total_score}</p>
         </div>
 
         <div className="mt-8 rounded-[1.6rem] border-2 border-[#18161d] bg-[#18161d] px-6 py-5 text-white">
-          <p className="text-sm font-bold uppercase tracking-[0.28em] text-[#f5c842]">Current outcome</p>
-          <p className="mt-2 text-3xl font-black">Placeholder Outcome #{result.outcome_id}</p>
+          <p className="text-sm font-bold uppercase tracking-[0.28em] text-[#f5c842]">{outcome.base_type}</p>
+          <p className="mt-2 text-3xl font-black">{outcome.branch}</p>
+          <p className="mt-3 text-sm font-semibold uppercase tracking-[0.18em] text-white/60">
+            Score range {outcome.score_range}
+          </p>
+          <p className="mt-4 max-w-2xl text-base leading-7 text-white/82">{outcome.description}</p>
         </div>
 
         <Link

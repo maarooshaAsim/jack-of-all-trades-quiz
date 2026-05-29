@@ -20,11 +20,7 @@ return new class extends Migration
             $table->string('category');
             $table->string('answer_key', 1);
             $table->text('answer_text');
-            $table->unsignedTinyInteger('score_breadth');
-            $table->unsignedTinyInteger('score_depth');
-            $table->unsignedTinyInteger('score_integration');
-            $table->unsignedTinyInteger('score_output');
-            $table->unsignedTinyInteger('score_recognition');
+            $table->unsignedTinyInteger('score_value');
             $table->unsignedTinyInteger('question_index');
 
             $table->unique(['response_id', 'question_id']);

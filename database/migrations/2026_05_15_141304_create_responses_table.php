@@ -19,12 +19,11 @@ return new class extends Migration
                 ->constrained('outcomes')
                 ->nullOnDelete();
             $table->string('ip_address', 45)->nullable();
-            $table->unsignedSmallInteger('total_breadth')->nullable();
-            $table->unsignedSmallInteger('total_depth')->nullable();
-            $table->unsignedSmallInteger('total_integration')->nullable();
-            $table->unsignedSmallInteger('total_output')->nullable();
-            $table->unsignedSmallInteger('total_recognition')->nullable();
-            $table->unsignedSmallInteger('grand_total')->nullable();
+            $table->unsignedSmallInteger('total_score')->nullable();
+            $table->string('outcome_base_type')->nullable();
+            $table->string('outcome_branch')->nullable();
+            $table->string('outcome_score_range')->nullable();
+            $table->text('outcome_description')->nullable();
             $table->timestamp('completed_at')->nullable()->index();
             $table->timestamp('created_at')->useCurrent();
         });

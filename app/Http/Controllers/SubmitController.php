@@ -19,11 +19,7 @@ class SubmitController extends Controller
          *         answer_key: string,
          *         answer_text: string,
          *         question_index: int,
-         *         score_breadth: int,
-         *         score_depth: int,
-         *         score_integration: int,
-         *         score_output: int,
-         *         score_recognition: int
+         *         score_value: int
          *     }>
          * } $payload
          */
@@ -34,11 +30,7 @@ class SubmitController extends Controller
                 static fn (array $answer): array => [
                     'question_id' => $answer['question_id'],
                     'answer_key' => $answer['answer_key'],
-                    'breadth' => $answer['score_breadth'],
-                    'depth' => $answer['score_depth'],
-                    'integration' => $answer['score_integration'],
-                    'output' => $answer['score_output'],
-                    'recognition' => $answer['score_recognition'],
+                    'score_value' => $answer['score_value'],
                 ],
                 $payload['answers'],
             ),
@@ -46,21 +38,17 @@ class SubmitController extends Controller
 
         DB::transaction(function () use ($payload, $request, $calculatedOutcome): void {
             $responseId = (string) Str::uuid();
-            $outcomeId = DB::table('outcomes')->where('id', $calculatedOutcome['outcome_id'])->exists()
-                ? $calculatedOutcome['outcome_id']
-                : null;
 
             DB::table('responses')->insert([
                 'id' => $responseId,
                 'session_id' => $payload['session_id'],
-                'outcome_id' => $outcomeId,
+                'outcome_id' => null,
                 'ip_address' => $request->ip(),
-                'total_breadth' => $calculatedOutcome['dimension_totals']['breadth'],
-                'total_depth' => $calculatedOutcome['dimension_totals']['depth'],
-                'total_integration' => $calculatedOutcome['dimension_totals']['integration'],
-                'total_output' => $calculatedOutcome['dimension_totals']['output'],
-                'total_recognition' => $calculatedOutcome['dimension_totals']['recognition'],
-                'grand_total' => $calculatedOutcome['grand_total'],
+                'total_score' => $calculatedOutcome['total_score'],
+                'outcome_base_type' => $calculatedOutcome['outcome']['base_type'],
+                'outcome_branch' => $calculatedOutcome['outcome']['branch'],
+                'outcome_score_range' => $calculatedOutcome['outcome']['score_range'],
+                'outcome_description' => $calculatedOutcome['outcome']['description'],
                 'completed_at' => now(),
             ]);
 
@@ -72,11 +60,7 @@ class SubmitController extends Controller
                         'category' => $answer['category'],
                         'answer_key' => $answer['answer_key'],
                         'answer_text' => $answer['answer_text'],
-                        'score_breadth' => $answer['score_breadth'],
-                        'score_depth' => $answer['score_depth'],
-                        'score_integration' => $answer['score_integration'],
-                        'score_output' => $answer['score_output'],
-                        'score_recognition' => $answer['score_recognition'],
+                        'score_value' => $answer['score_value'],
                         'question_index' => $answer['question_index'],
                     ],
                     $payload['answers'],
@@ -86,9 +70,8 @@ class SubmitController extends Controller
 
         return [
             'status' => 'ok',
-            'dimension_totals' => $calculatedOutcome['dimension_totals'],
-            'grand_total' => $calculatedOutcome['grand_total'],
-            'outcome_id' => $calculatedOutcome['outcome_id'],
+            'total_score' => $calculatedOutcome['total_score'],
+            'outcome' => $calculatedOutcome['outcome'],
         ];
     }
 }

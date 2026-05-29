@@ -3,23 +3,14 @@
 namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
 
 class SubmitQuizTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_it_stores_answers_and_dimension_totals_for_a_completed_quiz(): void
+    public function test_it_stores_answers_and_total_score_for_a_completed_quiz(): void
     {
-        DB::table('outcomes')->insert([
-            'id' => 1,
-            'title' => 'Placeholder Outcome',
-            'description' => 'Placeholder outcome used while thresholds are pending.',
-            'graph_image_path' => null,
-            'scoring_rules' => json_encode([]),
-        ]);
-
         $sessionId = '11111111-1111-4111-8111-111111111111';
 
         $response = $this->postJson('/api/submit', [
@@ -31,11 +22,7 @@ class SubmitQuizTest extends TestCase
                     'answer_key' => 'A',
                     'answer_text' => sprintf('Answer %d', $index + 1),
                     'question_index' => $index,
-                    'score_breadth' => 1,
-                    'score_depth' => 2,
-                    'score_integration' => 3,
-                    'score_output' => 4,
-                    'score_recognition' => 5,
+                    'score_value' => 1,
                 ],
                 range(0, 17),
             ),
@@ -43,35 +30,28 @@ class SubmitQuizTest extends TestCase
 
         $response->assertOk()->assertJson([
             'status' => 'ok',
-            'dimension_totals' => [
-                'breadth' => 18,
-                'depth' => 36,
-                'integration' => 54,
-                'output' => 72,
-                'recognition' => 90,
+            'total_score' => 18,
+            'outcome' => [
+                'base_type' => 'Linear Specialist',
+                'branch' => 'Contented Specialist',
+                'score_range' => '18-30',
+                'description' => 'Deep satisfaction in focused mastery. Concentrated, recognized, productive.',
             ],
-            'grand_total' => 270,
-            'outcome_id' => 1,
         ]);
 
         $this->assertDatabaseHas('responses', [
             'session_id' => $sessionId,
-            'outcome_id' => 1,
-            'total_breadth' => 18,
-            'total_depth' => 36,
-            'total_integration' => 54,
-            'total_output' => 72,
-            'total_recognition' => 90,
-            'grand_total' => 270,
+            'outcome_id' => null,
+            'total_score' => 18,
+            'outcome_base_type' => 'Linear Specialist',
+            'outcome_branch' => 'Contented Specialist',
+            'outcome_score_range' => '18-30',
+            'outcome_description' => 'Deep satisfaction in focused mastery. Concentrated, recognized, productive.',
         ]);
 
         $this->assertDatabaseHas('answers', [
             'question_id' => 'q_01',
-            'score_breadth' => 1,
-            'score_depth' => 2,
-            'score_integration' => 3,
-            'score_output' => 4,
-            'score_recognition' => 5,
+            'score_value' => 1,
         ]);
 
         $this->assertDatabaseCount('answers', 18);

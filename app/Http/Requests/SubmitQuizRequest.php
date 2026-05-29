@@ -27,11 +27,7 @@ class SubmitQuizRequest extends FormRequest
             'answers.*.answer_key' => ['required', 'string', 'in:A,B,C,D,E'],
             'answers.*.answer_text' => ['required', 'string'],
             'answers.*.question_index' => ['required', 'integer', 'between:0,17', 'distinct'],
-            'answers.*.score_breadth' => ['required', 'integer', 'between:1,5'],
-            'answers.*.score_depth' => ['required', 'integer', 'between:1,5'],
-            'answers.*.score_integration' => ['required', 'integer', 'between:1,5'],
-            'answers.*.score_output' => ['required', 'integer', 'between:1,5'],
-            'answers.*.score_recognition' => ['required', 'integer', 'between:1,5'],
+            'answers.*.score_value' => ['required', 'integer', 'between:1,5'],
         ];
     }
 }

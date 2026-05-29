@@ -57,11 +57,7 @@ export function useQuiz() {
             answer_key: selectedOption.key,
             answer_text: selectedOption.text,
             question_index: index,
-            score_breadth: selectedOption.scores.breadth,
-            score_depth: selectedOption.scores.depth,
-            score_integration: selectedOption.scores.integration,
-            score_output: selectedOption.scores.output,
-            score_recognition: selectedOption.scores.recognition,
+            score_value: selectedOption.score,
           }
         }),
       }
