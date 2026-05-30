@@ -34,7 +34,7 @@ class SubmitQuizTest extends TestCase
             'outcome' => [
                 'base_type' => 'Linear Specialist',
                 'branch' => 'Contented Specialist',
-                'score_range' => '18-30',
+                'score_range' => '18-29',
                 'description' => 'Deep satisfaction in focused mastery. Concentrated, recognized, productive.',
             ],
         ]);
@@ -45,7 +45,7 @@ class SubmitQuizTest extends TestCase
             'total_score' => 18,
             'outcome_base_type' => 'Linear Specialist',
             'outcome_branch' => 'Contented Specialist',
-            'outcome_score_range' => '18-30',
+            'outcome_score_range' => '18-29',
             'outcome_description' => 'Deep satisfaction in focused mastery. Concentrated, recognized, productive.',
         ]);
 

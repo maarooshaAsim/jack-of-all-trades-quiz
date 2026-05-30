@@ -66,20 +66,15 @@ class OutcomeCalculator
     }
 
     /**
-     * @param  array{min_score: int, max_score: int, is_final_range: bool}  $scoreTypeLink
+     * @param  array{min_score: int, max_score: int}  $scoreTypeLink
      */
     private function scoreIsWithinRange(int $totalScore, array $scoreTypeLink): bool
     {
-        if ($scoreTypeLink['is_final_range']) {
-            return $totalScore >= $scoreTypeLink['min_score'] && $totalScore <= $scoreTypeLink['max_score'];
-        }
-
-        return $totalScore >= $scoreTypeLink['min_score'] && $totalScore < $scoreTypeLink['max_score'];
+        return $totalScore >= $scoreTypeLink['min_score'] && $totalScore <= $scoreTypeLink['max_score'];
     }
 
     /**
-     * CSV ranges share boundaries, for example 18-30 and 30-38.
-     * Boundaries are treated as lower-inclusive and upper-exclusive, except the final range.
+     * CSV rows are evaluated in order, so overlapping ranges resolve to the first match.
      *
      * @return array<int, array{
      *     base_type: string,
@@ -87,8 +82,7 @@ class OutcomeCalculator
      *     score_range: string,
      *     min_score: int,
      *     max_score: int,
-     *     description: string,
-     *     is_final_range: bool
+     *     description: string
      * }>
      */
     private function scoreTypeLinks(): array
@@ -117,7 +111,6 @@ class OutcomeCalculator
                 'min_score' => $minimumScore,
                 'max_score' => $maximumScore,
                 'description' => trim($row[3]),
-                'is_final_range' => false,
             ];
         }
 
@@ -126,9 +119,6 @@ class OutcomeCalculator
         if ($header === false || $scoreTypeLinks === []) {
             throw new RuntimeException("Score type link file [{$path}] did not contain usable rows.");
         }
-
-        $lastIndex = array_key_last($scoreTypeLinks);
-        $scoreTypeLinks[$lastIndex]['is_final_range'] = true;
 
         return $scoreTypeLinks;
     }
