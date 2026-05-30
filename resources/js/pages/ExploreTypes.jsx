@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { DecorativeStar } from '../components/DecorativeStar.jsx'
 import { ResultPageShell } from '../components/ResultPageShell.jsx'
 import { useResultTypes } from '../hooks/useResultTypes.js'
 
@@ -29,9 +30,11 @@ export function ExploreTypes() {
             style={{ color: resultType.accent_color }}
           >
             <div
-              className="relative overflow-hidden rounded-[1.25rem] px-7 pt-9 pb-7 text-center shadow-[0_7px_12px_rgba(0,0,0,0.22)]"
+              className="relative rounded-[1.25rem] px-7 pt-9 pb-7 text-center shadow-[0_7px_12px_rgba(0,0,0,0.22)]"
               style={{ backgroundColor: resultType.base_color }}
             >
+              <DecorativeStar color={resultType.base_color} className="-top-10 -left-10" />
+              <DecorativeStar color={resultType.base_color} className="-top-10 -right-10" />
               <h1 className="text-[1.85rem] font-black uppercase leading-none text-white sm:text-[2.45rem]">
                 {resultType.name}
               </h1>

@@ -6,15 +6,17 @@ import { landingStarsPath } from '../config/assets.js'
 export function ResultPageShell({ children }) {
   return (
     <Shell tone="from-[#ededed] via-[#f5f5f4] to-[#ecebea]" fullBleed>
-      <section className="relative min-h-[100svh] overflow-hidden bg-[#edecec] px-5 py-6 text-[#00395D] sm:px-8">
+      <section className="relative flex min-h-[100svh] flex-1 flex-col items-center overflow-hidden bg-white px-4 py-5 text-center sm:px-8 sm:py-8">
         <div
-          className="pointer-events-none absolute inset-0 bg-center bg-repeat-y opacity-95"
+          className="pointer-events-none absolute inset-0 bg-cover bg-no-repeat opacity-[0.82]"
           style={{
             backgroundImage: `url(${landingStarsPath})`,
-            backgroundPosition: 'center top',
-            backgroundSize: '42rem auto',
+            backgroundPosition: 'center 16.5rem',
+            backgroundSize: '40rem auto',
           }}
         />
+        <div className="pointer-events-none absolute inset-x-0 top-[7.2rem] h-[13rem] bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.78)_0%,rgba(255,255,255,0.54)_38%,rgba(255,255,255,0.2)_72%,rgba(255,255,255,0)_100%)] sm:top-[8.5rem] sm:h-[14rem]" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 top-[10.5rem] bg-[linear-gradient(180deg,rgba(255,255,255,0)_0%,rgba(255,255,255,0.02)_18%,rgba(255,255,255,0.06)_40%,rgba(255,255,255,0.1)_62%,rgba(255,255,255,0.14)_100%)] sm:top-[12rem]" />
 
         <div className="relative mx-auto flex w-full max-w-[38rem] flex-col items-center">
           <Logo className="max-w-[19rem] sm:max-w-[24rem]" />
