@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { DecorativeStar } from '../components/DecorativeStar.jsx'
+import { ResultGraphPlaceholder } from '../components/ResultGraphPlaceholder.jsx'
 import { ResultPageShell } from '../components/ResultPageShell.jsx'
 import { useResultTypes } from '../hooks/useResultTypes.js'
 
@@ -9,7 +10,7 @@ export function ExploreTypes() {
 
   return (
     <ResultPageShell>
-      <div className="mt-14 w-full space-y-8 pb-20 sm:mt-18">
+      <div className="mt-20 flex w-full flex-col items-center space-y-20 pb-20 sm:mt-24">
         {isLoading ? (
           <p className="rounded-[1rem] bg-[#1d1d1f] px-6 py-5 text-center text-xl font-black text-white shadow-[0_5px_9px_rgba(0,0,0,0.22)]">
             Loading types
@@ -26,24 +27,20 @@ export function ExploreTypes() {
           <Link
             key={resultType.slug}
             to={`/explore/types/${resultType.slug}`}
-            className="group relative block w-full rounded-[1.25rem] transition hover:-translate-y-1 focus:outline-none focus-visible:ring-4 focus-visible:ring-[#18161d]/30"
+            className="group relative block w-full max-w-[23rem] rounded-[1.15rem] transition hover:-translate-y-1 focus:outline-none focus-visible:ring-4 focus-visible:ring-[#18161d]/30 sm:max-w-[25rem]"
             style={{ color: resultType.accent_color }}
           >
             <div
-              className="relative rounded-[1.25rem] px-7 pt-9 pb-7 text-center shadow-[0_7px_12px_rgba(0,0,0,0.22)]"
+              className="relative rounded-[1rem] px-4 pt-5 pb-5 text-center shadow-[0_7px_12px_rgba(0,0,0,0.22)] sm:px-5 sm:pt-6"
               style={{ backgroundColor: resultType.base_color }}
             >
               <DecorativeStar color={resultType.base_color} className="-top-10 -left-10" />
               <DecorativeStar color={resultType.base_color} className="-top-10 -right-10" />
-              <h1 className="text-[1.85rem] font-black uppercase leading-none text-white sm:text-[2.45rem]">
+              <h1 className="text-[1.35rem] font-black uppercase leading-none text-white sm:text-[1.75rem]">
                 {resultType.name}
               </h1>
-              <div className="mx-auto mt-8 aspect-[1.3] max-h-[16rem] w-full max-w-[25rem] overflow-hidden">
-                <img
-                  src={resultType.graph_path}
-                  alt=""
-                  className="h-full w-full object-contain object-top drop-shadow-[0_4px_0_rgba(255,255,255,0.36)]"
-                />
+              <div className="mt-5">
+                <ResultGraphPlaceholder accentColor={resultType.accent_color} />
               </div>
             </div>
           </Link>

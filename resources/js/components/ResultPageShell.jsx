@@ -6,12 +6,11 @@ import { landingStarsPath } from '../config/assets.js'
 export function ResultPageShell({ children }) {
   return (
     <Shell tone="from-[#ededed] via-[#f5f5f4] to-[#ecebea]" fullBleed>
-      <section className="relative flex min-h-[100svh] flex-1 flex-col items-center overflow-hidden bg-white px-4 py-5 text-center sm:px-8 sm:py-8">
+      <section id="bg" className="relative flex min-h-[100svh] flex-1 flex-col items-center overflow-hidden bg-white px-4 py-5 text-center sm:px-8 sm:py-8">
         <div
-          className="pointer-events-none absolute inset-0 bg-cover bg-no-repeat opacity-[0.82]"
+          className="pointer-events-none absolute translate-y-80 inset-0 bg-center bg-repeat-y opacity-[0.82] pt-7"
           style={{
             backgroundImage: `url(${landingStarsPath})`,
-            backgroundPosition: 'center 16.5rem',
             backgroundSize: '40rem auto',
           }}
         />

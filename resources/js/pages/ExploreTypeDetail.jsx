@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link, useParams } from 'react-router-dom'
+import { ArrowIcon } from '../components/ArrowIcon.jsx'
 import { DecorativeStar } from '../components/DecorativeStar.jsx'
+import { ResultGraphPlaceholder } from '../components/ResultGraphPlaceholder.jsx'
 import { ResultPageShell } from '../components/ResultPageShell.jsx'
 import { useResultType } from '../hooks/useResultTypes.js'
 
@@ -50,16 +52,16 @@ export function ExploreTypeDetail() {
 
   return (
     <ResultPageShell>
-      <div className="mt-14 w-full pb-24 sm:mt-18" style={{ color: resultType.accent_color }}>
+      <div className="mt-20 w-full pb-24 sm:mt-24" style={{ color: resultType.accent_color }}>
         <section
-          className="relative rounded-[1.25rem] px-6 pt-9 pb-8 text-center text-white shadow-[0_7px_12px_rgba(0,0,0,0.24)]"
+          className="relative mx-auto max-w-[23rem] rounded-[1rem] px-4 pt-5 pb-5 text-center text-white shadow-[0_7px_12px_rgba(0,0,0,0.24)] sm:max-w-[25rem] sm:px-5 sm:pt-6"
           style={{ backgroundColor: resultType.base_color }}
         >
           <DecorativeStar color={resultType.base_color} className="-top-10 -left-10" />
           <DecorativeStar color={resultType.base_color} className="-top-10 -right-10" />
-          <h1 className="text-[1.95rem] font-black uppercase leading-none sm:text-[2.55rem]">{resultType.name}</h1>
-          <div className="mx-auto mt-8 aspect-[1.08] w-full max-w-[25rem] overflow-hidden">
-            <img src={resultType.graph_path} alt="" className="h-full w-full object-contain object-top" />
+          <h1 className="text-[1.45rem] font-black uppercase leading-none sm:text-[1.85rem]">{resultType.name}</h1>
+          <div className="mt-5">
+            <ResultGraphPlaceholder accentColor={resultType.accent_color} />
           </div>
         </section>
 
@@ -109,10 +111,10 @@ export function ExploreTypeDetail() {
 
         <Link
           to="/explore/types"
-          className="mt-10 inline-flex items-center text-[1.9rem] font-black leading-none text-[#1d1d1f]"
+          className="mt-10 inline-flex items-center"
           aria-label="Back to result types"
         >
-          ←
+          <ArrowIcon direction="back" color="#1d1d1f" />
         </Link>
       </div>
     </ResultPageShell>
