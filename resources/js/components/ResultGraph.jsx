@@ -4,7 +4,7 @@ export function ResultGraph({ graphPath, alt = '' }) {
   const [hasImageError, setHasImageError] = useState(false)
 
   return (
-    <div className="relative mx-auto aspect-[1.18] w-[17rem] max-w-full sm:w-[19rem]">
+    <div className="relative mx-auto aspect-[1.18] w-[15rem] max-w-full sm:w-[19rem]">
       <span className="absolute left-1/2 top-0 -translate-x-1/2 text-[0.7rem] font-black text-white sm:text-[0.82rem]">
         Breadth
       </span>

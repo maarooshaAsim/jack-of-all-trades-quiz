@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use Illuminate\Support\Str;
 use RuntimeException;
 
 class OutcomeCalculator
@@ -20,6 +21,7 @@ class OutcomeCalculator
      *     total_score: int,
      *     outcome: array{
      *         base_type: string,
+     *         branch_slug: string,
      *         branch: string,
      *         score_range: string,
      *         description: string
@@ -44,6 +46,7 @@ class OutcomeCalculator
     /**
      * @return array{
      *     base_type: string,
+     *     branch_slug: string,
      *     branch: string,
      *     score_range: string,
      *     description: string
@@ -55,6 +58,7 @@ class OutcomeCalculator
             if ($this->scoreIsWithinRange($totalScore, $scoreTypeLink)) {
                 return [
                     'base_type' => $scoreTypeLink['base_type'],
+                    'branch_slug' => Str::slug($scoreTypeLink['branch']),
                     'branch' => $scoreTypeLink['branch'],
                     'score_range' => $scoreTypeLink['score_range'],
                     'description' => $scoreTypeLink['description'],

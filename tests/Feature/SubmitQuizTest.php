@@ -33,6 +33,7 @@ class SubmitQuizTest extends TestCase
             'total_score' => 18,
             'outcome' => [
                 'base_type' => 'Linear Specialist',
+                'branch_slug' => 'contented-specialist',
                 'branch' => 'Contented Specialist',
                 'score_range' => '18-29',
                 'description' => 'Deep satisfaction in focused mastery. Concentrated, recognized, productive.',

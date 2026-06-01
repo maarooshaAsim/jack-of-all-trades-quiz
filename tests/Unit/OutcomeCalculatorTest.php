@@ -25,6 +25,7 @@ class OutcomeCalculatorTest extends TestCase
         $this->assertSame(30, $result['total_score']);
         $this->assertSame([
             'base_type' => 'Linear Specialist',
+            'branch_slug' => 'assigned-specialist',
             'branch' => 'Assigned Specialist',
             'score_range' => '30-38',
             'description' => 'Specialization chosen by external pressure. Inherited path, not elected.',
