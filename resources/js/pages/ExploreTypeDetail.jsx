@@ -57,6 +57,17 @@ export function ResultTypeDetailContent({
 
       {quizResult ? (
         <section className="mx-auto mt-6 grid w-full max-w-[449px] grid-cols-2 gap-3 sm:mt-8 sm:gap-4">
+          {quizResult.participant ? (
+            <div className="col-span-2 rounded-[0.9rem] bg-white px-4 py-4 text-center shadow-[0_4px_8px_rgba(0,0,0,0.12)] sm:px-5">
+              <p className="text-[0.68rem] font-black uppercase tracking-[0.16em] sm:text-[0.72rem] sm:tracking-[0.18em]">Quiz Taker</p>
+              <p className="mt-2 text-[1.25rem] font-black leading-none text-[#1d1d1f] sm:text-[1.55rem]">
+                {quizResult.participant.name}
+              </p>
+              <p className="mt-2 text-[0.95rem] font-semibold text-[#1d1d1f]/70">
+                Age {quizResult.participant.age}
+              </p>
+            </div>
+          ) : null}
           <div className="rounded-[0.9rem] bg-[#1d1d1f] px-3 py-4 text-center text-white shadow-[0_4px_8px_rgba(0,0,0,0.22)] sm:px-4">
             <p className="text-[0.62rem] font-black uppercase tracking-[0.14em] text-white/60 sm:text-[0.72rem] sm:tracking-[0.18em]">Your Score</p>
             <p className="mt-1 text-[1.7rem] font-black leading-none sm:text-[2rem]">{quizResult.total_score}</p>

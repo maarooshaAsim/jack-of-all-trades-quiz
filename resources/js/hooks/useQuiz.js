@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { questions } from '../config/questions.config.js'
 
-export function useQuiz() {
+export function useQuiz(participant) {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [answers, setAnswers] = useState({})
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -48,6 +48,8 @@ export function useQuiz() {
     try {
       const payload = {
         session_id: crypto.randomUUID(),
+        participant_name: participant.name,
+        participant_age: participant.age,
         answers: questions.map((question, index) => {
           const selectedOption = answers[question.id]
 

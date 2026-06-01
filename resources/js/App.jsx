@@ -5,6 +5,7 @@ import { ExploreTypeDetail } from './pages/ExploreTypeDetail.jsx'
 import { ExploreTypes } from './pages/ExploreTypes.jsx'
 import { InfoPage } from './pages/InfoPage.jsx'
 import { Landing } from './pages/Landing.jsx'
+import { ParticipantInfo } from './pages/ParticipantInfo.jsx'
 import { Quiz } from './pages/Quiz.jsx'
 import { Result } from './pages/Result.jsx'
 
@@ -16,6 +17,7 @@ export default function App() {
         <Route path="/explore/types" element={<ExploreTypes />} />
         <Route path="/explore/types/:baseType" element={<ExploreTypeDetail />} />
         <Route path="/explore/:type" element={<InfoPage />} />
+        <Route path="/quiz/info" element={<ParticipantInfo />} />
         <Route path="/quiz" element={<Quiz />} />
         <Route path="/result" element={<Result />} />
         <Route path="/admin" element={<Admin />} />

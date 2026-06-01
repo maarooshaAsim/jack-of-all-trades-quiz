@@ -13,6 +13,8 @@ class SubmitController extends Controller
     {
         /** @var array{
          *     session_id: string,
+         *     participant_name: string,
+         *     participant_age: int,
          *     answers: array<int, array{
          *         question_id: string,
          *         category: string,
@@ -42,6 +44,8 @@ class SubmitController extends Controller
             DB::table('responses')->insert([
                 'id' => $responseId,
                 'session_id' => $payload['session_id'],
+                'participant_name' => $payload['participant_name'],
+                'participant_age' => $payload['participant_age'],
                 'outcome_id' => null,
                 'ip_address' => $request->ip(),
                 'total_score' => $calculatedOutcome['total_score'],
@@ -70,6 +74,10 @@ class SubmitController extends Controller
 
         return [
             'status' => 'ok',
+            'participant' => [
+                'name' => $payload['participant_name'],
+                'age' => $payload['participant_age'],
+            ],
             'total_score' => $calculatedOutcome['total_score'],
             'outcome' => $calculatedOutcome['outcome'],
         ];

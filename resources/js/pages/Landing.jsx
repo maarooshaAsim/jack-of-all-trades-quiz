@@ -44,7 +44,7 @@ export function Landing() {
             Explore Types
           </Link>
           <Link
-            to="/quiz"
+            to="/quiz/info"
             className="inline-flex min-h-[3.65rem] items-center justify-center rounded-[0.8rem] bg-[linear-gradient(90deg,#62b9ff_0%,#7db0ff_22%,#ff4a71_62%,#ffcc00_100%)] px-4 text-[1.45rem] font-black text-white shadow-[0_4px_10px_rgba(0,0,0,0.22)] transition hover:translate-y-[1px]"
           >
             Begin

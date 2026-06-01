@@ -21,6 +21,8 @@ class AdminExportTest extends TestCase
         DB::table('responses')->insert([
             'id' => '11111111-1111-4111-8111-111111111111',
             'session_id' => '22222222-2222-4222-8222-222222222222',
+            'participant_name' => 'Ayesha Khan',
+            'participant_age' => 29,
             'total_score' => 18,
             'outcome_base_type' => 'Linear Specialist',
             'outcome_branch' => 'Contented Specialist',
@@ -73,6 +75,7 @@ class AdminExportTest extends TestCase
         config([
             'app.admin_username' => 'admin',
             'app.admin_password' => 'secret',
+            'app.admin_token' => 'test-token',
         ]);
 
         $response = $this->postJson('/api/admin/login', [

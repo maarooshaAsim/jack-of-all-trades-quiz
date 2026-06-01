@@ -51,6 +51,8 @@ class AnswerExport
             $rows[] = $this->rowXml($rowNumber++, [
                 $answerRow->response_id,
                 $answerRow->session_id,
+                $answerRow->participant_name,
+                $answerRow->participant_age,
                 $answerRow->completed_at,
                 $answerRow->ip_address,
                 $answerRow->total_score,
@@ -80,6 +82,8 @@ class AnswerExport
         return [
             'Response ID',
             'Session ID',
+            'Participant Name',
+            'Participant Age',
             'Completed At',
             'IP Address',
             'Total Score',
@@ -105,6 +109,8 @@ class AnswerExport
             ->select([
                 'answers.response_id',
                 'responses.session_id',
+                'responses.participant_name',
+                'responses.participant_age',
                 'responses.completed_at',
                 'responses.ip_address',
                 'responses.total_score',

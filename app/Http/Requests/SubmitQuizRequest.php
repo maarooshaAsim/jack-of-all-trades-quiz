@@ -21,6 +21,8 @@ class SubmitQuizRequest extends FormRequest
     {
         return [
             'session_id' => ['required', 'uuid'],
+            'participant_name' => ['required', 'string', 'max:120'],
+            'participant_age' => ['required', 'integer', 'between:1,120'],
             'answers' => ['required', 'array', 'size:18'],
             'answers.*.question_id' => ['required', 'string'],
             'answers.*.category' => ['required', 'string'],

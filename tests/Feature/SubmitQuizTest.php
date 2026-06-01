@@ -15,6 +15,8 @@ class SubmitQuizTest extends TestCase
 
         $response = $this->postJson('/api/submit', [
             'session_id' => $sessionId,
+            'participant_name' => 'Ayesha Khan',
+            'participant_age' => 29,
             'answers' => array_map(
                 static fn (int $index): array => [
                     'question_id' => sprintf('q_%02d', $index + 1),
@@ -30,6 +32,10 @@ class SubmitQuizTest extends TestCase
 
         $response->assertOk()->assertJson([
             'status' => 'ok',
+            'participant' => [
+                'name' => 'Ayesha Khan',
+                'age' => 29,
+            ],
             'total_score' => 18,
             'outcome' => [
                 'base_type' => 'Linear Specialist',
@@ -42,6 +48,8 @@ class SubmitQuizTest extends TestCase
 
         $this->assertDatabaseHas('responses', [
             'session_id' => $sessionId,
+            'participant_name' => 'Ayesha Khan',
+            'participant_age' => 29,
             'outcome_id' => null,
             'total_score' => 18,
             'outcome_base_type' => 'Linear Specialist',

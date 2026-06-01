@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { Logo } from '../components/Logo.jsx'
 import { NavArrow } from '../components/NavArrow.jsx'
 import { QuizOption } from '../components/QuizOption.jsx'
@@ -8,9 +8,26 @@ import { questionStarsPath } from '../config/assets.js'
 import { getCategoryMeta } from '../config/categoryMeta.js'
 import { getQuestionTheme } from '../config/questionTheme.js'
 import { useQuiz } from '../hooks/useQuiz.js'
+import { participantStorageKey } from './ParticipantInfo.jsx'
+
+function readStoredParticipant() {
+  try {
+    const participant = JSON.parse(window.localStorage.getItem(participantStorageKey))
+
+    if (participant?.name && participant?.age) {
+      return participant
+    }
+  } catch (error) {
+    window.localStorage.removeItem(participantStorageKey)
+  }
+
+  return null
+}
 
 export function Quiz() {
   const navigate = useNavigate()
+  const location = useLocation()
+  const participant = location.state?.participant ?? readStoredParticipant()
   const {
     answers,
     currentIndex,
@@ -24,8 +41,18 @@ export function Quiz() {
     selectAnswer,
     submit,
     totalQuestions,
-  } = useQuiz()
+  } = useQuiz(participant)
   const [submitError, setSubmitError] = useState(null)
+
+  useEffect(() => {
+    if (!participant) {
+      navigate('/quiz/info', { replace: true })
+    }
+  }, [navigate, participant])
+
+  if (!participant) {
+    return null
+  }
 
   const currentAnswer = answers[currentQuestion.id]
   const category = getCategoryMeta(currentQuestion.category)
@@ -49,7 +76,10 @@ export function Quiz() {
 
       navigate('/result', {
         state: {
-          result,
+          result: {
+            ...result,
+            participant,
+          },
         },
       })
     } catch (error) {
