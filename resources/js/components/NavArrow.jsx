@@ -1,8 +1,7 @@
-import React from 'react'
-import { ArrowIcon } from './ArrowIcon.jsx'
+import React from "react"
 
 export function NavArrow({ direction, disabled, label, onClick }) {
-  const isNext = direction === 'next'
+  const isNext = direction === "next"
 
   return (
     <button
@@ -10,11 +9,19 @@ export function NavArrow({ direction, disabled, label, onClick }) {
       onClick={onClick}
       disabled={disabled}
       aria-label={label}
-      className={`inline-flex h-[2.8rem] w-[5.2rem] items-center justify-center rounded-full transition ${
-        isNext ? 'bg-[#18161d]/92' : 'bg-white/72'
-      } ${disabled ? 'cursor-not-allowed opacity-35' : 'hover:-translate-y-[1px]'}`}
+      className={`flex h-6 w-[58px] items-center ${
+        isNext ? "justify-end" : "justify-start"
+      } ${disabled ? "cursor-not-allowed opacity-35" : "hover:opacity-75"}`}
     >
-      <ArrowIcon direction={isNext ? 'forward' : 'back'} color={isNext ? '#ffffff' : '#18161d'} />
+      <span
+        className={`relative block h-[2px] w-[52px] bg-[#EDECEC] ${
+          isNext ? "after:right-0" : "after:left-0"
+        } after:absolute after:top-1/2 after:h-[7px] after:w-[7px] after:-translate-y-1/2 after:rotate-45 after:content-[''] ${
+          isNext
+            ? "after:border-r-2 after:border-t-2 after:border-[#EDECEC]"
+            : "after:border-b-2 after:border-l-2 after:border-[#EDECEC]"
+        }`}
+      />
     </button>
   )
 }

@@ -97,7 +97,7 @@ export function Quiz() {
           className="pointer-events-none absolute inset-0 bg-center bg-no-repeat opacity-[0.9]"
           style={{
             backgroundImage: `url(${questionStarsPath})`,
-            backgroundPosition: 'center 30rem',
+            backgroundPosition: 'center 22rem',
             backgroundSize: '42rem auto',
           }}
         />
@@ -127,9 +127,11 @@ export function Quiz() {
           </div>
 
           <div className="mx-auto flex w-full max-w-[22rem] flex-1 flex-col justify-center pt-4 pb-6 sm:max-w-[30rem] sm:pb-8">
-            <p className="pb-3 text-center text-[0.9rem] font-black uppercase tracking-[0.14em] text-white [text-shadow:0_1px_2px_rgba(0,0,0,0.18)] sm:pb-4 sm:text-[0.9rem] sm:tracking-[0.18em]">
-              {category.label}
-            </p>
+              <p
+                className="pb-3 text-center  text-[25.703px] font-bold text-[#EDECEC] leading-normal sm:pb-4"
+              >
+                {category.label}
+              </p>
             <div
               className="rounded-[1.05rem] px-2.5 py-3 shadow-[0_16px_32px_rgba(0,0,0,0.2)] sm:rounded-[1.15rem] sm:px-4 sm:py-4"
               style={{ backgroundColor: theme.card }}
@@ -138,7 +140,7 @@ export function Quiz() {
                 {currentQuestion.text}
               </h1>
 
-              <div className="space-y-2">
+              <div className="space-y-3">
                 {currentQuestion.options.map((option) => (
                   <QuizOption
                     accentColor={theme.accent}
@@ -154,23 +156,26 @@ export function Quiz() {
               {submitError ? (
                 <p className="px-2 pt-3 pb-1 text-center text-xs font-semibold text-[#ffd5d5]">{submitError}</p>
               ) : null}
+
+              <div className="flex w-full items-center justify-between px-3 pb-2 pt-3">
+                <NavArrow
+                  direction="prev"
+                  disabled={isFirst || isSubmitting}
+                  label="Previous question"
+                  onClick={goPrev}
+                />
+
+                <NavArrow
+                  direction="next"
+                  disabled={!hasAnswered || isSubmitting}
+                  label={isLast ? "Submit quiz" : "Next question"}
+                  onClick={handleAdvance}
+                />
+              </div>
             </div>
           </div>
 
-          <div className="mx-auto flex w-full max-w-[22rem] items-center justify-between gap-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] sm:max-w-[30rem] sm:gap-4 sm:pb-2">
-            <NavArrow direction="prev" disabled={isFirst || isSubmitting} label="Previous question" onClick={goPrev} />
 
-            <div className="text-center text-[0.58rem] font-black uppercase tracking-[0.16em] text-[#18161d]/65 sm:text-[0.65rem] sm:tracking-[0.2em]">
-              {isSubmitting ? 'Submitting' : `${currentIndex + 1} / ${totalQuestions}`}
-            </div>
-
-            <NavArrow
-              direction="next"
-              disabled={!hasAnswered || isSubmitting}
-              label={isLast ? 'Submit quiz' : 'Next question'}
-              onClick={handleAdvance}
-            />
-          </div>
         </div>
       </section>
     </Shell>
