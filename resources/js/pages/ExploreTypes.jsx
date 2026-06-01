@@ -10,7 +10,7 @@ export function ExploreTypes() {
 
   return (
     <ResultPageShell>
-      <div className="mt-20 flex w-full flex-col items-center space-y-20 pb-20 sm:mt-24">
+      <div className="mt-16 flex w-full flex-col items-center space-y-12 pb-16 sm:mt-18 sm:space-y-14">
         {isLoading ? (
           <p className="rounded-[1rem] bg-[#1d1d1f] px-6 py-5 text-center text-xl font-black text-white shadow-[0_5px_9px_rgba(0,0,0,0.22)]">
             Loading types
@@ -39,7 +39,7 @@ export function ExploreTypes() {
               <h1 className="text-[1.35rem] font-black uppercase leading-none text-white sm:text-[1.75rem]">
                 {resultType.name}
               </h1>
-              <div className="mt-5">
+              <div className="mt-5 w-full">
                 <ResultGraph graphPath={resultType.graph_path} />
               </div>
             </div>
