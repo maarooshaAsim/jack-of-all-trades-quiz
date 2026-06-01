@@ -2,7 +2,7 @@ import React from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { ArrowIcon } from '../components/ArrowIcon.jsx'
 import { DecorativeStar } from '../components/DecorativeStar.jsx'
-import { ResultGraphPlaceholder } from '../components/ResultGraphPlaceholder.jsx'
+import { ResultGraph } from '../components/ResultGraph.jsx'
 import { ResultPageShell } from '../components/ResultPageShell.jsx'
 import { useResultType } from '../hooks/useResultTypes.js'
 
@@ -61,7 +61,7 @@ export function ExploreTypeDetail() {
           <DecorativeStar color={resultType.base_color} className="-top-10 -right-10" />
           <h1 className="text-[1.45rem] font-black uppercase leading-none sm:text-[1.85rem]">{resultType.name}</h1>
           <div className="mt-5">
-            <ResultGraphPlaceholder accentColor={resultType.accent_color} />
+            <ResultGraph graphPath={resultType.graph_path} />
           </div>
         </section>
 

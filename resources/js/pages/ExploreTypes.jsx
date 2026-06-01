@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { DecorativeStar } from '../components/DecorativeStar.jsx'
-import { ResultGraphPlaceholder } from '../components/ResultGraphPlaceholder.jsx'
+import { ResultGraph } from '../components/ResultGraph.jsx'
 import { ResultPageShell } from '../components/ResultPageShell.jsx'
 import { useResultTypes } from '../hooks/useResultTypes.js'
 
@@ -40,7 +40,7 @@ export function ExploreTypes() {
                 {resultType.name}
               </h1>
               <div className="mt-5">
-                <ResultGraphPlaceholder accentColor={resultType.accent_color} />
+                <ResultGraph graphPath={resultType.graph_path} />
               </div>
             </div>
           </Link>
