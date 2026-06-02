@@ -131,10 +131,10 @@ class ResultTypeSeeder extends Seeder
         $code = $this->assetCodeFor($row['code']);
 
         if ($row['parent_code'] === '') {
-            return "/storage/assets/base_types/{$code}.svg";
+            return "/assets/base_types/{$code}.svg";
         }
 
-        return "/storage/assets/result_categories/{$code}.svg";
+        return "/assets/result_categories/{$code}.svg";
     }
 
     private function assetCodeFor(string $code): string

@@ -33,7 +33,7 @@ class ResultTypeFactory extends Factory
             'integration_description' => fake()->paragraph(),
             'base_color' => fake()->hexColor(),
             'accent_color' => fake()->hexColor(),
-            'graph_path' => '/storage/assets/result_categories/contended_specialist.svg',
+            'graph_path' => '/assets/result_categories/contended_specialist.svg',
             'sort_order' => fake()->numberBetween(1, 100),
         ];
     }
