@@ -42,7 +42,19 @@ export function ResultTypeDetailContent({
   actions = null,
 }) {
   return (
-    <div className="mt-10 w-full pb-14 sm:mt-18 sm:pb-16" style={{ color: resultType.accent_color }}>
+    <div className="mt-5 w-full pb-14 sm:mt-8 sm:pb-16" style={{ color: resultType.accent_color }}>
+      {showBackLink ? (
+        <div className="mb-8 flex w-full justify-start sm:mb-10">
+          <Link
+            to="/explore/types"
+            className="joat-button-motion inline-flex items-center"
+            aria-label="Back to result types"
+          >
+            <ArrowIcon direction="back" color="#1d1d1f" className="h-[2.35rem] w-[4.25rem]" />
+          </Link>
+        </div>
+      ) : null}
+
       <section
         className="relative mx-auto flex aspect-square w-full max-w-[449px] flex-col items-center justify-center rounded-[1rem] px-2.5 py-6 text-center text-white shadow-[0_7px_12px_rgba(0,0,0,0.24)] min-[380px]:px-3 sm:px-7 sm:py-8"
         style={{ backgroundColor: resultType.base_color }}
@@ -132,16 +144,6 @@ export function ResultTypeDetailContent({
       ) : null}
 
       {actions ? <div className="mx-auto mt-9 max-w-[449px]">{actions}</div> : null}
-
-      {showBackLink ? (
-        <Link
-          to="/explore/types"
-          className="joat-button-motion mt-10 inline-flex items-center"
-          aria-label="Back to result types"
-        >
-          <ArrowIcon direction="back" color="#1d1d1f" />
-        </Link>
-      ) : null}
     </div>
   )
 }

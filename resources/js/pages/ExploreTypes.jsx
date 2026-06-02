@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { ArrowIcon } from '../components/ArrowIcon.jsx'
 import { DecorativeStar } from '../components/DecorativeStar.jsx'
 import { ResultGraph } from '../components/ResultGraph.jsx'
 import { ResultPageShell } from '../components/ResultPageShell.jsx'
@@ -10,7 +11,17 @@ export function ExploreTypes() {
 
   return (
     <ResultPageShell>
-      <div className="mt-16 flex w-full flex-col items-center space-y-12 pb-16 sm:mt-18 sm:space-y-14">
+      <div className="flex w-full justify-start ">
+        <Link
+          to="/"
+          className="joat-button-motion inline-flex items-center"
+          aria-label="Back to home"
+        >
+          <ArrowIcon direction="back" color="#1d1d1f" className="h-[2.35rem] w-[4.25rem]" />
+        </Link>
+      </div>
+
+      <div className="mt-10 flex w-full flex-col items-center space-y-12 pb-16 sm:mt-12 sm:space-y-14">
         {isLoading ? (
           <p className="rounded-[1rem] bg-[#1d1d1f] px-6 py-5 text-center text-xl font-black text-white shadow-[0_5px_9px_rgba(0,0,0,0.22)]">
             Loading types
@@ -27,7 +38,7 @@ export function ExploreTypes() {
           <Link
             key={resultType.slug}
             to={`/explore/types/${resultType.slug}`}
-            className="joat-button-motion group relative block w-full max-w-[23rem] rounded-[1.15rem] focus:outline-none focus-visible:ring-4 focus-visible:ring-[#18161d]/30 sm:max-w-[25rem]"
+            className="my-10 joat-button-motion group relative block w-full max-w-[23rem] rounded-[1.15rem] focus:outline-none focus-visible:ring-4 focus-visible:ring-[#18161d]/30 sm:max-w-[25rem]"
             style={{ color: resultType.accent_color }}
           >
             <div
