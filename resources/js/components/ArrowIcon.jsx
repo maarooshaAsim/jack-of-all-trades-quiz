@@ -7,7 +7,7 @@ export function ArrowIcon({ direction = 'back', color = '#1d1d1f', className = '
   return (
     <span
       aria-hidden="true"
-      className={`block h-[2rem] w-[4.9rem] ${className}`}
+      className={`block h-[3rem] w-[5rem] ${className}`}
       style={{
         backgroundColor: color,
         mask: `url(${arrowPath}) center / contain no-repeat`,

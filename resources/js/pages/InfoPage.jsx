@@ -22,7 +22,7 @@ export function InfoPage() {
         </p>
         <Link
           to="/"
-          className="mt-8 inline-flex rounded-full border-2 border-[#18161d] bg-[#18161d] px-5 py-3 text-sm font-black uppercase tracking-[0.2em] text-white"
+          className="joat-button-motion mt-8 inline-flex rounded-full border-2 border-[#18161d] bg-[#18161d] px-5 py-3 text-sm font-black uppercase tracking-[0.2em] text-white"
         >
           Back
         </Link>

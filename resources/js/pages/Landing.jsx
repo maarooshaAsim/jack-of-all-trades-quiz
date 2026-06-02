@@ -3,52 +3,79 @@ import { Link } from 'react-router-dom'
 import { Logo } from '../components/Logo.jsx'
 import { Shell } from '../components/Shell.jsx'
 import { landingStarsPath } from '../config/assets.js'
+import { beginButtonImage } from '../config/assets.js'
 
 export function Landing() {
   return (
     <Shell tone="from-[#fbfbfa] via-[#fffdf9] to-[#f8f8f7]" fullBleed>
-      <section className="relative flex min-h-[100svh] flex-1 flex-col items-center justify-between overflow-hidden bg-white px-4 py-5 text-center sm:px-8 sm:py-8">
+      <section className="relative flex min-h-[100svh] flex-1 flex-col items-center overflow-hidden bg-white px-4 py-5 text-center font-['Outfit']">
         <div
           className="pointer-events-none absolute inset-0 bg-cover bg-no-repeat opacity-[0.82]"
           style={{
             backgroundImage: `url(${landingStarsPath})`,
-            backgroundPosition: 'center 16.5rem',
+            backgroundPosition: 'center 18rem',
             backgroundSize: '40rem auto',
           }}
         />
-        <div className="pointer-events-none absolute inset-x-0 top-[7.2rem] h-[13rem] bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.78)_0%,rgba(255,255,255,0.54)_38%,rgba(255,255,255,0.2)_72%,rgba(255,255,255,0)_100%)] sm:top-[8.5rem] sm:h-[14rem]" />
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 top-[10.5rem] bg-[linear-gradient(180deg,rgba(255,255,255,0)_0%,rgba(255,255,255,0.02)_18%,rgba(255,255,255,0.06)_40%,rgba(255,255,255,0.1)_62%,rgba(255,255,255,0.14)_100%)] sm:top-[12rem]" />
 
-        <div className="relative flex w-full justify-center">
+        <div className="relative z-10 mt-6 flex w-full justify-center">
           <Logo />
         </div>
-
-        <div className="relative flex w-full max-w-[21rem] flex-1 flex-col items-center justify-center py-7 sm:max-w-[25rem] sm:py-10">
-          <div className="-mt-5 rounded-[3.2rem] bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.98)_0%,rgba(255,255,255,0.98)_38%,rgba(255,255,255,0.94)_56%,rgba(255,255,255,0.76)_72%,rgba(255,255,255,0.42)_88%,rgba(255,255,255,0.12)_97%,rgba(255,255,255,0)_100%)] px-10 pt-14 pb-10 sm:-mt-6 sm:px-12 sm:pt-16 sm:pb-11">
-            <h1 className="text-[1.45rem] font-black uppercase tracking-[-0.04em] text-[#18161d] sm:text-[2rem]">
-              The Polymath Type Quiz
+       <div className="relative z-10 mt-25 flex flex-col items-center pt-20">
+            {/* Main white cloud */}
+            <div
+              className="
+                pointer-events-none absolute left-1/2
+                top-1/2 -z-10 h-[600px]
+                w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-[999px] blur-2xl"
+              style={{
+                background:
+                  'radial-gradient(ellipse at center, rgba(255,255,255,1) 0%, rgba(255,255,255,.98) 35%, rgba(255,255,255,.88) 55%, rgba(255,255,255,.55) 72%, rgba(255,255,255,.15) 90%, rgba(255,255,255,0) 100%)',
+                }}
+            />
+          <div className="relative z-10 mt-auto mb-auto w-full max-w-[360px]">
+            <h1 className="text-center text-[27px] font-bold leading-normal text-black">
+              THE POLYMATH TYPE QUIZ
             </h1>
-            <div className="mt-5 space-y-3 text-[0.9rem] leading-6 text-[#33303a] sm:mt-6 sm:text-base">
-              <p>Discover your archetype in the tension between mastery and exploration.</p>
-              <p>Are you a Deep Diver or an Infinite Explorer? A T-Shaped Bridge or a Renaissance Weaver.</p>
-              <p>18 questions. No right answers. Just honest self reflection.</p>
+
+            <div className="mt-4 space-y-5 text-center text-[17px] font-light leading-normal text-black">
+              <p>
+                Discover your archetype in the tension between mastery and exploration.
+              </p>
+
+              <p>
+                Are you a Serial Builder or a Drifting Aspirant? A Systemic Weaver or a Contained Polymath?
+              </p>
+
+              <p>
+                18 questions. No right answers. Just honest self reflection.
+              </p>
             </div>
           </div>
-        </div>
 
-        <div className="relative grid w-full max-w-[20rem] grid-cols-2 gap-3 pb-3 sm:max-w-[22rem] sm:gap-5">
+          <div className="relative z-10 mb-8 mt-10 grid w-full max-w-[372px] grid-cols-2 gap-3 min-[380px]:gap-5">
+            <Link
+              to="/explore/types"
+              className="joat-button-motion flex min-h-[70px] w-full items-center justify-center rounded-[14px] bg-[#1E1E1E] px-3 text-[0.95rem] font-semibold text-white shadow-[0_2px_4px_2px_rgba(0,0,0,0.25)] min-[380px]:min-h-[80px] min-[380px]:text-[1rem]"
+            >
+              Explore Types
+            </Link>
+
           <Link
-            to="/explore/types"
-            className="inline-flex min-h-[3.65rem] items-center justify-center rounded-[0.8rem] bg-[#1d1d1f] px-4 text-base font-semibold text-white shadow-[0_4px_10px_rgba(0,0,0,0.22)] transition hover:translate-y-[1px]"
-          >
-            Explore Types
-          </Link>
-          <Link
-            to="/quiz/info"
-            className="inline-flex min-h-[3.65rem] items-center justify-center rounded-[0.8rem] bg-[linear-gradient(90deg,#62b9ff_0%,#7db0ff_22%,#ff4a71_62%,#ffcc00_100%)] px-4 text-[1.45rem] font-black text-white shadow-[0_4px_10px_rgba(0,0,0,0.22)] transition hover:translate-y-[1px]"
-          >
-            Begin
-          </Link>
+              to="/quiz/info"
+              className="joat-button-motion relative flex min-h-[70px] w-full items-center justify-center overflow-hidden rounded-[14px] px-3 text-[1.35rem] font-bold text-white shadow-[0_2px_4px_2px_rgba(0,0,0,0.25)] min-[380px]:min-h-[80px] min-[380px]:text-[1.55rem]"
+            >
+              <img
+                src={beginButtonImage}
+                alt=""
+                className="absolute inset-0 h-full w-full scale-[1.15] object-cover"
+              />
+
+              <span className="relative z-10">
+                Begin
+              </span>
+            </Link>
+          </div>
         </div>
       </section>
     </Shell>

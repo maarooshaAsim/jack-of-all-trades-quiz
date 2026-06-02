@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;700&display=swap');
+
 @import 'tailwindcss';
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
@@ -25,4 +27,32 @@ body {
 
 #root {
     min-height: 100svh;
+}
+
+.joat-button-motion {
+    transform: translateZ(0);
+    transition:
+        transform 180ms ease,
+        box-shadow 180ms ease,
+        filter 180ms ease;
+    will-change: transform;
+}
+
+.joat-button-motion:hover:not(:disabled) {
+    filter: saturate(1.05);
+    transform: translateY(-3px) scale(1.015);
+}
+
+.joat-button-motion:active:not(:disabled) {
+    transform: translateY(1px) scale(0.985);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .joat-button-motion,
+    .joat-button-motion:hover:not(:disabled),
+    .joat-button-motion:active:not(:disabled) {
+        filter: none;
+        transform: none;
+        transition: none;
+    }
 }

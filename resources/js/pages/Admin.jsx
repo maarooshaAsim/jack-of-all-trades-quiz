@@ -140,7 +140,7 @@ export function Admin() {
 
         {token ? (
           <div className="mt-8 space-y-5">
-            <div className="flex items-center justify-between gap-4 rounded-[1rem] bg-[#18161d] px-5 py-5 text-white">
+            <div className="flex flex-col items-stretch gap-4 rounded-[1rem] bg-[#18161d] px-5 py-5 text-white min-[380px]:flex-row min-[380px]:items-center min-[380px]:justify-between">
               <div>
                 <p className="text-[0.72rem] font-black uppercase tracking-[0.2em] text-white/55">Dashboard</p>
                 <p className="mt-2 text-[1.2rem] font-black">Logged in</p>
@@ -148,13 +148,13 @@ export function Admin() {
               <button
                 type="button"
                 onClick={logout}
-                className="rounded-[0.65rem] bg-white/12 px-4 py-2 text-[0.72rem] font-black uppercase tracking-[0.12em] text-white"
+                className="joat-button-motion min-h-11 rounded-[0.65rem] bg-white/12 px-4 py-2 text-[0.72rem] font-black uppercase tracking-[0.12em] text-white"
               >
                 Log Out
               </button>
             </div>
 
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 gap-3 min-[380px]:grid-cols-2">
               <div className="rounded-[1rem] bg-[#edecec] px-4 py-4">
                 <p className="text-[0.68rem] font-black uppercase tracking-[0.16em] text-[#5b6170]">Attempts</p>
                 <p className="mt-2 text-[2rem] font-black leading-none">{isLoadingStats ? '...' : stats?.total_attempts ?? 0}</p>
@@ -163,7 +163,7 @@ export function Admin() {
                 <p className="text-[0.68rem] font-black uppercase tracking-[0.16em] text-[#5b6170]">Answers</p>
                 <p className="mt-2 text-[2rem] font-black leading-none">{isLoadingStats ? '...' : stats?.total_answers ?? 0}</p>
               </div>
-              <div className="col-span-2 rounded-[1rem] bg-[#edecec] px-4 py-4">
+              <div className="rounded-[1rem] bg-[#edecec] px-4 py-4 min-[380px]:col-span-2">
                 <p className="text-[0.68rem] font-black uppercase tracking-[0.16em] text-[#5b6170]">Latest Attempt</p>
                 <p className="mt-2 text-[1rem] font-black leading-none">
                   {isLoadingStats ? 'Loading...' : stats?.latest_attempt_at ?? 'No attempts yet'}
@@ -193,7 +193,7 @@ export function Admin() {
               type="button"
               onClick={downloadExport}
               disabled={isExporting}
-              className="w-full rounded-[0.9rem] bg-[#18161d] px-5 py-4 text-[0.95rem] font-black uppercase tracking-[0.14em] text-white shadow-[0_5px_10px_rgba(0,0,0,0.24)] disabled:cursor-wait disabled:opacity-60"
+              className="joat-button-motion min-h-12 w-full rounded-[0.9rem] bg-[#18161d] px-5 py-4 text-[0.95rem] font-black uppercase tracking-[0.14em] text-white shadow-[0_5px_10px_rgba(0,0,0,0.24)] disabled:cursor-wait disabled:opacity-60"
             >
               {isExporting ? 'Preparing XLSX' : 'Download XLSX'}
             </button>
@@ -226,7 +226,7 @@ export function Admin() {
             <button
               type="submit"
               disabled={isLoggingIn}
-              className="w-full rounded-[0.9rem] bg-[#18161d] px-5 py-4 text-[0.95rem] font-black uppercase tracking-[0.14em] text-white shadow-[0_5px_10px_rgba(0,0,0,0.24)] disabled:cursor-wait disabled:opacity-60"
+              className="joat-button-motion min-h-12 w-full rounded-[0.9rem] bg-[#18161d] px-5 py-4 text-[0.95rem] font-black uppercase tracking-[0.14em] text-white shadow-[0_5px_10px_rgba(0,0,0,0.24)] disabled:cursor-wait disabled:opacity-60"
             >
               {isLoggingIn ? 'Logging In' : 'Log In'}
             </button>

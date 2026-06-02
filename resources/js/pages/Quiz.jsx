@@ -90,7 +90,7 @@ export function Quiz() {
   return (
     <Shell tone="from-[#ecfbff] via-[#f8ffff] to-[#fffdf7]" fullBleed>
       <section
-        className="relative min-h-[100svh] overflow-hidden px-5 py-6 sm:px-8 sm:py-8"
+        className="relative min-h-[100svh] overflow-hidden px-3 py-5 min-[380px]:px-5 sm:px-8 sm:py-8"
         style={{ backgroundColor: category.color }}
       >
         <div
@@ -114,7 +114,7 @@ export function Quiz() {
             <Logo variant="light" className="max-w-[11.5rem] sm:max-w-[13rem]" />
           </div>
 
-          <div className="mx-auto mt-7 w-full max-w-[22rem] sm:mt-8 sm:max-w-[26rem]">
+          <div className="mx-auto mt-6 w-full max-w-[22rem] px-1 sm:mt-8 sm:max-w-[26rem]">
             <div className="h-[0.38rem] overflow-hidden rounded-full bg-white/65 shadow-[inset_0_1px_2px_rgba(0,0,0,0.08)]">
               <div
                 className="h-full rounded-full transition-all duration-300"
@@ -126,17 +126,17 @@ export function Quiz() {
             </div>
           </div>
 
-          <div className="mx-auto flex w-full max-w-[22rem] flex-1 flex-col justify-center pt-4 pb-6 sm:max-w-[30rem] sm:pb-8">
+          <div className="mx-auto flex w-full max-w-[22rem] flex-1 flex-col justify-center pt-4 pb-6 min-[380px]:max-w-[23rem] sm:max-w-[30rem] sm:pb-8">
               <p
-                className="pb-3 text-center  text-[25.703px] font-bold text-[#EDECEC] leading-normal sm:pb-4"
+                className="pb-3 text-center text-[1.25rem] font-bold leading-tight text-[#EDECEC] min-[380px]:text-[1.45rem] sm:pb-4 sm:text-[1.6rem]"
               >
                 {category.label}
               </p>
             <div
-              className="rounded-[1.05rem] px-2.5 py-3 shadow-[0_16px_32px_rgba(0,0,0,0.2)] sm:rounded-[1.15rem] sm:px-4 sm:py-4"
+              className="rounded-[1.05rem] px-2 py-3 shadow-[0_16px_32px_rgba(0,0,0,0.2)] min-[380px]:px-2.5 sm:rounded-[1.15rem] sm:px-4 sm:py-4"
               style={{ backgroundColor: theme.card }}
             >
-              <h1 className="px-2 pt-2 pb-3 text-center text-[1.08rem] font-medium leading-[1.38] text-white sm:px-6 sm:pb-4 sm:text-[1.12rem] sm:leading-[1.45]">
+              <h1 className="px-2 pt-2 pb-3 text-center text-[1rem] font-medium leading-[1.35] text-white min-[380px]:text-[1.08rem] sm:px-6 sm:pb-4 sm:text-[1.12rem] sm:leading-[1.45]">
                 {currentQuestion.text}
               </h1>
 

@@ -100,7 +100,7 @@ export function ParticipantInfo() {
 
             <button
               type="submit"
-              className="mx-auto mt-14 inline-flex min-h-[4rem] min-w-[8rem] items-center justify-center rounded-[0.75rem] bg-[#1d1d1f] px-7 text-[1.35rem] font-black text-white shadow-[0_5px_12px_rgba(0,0,0,0.24)] transition hover:translate-y-[1px] sm:mt-16 sm:min-h-[4.5rem] sm:min-w-[9rem] sm:text-[1.5rem]"
+              className="joat-button-motion mx-auto mt-14 inline-flex min-h-[4rem] min-w-[8rem] items-center justify-center rounded-[0.75rem] bg-[#1d1d1f] px-7 text-[1.35rem] font-black text-white shadow-[0_5px_12px_rgba(0,0,0,0.24)] sm:mt-16 sm:min-h-[4.5rem] sm:min-w-[9rem] sm:text-[1.5rem]"
             >
               Enter
             </button>

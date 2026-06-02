@@ -5,3 +5,5 @@ export const questionStarsPath = '/storage/assets/question_page_bg_stars.svg'
 export const resultStarsPath = '/storage/assets/bg_star.svg'
 export const backArrowPath = '/storage/assets/back_arrow.svg'
 export const forwardArrowPath = '/storage/assets/forward_arrow.svg'
+export const beginButtonImage = '/storage/assets/begin_button.svg'
+

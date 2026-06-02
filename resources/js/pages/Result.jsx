@@ -26,7 +26,7 @@ function MissingResult() {
           </p>
           <Link
             to="/quiz/info"
-            className="mt-6 inline-flex rounded-[0.75rem] bg-white px-5 py-3 text-[0.9rem] font-black uppercase tracking-[0.12em] text-[#1d1d1f]"
+            className="joat-button-motion mt-6 inline-flex min-h-12 items-center rounded-[0.75rem] bg-white px-5 py-3 text-[0.9rem] font-black uppercase tracking-[0.12em] text-[#1d1d1f]"
           >
             Start Quiz
           </Link>
@@ -89,13 +89,13 @@ function LoadedResult({ result }) {
           type="button"
           onClick={downloadResult}
           disabled={isDownloading}
-          className="rounded-[0.85rem] bg-[#1d1d1f] px-5 py-4 text-center text-[0.95rem] font-black uppercase tracking-[0.14em] text-white shadow-[0_4px_8px_rgba(0,0,0,0.24)] disabled:cursor-wait disabled:opacity-60"
+          className="joat-button-motion min-h-12 rounded-[0.85rem] bg-[#1d1d1f] px-5 py-4 text-center text-[0.95rem] font-black uppercase tracking-[0.14em] text-white shadow-[0_4px_8px_rgba(0,0,0,0.24)] disabled:cursor-wait disabled:opacity-60"
         >
           {isDownloading ? 'Preparing Result' : 'Download Result'}
         </button>
         <Link
           to="/quiz/info"
-          className="rounded-[0.85rem] bg-white px-5 py-4 text-center text-[0.95rem] font-black uppercase tracking-[0.14em] text-[#1d1d1f] shadow-[0_4px_8px_rgba(0,0,0,0.12)]"
+          className="joat-button-motion min-h-12 rounded-[0.85rem] bg-white px-5 py-4 text-center text-[0.95rem] font-black uppercase tracking-[0.14em] text-[#1d1d1f] shadow-[0_4px_8px_rgba(0,0,0,0.12)]"
         >
           Retake Quiz
         </Link>

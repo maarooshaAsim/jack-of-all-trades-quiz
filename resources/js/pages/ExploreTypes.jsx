@@ -27,7 +27,7 @@ export function ExploreTypes() {
           <Link
             key={resultType.slug}
             to={`/explore/types/${resultType.slug}`}
-            className="group relative block w-full max-w-[23rem] rounded-[1.15rem] transition hover:-translate-y-1 focus:outline-none focus-visible:ring-4 focus-visible:ring-[#18161d]/30 sm:max-w-[25rem]"
+            className="joat-button-motion group relative block w-full max-w-[23rem] rounded-[1.15rem] focus:outline-none focus-visible:ring-4 focus-visible:ring-[#18161d]/30 sm:max-w-[25rem]"
             style={{ color: resultType.accent_color }}
           >
             <div
