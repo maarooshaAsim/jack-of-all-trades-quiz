@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
+use ZipArchive;
 
 class AdminExportTest extends TestCase
 {
@@ -67,7 +68,14 @@ class AdminExportTest extends TestCase
             'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
             $export->headers->get('content-type'),
         );
-        $this->assertStringStartsWith('PK', $export->streamedContent());
+
+        $content = $export->streamedContent();
+
+        $this->assertStringStartsWith('PK', $content);
+        $this->assertExportContainsRows($content, [
+            ['name', 'age', 'score', 'result'],
+            ['Ayesha Khan', '29', '18', 'Contented Specialist'],
+        ]);
     }
 
     public function test_admin_login_rejects_invalid_credentials(): void
@@ -84,5 +92,34 @@ class AdminExportTest extends TestCase
         ]);
 
         $response->assertUnauthorized();
+    }
+
+    /**
+     * @param  array<int, array<int, string>>  $rows
+     */
+    private function assertExportContainsRows(string $content, array $rows): void
+    {
+        $path = tempnam(sys_get_temp_dir(), 'joat-export-test-');
+
+        $this->assertIsString($path);
+
+        file_put_contents($path, $content);
+
+        $zip = new ZipArchive;
+
+        $this->assertTrue($zip->open($path));
+
+        $worksheet = $zip->getFromName('xl/worksheets/sheet1.xml');
+
+        $zip->close();
+        unlink($path);
+
+        $this->assertIsString($worksheet);
+
+        foreach ($rows as $row) {
+            foreach ($row as $cellValue) {
+                $this->assertStringContainsString('<t>'.$cellValue.'</t>', $worksheet);
+            }
+        }
     }
 }

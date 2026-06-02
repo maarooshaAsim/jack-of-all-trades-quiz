@@ -47,24 +47,12 @@ class AnswerExport
         $rows = [$this->rowXml(1, $this->headings())];
         $rowNumber = 2;
 
-        foreach ($this->answerRows() as $answerRow) {
+        foreach ($this->responseRows() as $responseRow) {
             $rows[] = $this->rowXml($rowNumber++, [
-                $answerRow->response_id,
-                $answerRow->session_id,
-                $answerRow->participant_name,
-                $answerRow->participant_age,
-                $answerRow->completed_at,
-                $answerRow->ip_address,
-                $answerRow->total_score,
-                $answerRow->outcome_base_type,
-                $answerRow->outcome_branch,
-                $answerRow->outcome_score_range,
-                $answerRow->question_index,
-                $answerRow->question_id,
-                $answerRow->category,
-                $answerRow->answer_key,
-                $answerRow->answer_text,
-                $answerRow->score_value,
+                $responseRow->participant_name,
+                $responseRow->participant_age,
+                $responseRow->total_score,
+                $responseRow->outcome_branch,
             ]);
         }
 
@@ -80,52 +68,26 @@ class AnswerExport
     private function headings(): array
     {
         return [
-            'Response ID',
-            'Session ID',
-            'Participant Name',
-            'Participant Age',
-            'Completed At',
-            'IP Address',
-            'Total Score',
-            'Base Type',
-            'Branch',
-            'Score Range',
-            'Question Index',
-            'Question ID',
-            'Category',
-            'Answer Key',
-            'Answer Text',
-            'Score Value',
+            'name',
+            'age',
+            'score',
+            'result',
         ];
     }
 
     /**
      * @return Collection<int, object>
      */
-    private function answerRows()
+    private function responseRows()
     {
-        return DB::table('answers')
-            ->join('responses', 'answers.response_id', '=', 'responses.id')
+        return DB::table('responses')
             ->select([
-                'answers.response_id',
-                'responses.session_id',
                 'responses.participant_name',
                 'responses.participant_age',
-                'responses.completed_at',
-                'responses.ip_address',
                 'responses.total_score',
-                'responses.outcome_base_type',
                 'responses.outcome_branch',
-                'responses.outcome_score_range',
-                'answers.question_index',
-                'answers.question_id',
-                'answers.category',
-                'answers.answer_key',
-                'answers.answer_text',
-                'answers.score_value',
             ])
             ->orderBy('responses.completed_at')
-            ->orderBy('answers.question_index')
             ->get();
     }
 
