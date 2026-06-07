@@ -90,7 +90,7 @@ export function Quiz() {
   return (
     <Shell tone="from-[#ecfbff] via-[#f8ffff] to-[#fffdf7]" fullBleed>
       <section
-        className="relative min-h-[100svh] overflow-hidden px-3 py-5 min-[380px]:px-5 sm:px-8 sm:py-8"
+        className="relative h-[100svh] overflow-hidden px-3 py-3 min-[380px]:px-5 min-[380px]:py-4 sm:px-8 sm:py-6"
         style={{ backgroundColor: category.color }}
       >
         <div
@@ -109,12 +109,12 @@ export function Quiz() {
           }}
         />
 
-        <div className="relative flex min-h-[calc(100svh-2.5rem)] flex-col">
+        <div className="relative flex h-full min-h-0 flex-col">
           <div className="flex justify-center">
-            <Logo variant="light" className="max-w-[11.5rem] sm:max-w-[13rem]" />
+            <Logo variant="light" className="max-w-[9.75rem] min-[380px]:max-w-[10.75rem] sm:max-w-[13rem]" />
           </div>
 
-          <div className="mx-auto mt-6 w-full max-w-[22rem] px-1 sm:mt-8 sm:max-w-[26rem]">
+          <div className="mx-auto mt-4 w-full max-w-[21rem] px-1 min-[380px]:mt-5 sm:mt-7 sm:max-w-[26rem]">
             <div className="h-[0.38rem] overflow-hidden rounded-full bg-white/65 shadow-[inset_0_1px_2px_rgba(0,0,0,0.08)]">
               <div
                 className="h-full rounded-full transition-all duration-300"
@@ -126,21 +126,21 @@ export function Quiz() {
             </div>
           </div>
 
-          <div className="mx-auto flex w-full max-w-[22rem] flex-1 flex-col justify-center pt-4 pb-6 min-[380px]:max-w-[23rem] sm:max-w-[30rem] sm:pb-8">
+          <div className="mx-auto flex min-h-0 w-full max-w-[21rem] flex-1 flex-col justify-center pb-2 pt-3 min-[380px]:max-w-[23rem] min-[380px]:pb-3 sm:max-w-[30rem] sm:pb-6 sm:pt-4">
               <p
-                className="pb-3 text-center text-[1.25rem] font-bold leading-tight text-[#EDECEC] min-[380px]:text-[1.45rem] sm:pb-4 sm:text-[1.6rem]"
+                className="pb-2 text-center text-[1rem] font-bold uppercase leading-tight text-[#EDECEC] min-[380px]:text-[1.18rem] sm:pb-3 sm:text-[1.6rem]"
               >
                 {category.label}
               </p>
             <div
-              className="rounded-[1.05rem] px-2 py-3 shadow-[0_16px_32px_rgba(0,0,0,0.2)] min-[380px]:px-2.5 sm:rounded-[1.15rem] sm:px-4 sm:py-4"
+              className="rounded-[1.05rem] px-2 py-2.5 shadow-[0_16px_32px_rgba(0,0,0,0.2)] min-[380px]:px-2.5 min-[380px]:py-3 sm:rounded-[1.15rem] sm:px-4 sm:py-4"
               style={{ backgroundColor: theme.card }}
             >
-              <h1 className="px-2 pt-2 pb-3 text-center text-[1rem] font-medium leading-[1.35] text-white min-[380px]:text-[1.08rem] sm:px-6 sm:pb-4 sm:text-[1.12rem] sm:leading-[1.45]">
+              <h1 className="px-2 pb-2 pt-1.5 text-center text-[0.9rem] font-medium leading-[1.22] text-white min-[380px]:pb-3 min-[380px]:pt-2 min-[380px]:text-[0.98rem] sm:px-6 sm:pb-4 sm:text-[1.12rem] sm:leading-[1.45]">
                 {currentQuestion.text}
               </h1>
 
-              <div className="space-y-3">
+              <div className="space-y-2.5 min-[380px]:space-y-3">
                 {currentQuestion.options.map((option) => (
                   <QuizOption
                     accentColor={theme.accent}
@@ -157,7 +157,7 @@ export function Quiz() {
                 <p className="px-2 pt-3 pb-1 text-center text-xs font-semibold text-[#ffd5d5]">{submitError}</p>
               ) : null}
 
-              <div className="flex w-full items-center justify-between px-3 pb-2 pt-3">
+              <div className="flex w-full items-center justify-between px-3 pb-1 pt-2.5 min-[380px]:pb-2 min-[380px]:pt-3">
                 <NavArrow
                   direction="prev"
                   disabled={isFirst || isSubmitting}

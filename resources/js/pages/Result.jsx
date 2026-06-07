@@ -84,7 +84,7 @@ function LoadedResult({ result }) {
         </div>
       </div>
 
-      <div data-export-hidden="true" className="mx-auto mb-16 flex w-full max-w-[449px] flex-col gap-3">
+      <div data-export-hidden="true" className="mx-auto mb-16 flex w-full max-w-[292px] flex-col gap-3 min-[390px]:max-w-[320px]">
         <button
           type="button"
           onClick={downloadResult}
@@ -94,7 +94,7 @@ function LoadedResult({ result }) {
           {isDownloading ? 'Preparing Result' : 'Download Result'}
         </button>
         <Link
-          to="/quiz/info"
+          to="/"
           className="joat-button-motion min-h-12 rounded-[0.85rem] bg-white px-5 py-4 text-center text-[0.95rem] font-black uppercase tracking-[0.14em] text-[#1d1d1f] shadow-[0_4px_8px_rgba(0,0,0,0.12)]"
         >
           Retake Quiz
