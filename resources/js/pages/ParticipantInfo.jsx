@@ -42,70 +42,80 @@ export function ParticipantInfo() {
   }
 
   return (
-    <Shell tone="from-[#fbfbfa] via-[#fffdf9] to-[#f8f8f7]" fullBleed>
-      <section className="relative flex min-h-[100svh] flex-1 flex-col items-center overflow-hidden bg-white px-5 py-7 text-center sm:px-8 sm:py-9">
-        <div
-          className="pointer-events-none absolute inset-0 bg-cover bg-no-repeat opacity-[0.82]"
-          style={{
-            backgroundImage: `url(${landingStarsPath})`,
-            backgroundPosition: 'center 17.5rem',
-            backgroundSize: '39rem auto',
-          }}
-        />
-        <div className="pointer-events-none absolute inset-x-0 top-[7.5rem] h-[18rem] bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.86)_0%,rgba(255,255,255,0.66)_44%,rgba(255,255,255,0.25)_78%,rgba(255,255,255,0)_100%)] sm:top-[8.5rem]" />
-
-        <div className="relative flex w-full justify-center">
-          <Logo />
-        </div>
-
-        <div className="relative mx-auto flex w-full max-w-[445px] flex-1 flex-col justify-center py-10 sm:py-12">
-          <form
-            onSubmit={startQuiz}
-            className="w-full rounded-[3rem] bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.98)_0%,rgba(255,255,255,0.98)_42%,rgba(255,255,255,0.92)_62%,rgba(255,255,255,0.68)_81%,rgba(255,255,255,0.18)_97%,rgba(255,255,255,0)_100%)] px-8 py-16 sm:px-12 sm:py-20"
-          >
-            <div className="mx-auto max-w-[22rem] space-y-10 sm:space-y-12">
-              <label className="block">
-                <span className="sr-only">Name</span>
-                <input
-                  value={name}
-                  onChange={(event) => setName(event.target.value)}
-                  placeholder="Enter Name"
-                  autoComplete="name"
-                  className="w-full border-0 border-b-[3px] border-[#1d1d1f] bg-transparent px-2 pb-1 text-center text-[1rem] font-semibold text-[#1d1d1f] outline-none placeholder:text-[#6b6870] focus:border-[#0a72c8] sm:text-[1.1rem]"
-                  required
-                />
-              </label>
-
-              <label className="block">
-                <span className="sr-only">Age</span>
-                <input
-                  type="number"
-                  min="1"
-                  max="120"
-                  inputMode="numeric"
-                  value={age}
-                  onChange={(event) => setAge(event.target.value)}
-                  placeholder="Enter Age"
-                  className="w-full border-0 border-b-[3px] border-[#1d1d1f] bg-transparent px-2 pb-1 text-center text-[1rem] font-semibold text-[#1d1d1f] outline-none placeholder:text-[#6b6870] focus:border-[#0a72c8] sm:text-[1.1rem]"
-                  required
-                />
-              </label>
+        <Shell tone="from-[#fbfbfa] via-[#fffdf9] to-[#f8f8f7]" fullBleed>
+          <section className="relative flex h-[100svh] flex-1 flex-col items-center overflow-hidden bg-white px-4 py-4 text-center font-['Outfit']">
+            <div
+              className="pointer-events-none absolute inset-0 bg-cover bg-no-repeat opacity-[0.82]"
+              style={{
+                backgroundImage: `url(${landingStarsPath})`,
+                backgroundPosition: 'center 14.8rem',
+                backgroundSize: '34rem auto',
+              }}
+            />
+    
+            <div className="relative z-10 mt-7 flex w-full justify-center min-[390px]:mt-9">
+              <Logo className="max-w-[15rem] min-[390px]:max-w-[17rem]" />
             </div>
+    
+            <div className="relative z-10 flex min-h-0 flex-1 flex-col items-center justify-center pb-5 pt-4">
+              <div
+                className="pointer-events-none absolute left-1/2 top-[45%] -z-10 h-[24rem] w-[27rem] -translate-x-1/2 -translate-y-1/2 rounded-[999px] blur-2xl"
+                style={{
+                  background:
+                    'radial-gradient(ellipse at center, rgba(255,255,255,1) 0%, rgba(255,255,255,.98) 34%, rgba(255,255,255,.9) 55%, rgba(255,255,255,.58) 73%, rgba(255,255,255,.16) 90%, rgba(255,255,255,0) 100%)',
+                }}
+              />
+    
+              <div className="relative z-10 w-full max-w-[320px] rounded-[3rem] bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.98)_0%,rgba(255,255,255,0.98)_43%,rgba(255,255,255,0.9)_63%,rgba(255,255,255,0.62)_82%,rgba(255,255,255,0)_100%)] px-7 py-4 min-[390px]:max-w-[340px] min-[390px]:py-9">
+                
+                <form
+                  onSubmit={startQuiz}
+                  className="relative z-10 flex min-h-[24.5rem] w-full max-w-[320px] flex-col items-center justify-center min-[390px]:max-w-[340px]"
+                >
+                  <div className="mx-auto w-full max-w-[17.25rem] space-y-11 min-[390px]:max-w-[18rem]">
+                    <label className="block">
+                      <span className="sr-only">Name</span>
+                      <input
+                        value={name}
+                        onChange={(event) => setName(event.target.value)}
+                        placeholder="Enter Name"
+                        autoComplete="name"
+                        className="w-full border-0 border-b-[3px] border-[#1d1d1f] bg-transparent px-2 pb-1 text-center text-[0.82rem] font-semibold text-[#1d1d1f] outline-none placeholder:text-[#6b6870] focus:border-[#0a72c8] min-[390px]:text-[0.88rem]"
+                        required
+                      />
+                    </label>
 
-            {error ? (
-              <p className="mx-auto mt-7 max-w-[22rem] rounded-[0.75rem] bg-white/85 px-4 py-3 text-[0.9rem] font-bold text-[#b42318] shadow-[0_4px_10px_rgba(0,0,0,0.12)]">
-                {error}
-              </p>
-            ) : null}
+                    <label className="block">
+                      <span className="sr-only">Age</span>
+                      <input
+                        type="number"
+                        min="1"
+                        max="120"
+                        inputMode="numeric"
+                        value={age}
+                        onChange={(event) => setAge(event.target.value)}
+                        placeholder="Enter Age"
+                        className="w-full border-0 border-b-[3px] border-[#1d1d1f] bg-transparent px-2 pb-1 text-center text-[0.82rem] font-semibold text-[#1d1d1f] outline-none placeholder:text-[#6b6870] focus:border-[#0a72c8] min-[390px]:text-[0.88rem]"
+                        required
+                      />
+                    </label>
+                  </div>
 
-            <button
-              type="submit"
-              className="joat-button-motion mx-auto mt-14 inline-flex min-h-[4rem] min-w-[8rem] items-center justify-center rounded-[0.75rem] bg-[#1d1d1f] px-7 text-[1.35rem] font-black text-white shadow-[0_5px_12px_rgba(0,0,0,0.24)] sm:mt-16 sm:min-h-[4.5rem] sm:min-w-[9rem] sm:text-[1.5rem]"
-            >
-              Enter
-            </button>
-          </form>
-        </div>
+                  {error ? (
+                    <p className="mx-auto mt-7 max-w-[22rem] rounded-[0.75rem] bg-white/85 px-4 py-3 text-[0.9rem] font-bold text-[#b42318] shadow-[0_4px_10px_rgba(0,0,0,0.12)]">
+                      {error}
+                    </p>
+                  ) : null}
+
+                  <button
+                    type="submit"
+                    className="joat-button-motion mx-auto mt-14 inline-flex min-h-[3.6rem] min-w-[7.25rem] items-center justify-center rounded-[0.75rem] bg-[#1d1d1f] px-7 text-[1.12rem] font-black text-white shadow-[0_5px_12px_rgba(0,0,0,0.24)] min-[390px]:min-h-[4rem] min-[390px]:min-w-[7.8rem] min-[390px]:text-[1.25rem]"
+                  >
+                    Enter
+                  </button>
+                </form>
+              </div>
+            </div>
       </section>
     </Shell>
   )
