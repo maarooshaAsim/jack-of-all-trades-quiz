@@ -6,9 +6,14 @@ use App\Models\ResultType;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 use RuntimeException;
+use ZipArchive;
 
 class ResultTypeSeeder extends Seeder
 {
+    private const SourceWorkbook = 'final_quiz_info.xlsx';
+
+    private const ResultTypeSheet = 'xl/worksheets/sheet5.xml';
+
     /**
      * Run the database seeds.
      */
@@ -70,7 +75,8 @@ class ResultTypeSeeder extends Seeder
      *     output: string,
      *     recognition: string,
      *     parent_code: string,
-     *     base_color: string
+     *     base_color: string,
+     *     accent_color?: string
      * }  $row
      * @return array<string, mixed>
      */
@@ -96,7 +102,7 @@ class ResultTypeSeeder extends Seeder
             'integration_percentage' => $integration['percentage'],
             'integration_description' => $integration['description'],
             'base_color' => $this->colorFrom($row['base_color']),
-            'accent_color' => $this->colorFrom($row['base_color']),
+            'accent_color' => $this->colorFrom($row['accent_color'] ?? $row['base_color']),
             'graph_path' => $this->graphPathFor($row),
         ];
     }
@@ -158,11 +164,18 @@ class ResultTypeSeeder extends Seeder
      *     output: string,
      *     recognition: string,
      *     parent_code: string,
-     *     base_color: string
+     *     base_color: string,
+     *     accent_color?: string
      * }>
      */
     private function rows(): array
     {
+        $spreadsheetRows = $this->spreadsheetRows();
+
+        if ($spreadsheetRows !== []) {
+            return $spreadsheetRows;
+        }
+
         return [
             [
                 'name' => 'Linear Specialist',
@@ -369,5 +382,134 @@ class ResultTypeSeeder extends Seeder
                 'base_color' => '#38470A',
             ],
         ];
+    }
+
+    /**
+     * @return array<int, array{
+     *     name: string,
+     *     code: string,
+     *     description: string,
+     *     breadth: string,
+     *     depth: string,
+     *     integration: string,
+     *     output: string,
+     *     recognition: string,
+     *     parent_code: string,
+     *     base_color: string,
+     *     accent_color: string
+     * }>
+     */
+    private function spreadsheetRows(): array
+    {
+        $path = base_path(self::SourceWorkbook);
+
+        if (! is_file($path)) {
+            return [];
+        }
+
+        $zip = new ZipArchive();
+
+        if ($zip->open($path) !== true) {
+            throw new RuntimeException('Unable to open result type workbook.');
+        }
+
+        $sharedStrings = $this->sharedStringsFrom($zip);
+        $sheetXml = $zip->getFromName(self::ResultTypeSheet);
+
+        if ($sheetXml === false) {
+            throw new RuntimeException('Unable to find the result type sheet in the workbook.');
+        }
+
+        $sheet = simplexml_load_string($sheetXml);
+
+        if ($sheet === false) {
+            throw new RuntimeException('Unable to parse the result type sheet.');
+        }
+
+        $rows = [];
+
+        foreach ($sheet->sheetData->row as $sheetRow) {
+            $cells = $this->cellsFrom($sheetRow, $sharedStrings);
+            $name = trim($cells['A'] ?? '');
+
+            if ($name === '' || strcasecmp($name, 'Branch') === 0) {
+                continue;
+            }
+
+            $rows[] = [
+                'name' => $name,
+                'code' => trim($cells['B'] ?? ''),
+                'description' => trim($cells['C'] ?? ''),
+                'breadth' => trim($cells['D'] ?? ''),
+                'depth' => trim($cells['E'] ?? ''),
+                'integration' => trim($cells['F'] ?? ''),
+                'output' => trim($cells['G'] ?? ''),
+                'recognition' => trim($cells['H'] ?? ''),
+                'parent_code' => trim($cells['I'] ?? ''),
+                'base_color' => trim($cells['K'] ?? ''),
+                'accent_color' => trim($cells['L'] ?? ($cells['K'] ?? '')),
+            ];
+        }
+
+        return $rows;
+    }
+
+    /**
+     * @return array<int, string>
+     */
+    private function sharedStringsFrom(ZipArchive $zip): array
+    {
+        $xml = $zip->getFromName('xl/sharedStrings.xml');
+
+        if ($xml === false) {
+            return [];
+        }
+
+        $sharedStrings = simplexml_load_string($xml);
+
+        if ($sharedStrings === false) {
+            throw new RuntimeException('Unable to parse workbook shared strings.');
+        }
+
+        $values = [];
+
+        foreach ($sharedStrings->si as $sharedString) {
+            $parts = [];
+
+            if (isset($sharedString->t)) {
+                $parts[] = (string) $sharedString->t;
+            }
+
+            foreach ($sharedString->r as $run) {
+                $parts[] = (string) $run->t;
+            }
+
+            $values[] = implode('', $parts);
+        }
+
+        return $values;
+    }
+
+    /**
+     * @param  array<int, string>  $sharedStrings
+     * @return array<string, string>
+     */
+    private function cellsFrom(mixed $sheetRow, array $sharedStrings): array
+    {
+        $cells = [];
+
+        foreach ($sheetRow->c as $cell) {
+            $reference = (string) $cell['r'];
+            $column = preg_replace('/[0-9]/', '', $reference) ?? '';
+            $value = (string) $cell->v;
+
+            if ((string) $cell['t'] === 's') {
+                $value = $sharedStrings[(int) $value] ?? $value;
+            }
+
+            $cells[$column] = $value;
+        }
+
+        return $cells;
     }
 }

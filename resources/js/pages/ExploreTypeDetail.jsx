@@ -16,7 +16,7 @@ const dimensions = [
 
 function PercentCard({ label, value }) {
   return (
-    <div className="w-full max-w-[200px] rounded-[0.85rem] bg-[#1d1d1f] px-2.5 py-3 text-center text-white shadow-[0_4px_8px_rgba(0,0,0,0.24)] sm:px-4">
+    <div className="w-full rounded-[0.85rem] bg-[#1d1d1f] px-2.5 py-3 text-center text-white shadow-[0_4px_8px_rgba(0,0,0,0.24)] sm:px-4">
       <p className="text-[0.82rem] font-black leading-tight min-[380px]:text-[0.92rem] sm:text-[1.2rem]">{label}</p>
       <p className="mt-1 text-[1.35rem] font-black leading-none sm:text-[2rem]">{value}%</p>
     </div>
@@ -25,9 +25,9 @@ function PercentCard({ label, value }) {
 
 function CopyBlock({ title, children }) {
   return (
-    <section className="mx-auto max-w-[449px] space-y-3">
+    <section className="mx-auto max-w-[292px] space-y-3 min-[390px]:max-w-[320px]">
       <h2 className="text-[1.35rem] font-black leading-none sm:text-[1.75rem]">{title}</h2>
-      <div className="rounded-[1rem] bg-[#1d1d1f] px-4 py-4 text-[0.9rem] font-semibold leading-6 text-[#edecec] shadow-[0_4px_8px_rgba(0,0,0,0.22)] min-[380px]:text-[0.96rem] min-[380px]:leading-7 sm:px-6 sm:py-5 sm:text-[1.12rem] sm:leading-8">
+      <div className="rounded-[1rem] bg-[#1d1d1f] px-4 py-4 text-md font-semibold leading-6 text-[#edecec] shadow-[0_4px_8px_rgba(0,0,0,0.22)] min-[380px]:text-[0.96rem] min-[380px]:leading-7 sm:px-6 sm:py-5 sm:text-[1.12rem] sm:leading-8">
         {children}
       </div>
     </section>
@@ -42,33 +42,40 @@ export function ResultTypeDetailContent({
   actions = null,
 }) {
   return (
-    <div className="mt-5 w-full pb-14 sm:mt-8 sm:pb-16" style={{ color: resultType.accent_color }}>
-      {showBackLink ? (
-        <div className="mb-8 flex w-full justify-start sm:mb-10">
-          <Link
-            to="/explore/types"
-            className="joat-button-motion inline-flex items-center"
-            aria-label="Back to result types"
-          >
-            <ArrowIcon direction="back" color="#1d1d1f" className="h-[2.35rem] w-[4.25rem]" />
-          </Link>
-        </div>
-      ) : null}
+    <div className="mt-7 w-full pb-10" style={{ color: resultType.accent_color }}>
+            {showBackLink ? (
+              <div className="mb-14 flex w-full justify-start">
+                <Link
+                  to="/explore/types"
+                  className="joat-button-motion inline-flex items-center"
+                  aria-label="Back to result types"
+                >
+                  <ArrowIcon
+                    direction="back"
+                    color="#1d1d1f"
+                    className="h-[2.35rem] w-[4.25rem]"
+                  />
+                </Link>
+              </div>
+            ) : null}
 
       <section
-        className="relative mx-auto flex aspect-square w-full max-w-[449px] flex-col items-center justify-center rounded-[1rem] px-2.5 py-6 text-center text-white shadow-[0_7px_12px_rgba(0,0,0,0.24)] min-[380px]:px-3 sm:px-7 sm:py-8"
+        className="relative mx-auto flex aspect-square w-full max-w-[292px] flex-col items-center justify-center rounded-[14px] px-5 pb-5 pt-6 text-center text-white shadow-[0_7px_12px_rgba(0,0,0,0.22)] min-[390px]:max-w-[320px]"
         style={{ backgroundColor: resultType.base_color }}
       >
-        <DecorativeStar color={resultType.base_color} className="-top-10 -left-10" />
-        <DecorativeStar color={resultType.base_color} className="-top-10 -right-10" />
-        <h1 className="max-w-full text-[1.08rem] font-black uppercase leading-tight min-[380px]:text-[1.28rem] sm:text-[1.85rem]">{resultType.name}</h1>
-        <div className="mt-4 w-full sm:mt-5">
+        <DecorativeStar color={resultType.base_color} className="-left-8 -top-10" />
+        <DecorativeStar color={resultType.base_color} className="-right-8 -top-10" />
+
+        <h1 className="text-[1.05rem] font-black uppercase leading-none text-white min-[390px]:text-[1.2rem]">
+          {resultType.name}
+        </h1>
+
+        <div className="mt-5 w-full">
           <ResultGraph graphPath={resultType.graph_path} />
         </div>
       </section>
-
       {quizResult ? (
-        <section className="mx-auto mt-6 grid w-full max-w-[449px] grid-cols-2 gap-3 sm:mt-8 sm:gap-4">
+        <section className="mx-auto mt-6 grid w-full max-w-[292px] grid-cols-2 gap-3 sm:mt-8 min-[390px]:max-w-[320px] sm:gap-4">
           {quizResult.participant ? (
             <div className="col-span-2 rounded-[0.9rem] bg-white px-4 py-4 text-center shadow-[0_4px_8px_rgba(0,0,0,0.12)] sm:px-5">
               <p className="text-[0.68rem] font-black uppercase tracking-[0.16em] sm:text-[0.72rem] sm:tracking-[0.18em]">Quiz Taker</p>
@@ -100,14 +107,14 @@ export function ResultTypeDetailContent({
       <section className="mt-7 space-y-3 sm:mt-8">
         <h2 className="text-[1.38rem] font-black leading-none sm:text-[1.85rem]">Your Profile</h2>
         <div
-          className="mx-auto flex min-h-[220px] w-full max-w-[449px] items-center rounded-[1rem] px-4 py-5 text-[0.9rem] font-semibold leading-6 text-white shadow-[0_4px_8px_rgba(0,0,0,0.2)] min-[380px]:min-h-[240px] min-[380px]:text-[0.96rem] min-[380px]:leading-7 sm:min-h-[287px] sm:px-7 sm:text-[1.12rem] sm:leading-8"
-          style={{ backgroundColor: resultType.base_color }}
+          className="mx-auto min-h-[220px] w-full max-w-[292px] items-center rounded-[1rem] px-4 py-5 text-md font-semibold leading-6 text-white shadow-[0_4px_8px_rgba(0,0,0,0.2)] min-[380px]:text-[0.96rem] min-[380px]:leading-7 min-[390px]:max-w-[320px] sm:px-5 sm:text-lg sm:leading-7"
+          style={{ backgroundColor: resultType.accent_color }}
         >
           {resultType.description}
         </div>
       </section>
 
-      <section className="mx-auto mt-7 grid w-full max-w-[416px] grid-cols-2 justify-items-center gap-3 sm:mt-8 sm:gap-4">
+      <section className="mx-auto mt-7 grid w-full max-w-[292px] grid-cols-2 justify-items-center gap-3 sm:mt-8 min-[390px]:max-w-[320px] sm:gap-4">
         {dimensions.map((dimension) => (
           <PercentCard
             key={dimension.key}
@@ -126,14 +133,14 @@ export function ResultTypeDetailContent({
       </div>
 
       {showBranches && resultType.branches.length > 0 ? (
-        <section className="mx-auto mt-9 max-w-[449px] space-y-4">
+        <section className="mx-auto mt-9 max-w-[292px] space-y-4 min-[390px]:max-w-[320px]">
           <h2 className="text-[1.55rem] font-black uppercase leading-none sm:text-[1.85rem]">Branches</h2>
           <div className="space-y-4">
             {resultType.branches.map((branch) => (
               <Link
                 key={branch.slug}
                 to={`/explore/types/${branch.slug}`}
-                className="joat-button-motion block min-h-16 rounded-[0.9rem] px-4 py-5 text-center text-[1.15rem] font-black uppercase leading-tight text-white shadow-[0_4px_8px_rgba(0,0,0,0.2)] min-[380px]:text-[1.35rem] sm:text-[1.9rem]"
+                className="joat-button-motion block min-h-16 rounded-[0.9rem] px-4 py-5 text-center text-lg font-black uppercase leading-tight text-white shadow-[0_4px_8px_rgba(0,0,0,0.2)] min-[380px]:text-lg sm:text-lg"
                 style={{ backgroundColor: resultType.base_color }}
               >
                 {branch.name}

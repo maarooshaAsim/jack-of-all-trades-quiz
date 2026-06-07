@@ -10,53 +10,47 @@ export function ExploreTypes() {
   const { resultTypes, isLoading, error } = useResultTypes()
 
   return (
-    <ResultPageShell>
-      <div className="flex w-full justify-start ">
-        <Link
-          to="/"
-          className="joat-button-motion inline-flex items-center"
-          aria-label="Back to home"
-        >
-          <ArrowIcon direction="back" color="#1d1d1f" className="h-[2.35rem] w-[4.25rem]" />
-        </Link>
-      </div>
-
-      <div className="mt-10 flex w-full flex-col items-center space-y-12 pb-16 sm:mt-12 sm:space-y-14">
-        {isLoading ? (
-          <p className="rounded-[1rem] bg-[#1d1d1f] px-6 py-5 text-center text-xl font-black text-white shadow-[0_5px_9px_rgba(0,0,0,0.22)]">
-            Loading types
-          </p>
-        ) : null}
-
-        {error ? (
-          <p className="rounded-[1rem] bg-[#1d1d1f] px-6 py-5 text-center text-xl font-black text-white shadow-[0_5px_9px_rgba(0,0,0,0.22)]">
-            {error}
-          </p>
-        ) : null}
-
-        {resultTypes.map((resultType) => (
-          <Link
-            key={resultType.slug}
-            to={`/explore/types/${resultType.slug}`}
-            className="my-10 joat-button-motion group relative block w-full max-w-[23rem] rounded-[1.15rem] focus:outline-none focus-visible:ring-4 focus-visible:ring-[#18161d]/30 sm:max-w-[25rem]"
-            style={{ color: resultType.accent_color }}
-          >
-            <div
-              className="relative rounded-[1rem] px-4 pt-5 pb-5 text-center shadow-[0_7px_12px_rgba(0,0,0,0.22)] sm:px-5 sm:pt-6"
-              style={{ backgroundColor: resultType.base_color }}
+        <ResultPageShell>
+          <div className="mt-7 mb-7 flex w-full justify-start">
+            <Link
+              to="/"
+              className="joat-button-motion inline-flex items-center"
+              aria-label="Back to home"
             >
-              <DecorativeStar color={resultType.base_color} className="-top-10 -left-10" />
-              <DecorativeStar color={resultType.base_color} className="-top-10 -right-10" />
-              <h1 className="text-[1.35rem] font-black uppercase leading-none text-white sm:text-[1.75rem]">
-                {resultType.name}
-              </h1>
-              <div className="mt-5 w-full">
-                <ResultGraph graphPath={resultType.graph_path} />
-              </div>
-            </div>
-          </Link>
-        ))}
-      </div>
+              <ArrowIcon
+                direction="back"
+                color="#1d1d1f"
+                className="h-[2.35rem] w-[4.25rem]"
+              />
+            </Link>
+          </div>
+
+          <div className="mt-7 flex w-full flex-col items-center gap-10 pb-10">
+            {resultTypes.map((resultType) => (
+              <Link
+                key={resultType.slug}
+                to={`/explore/types/${resultType.slug}`}
+                className="joat-button-motion group relative block w-full max-w-[292px] rounded-[14px] focus:outline-none focus-visible:ring-4 focus-visible:ring-[#18161d]/30 min-[390px]:max-w-[320px]"
+                style={{ color: resultType.accent_color }}
+              >
+                <div
+                  className="relative rounded-[14px] my-5 px-5 pb-5 pt-6 text-center shadow-[0_7px_12px_rgba(0,0,0,0.22)]"
+                  style={{ backgroundColor: resultType.base_color }}
+                >
+                  <DecorativeStar color={resultType.base_color} className="-left-8 -top-10" />
+                  <DecorativeStar color={resultType.base_color} className="-right-8 -top-10" />
+
+                  <h1 className="text-[1.05rem] font-black uppercase leading-none text-white min-[390px]:text-[1.2rem]">
+                    {resultType.name}
+                  </h1>
+
+                  <div className="mt-5 w-full">
+                    <ResultGraph graphPath={resultType.graph_path} />
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
     </ResultPageShell>
   )
 }
