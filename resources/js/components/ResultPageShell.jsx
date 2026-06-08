@@ -7,6 +7,7 @@ export function ResultPageShell({
   children,
   shellRef = null,
   showLogo = true,
+  contentClassName = 'max-w-[410px]',
 }) {
   return (
     <Shell tone="from-[#fbfbfa] via-[#fffdf9] to-[#f8f8f7]" fullBleed>
@@ -42,7 +43,7 @@ export function ResultPageShell({
           }}
         />
 
-        <div className="relative z-10 flex w-full max-w-[410px] flex-col items-center">
+        <div className={`relative z-10 flex w-full flex-col items-center ${contentClassName}`}>
           {showLogo ? (
             <div className="mt-7 flex w-full justify-center min-[390px]:mt-9">
               <Logo className="max-w-[15rem] min-[390px]:max-w-[17rem]" />

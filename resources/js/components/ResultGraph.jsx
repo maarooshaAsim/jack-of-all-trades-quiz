@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 
-export function ResultGraph({ graphPath, alt = '' }) {
+export function ResultGraph({ graphPath, alt = '', size = 'compact' }) {
   const [hasImageError, setHasImageError] = useState(false)
+  const isLarge = size === 'large'
 
   return (
-    <div className="relative mx-auto aspect-[1.18] w-[12.8rem] max-w-full min-[380px]:w-[13.9rem] sm:w-[15.5rem]">
+    <div className={`relative mx-auto aspect-[1.18] max-w-full ${isLarge ? 'w-[18.5rem] min-[430px]:w-[22rem]' : 'w-[12.8rem] min-[380px]:w-[13.9rem] sm:w-[15.5rem]'}`}>
       <span className="z-20 absolute left-1/2 top-0 -translate-x-1/2 text-[0.62rem] font-black text-white min-[380px]:text-[0.7rem] sm:text-[0.82rem]">
         Breadth
       </span>

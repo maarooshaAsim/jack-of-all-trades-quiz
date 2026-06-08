@@ -69,10 +69,9 @@ function LoadedResult({ result }) {
   }
 
   return (
-    <ResultPageShell showLogo={false}>
-      <div ref={captureRef} className="bg-[#f4f4f3] px-3 pb-10">
+    <ResultPageShell showLogo={false} contentClassName="max-w-[488px]">
         <div className="flex flex-col items-center">
-          <Logo className="max-w-[17rem] sm:max-w-[24rem]" />
+          <Logo className="max-w-[17rem] min-[390px]:max-w-[20rem]" />
         </div>
         <div>
           <ResultTypeDetailContent
@@ -80,22 +79,22 @@ function LoadedResult({ result }) {
             quizResult={result}
             showBackLink={false}
             showBranches={false}
+            variant="result"
           />
         </div>
-      </div>
 
-      <div data-export-hidden="true" className="mx-auto mb-16 flex w-full max-w-[292px] flex-col gap-3 min-[390px]:max-w-[320px]">
+      <div data-export-hidden="true" className="items-center mx-auto mb-16 flex w-full max-w-[449px] flex-col gap-3 px-5">
         <button
           type="button"
           onClick={downloadResult}
           disabled={isDownloading}
-          className="joat-button-motion min-h-12 rounded-[0.85rem] bg-[#1d1d1f] px-5 py-4 text-center text-[0.95rem] font-black uppercase tracking-[0.14em] text-white shadow-[0_4px_8px_rgba(0,0,0,0.24)] disabled:cursor-wait disabled:opacity-60"
+          className=" max-w-[292px] min-[390px]:max-w-[320px] joat-button-motion min-h-12 rounded-[0.85rem] bg-[#1d1d1f] px-5 py-4 text-center text-[0.95rem] font-black uppercase tracking-[0.14em] text-white shadow-[0_4px_8px_rgba(0,0,0,0.24)] disabled:cursor-wait disabled:opacity-60"
         >
           {isDownloading ? 'Preparing Result' : 'Download Result'}
         </button>
         <Link
           to="/"
-          className="joat-button-motion min-h-12 rounded-[0.85rem] bg-white px-5 py-4 text-center text-[0.95rem] font-black uppercase tracking-[0.14em] text-[#1d1d1f] shadow-[0_4px_8px_rgba(0,0,0,0.12)]"
+          className=" max-w-[292px] min-[390px]:max-w-[320px]  joat-button-motion min-h-12 rounded-[0.85rem] bg-white px-5 py-4 text-center text-[0.95rem] font-black uppercase tracking-[0.14em] text-[#1d1d1f] shadow-[0_4px_8px_rgba(0,0,0,0.12)]"
         >
           Retake Quiz
         </Link>
