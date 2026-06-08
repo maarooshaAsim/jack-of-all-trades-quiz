@@ -81,7 +81,10 @@ export async function downloadElementAsJpeg(element, filename = 'joat-result.jpe
     const link = document.createElement('a')
     link.href = jpegUrl
     link.download = filename
+    link.style.display = 'none'
+    document.body.appendChild(link)
     link.click()
+    link.remove()
   } finally {
     URL.revokeObjectURL(svgUrl)
   }

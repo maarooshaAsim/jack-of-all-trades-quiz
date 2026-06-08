@@ -30,7 +30,7 @@ function CopyBlock({ title, children, variant = 'explore' }) {
 
   return (
     <section className={`mx-auto space-y-3 text-left max-w-[292px] min-[390px]:max-w-[320px]`}>
-      <h2 className={`text-[1.35rem] sm:text-[1.75rem] font-black leading-none`}>{title}</h2>
+      <h2 className={`text-[1.35rem] sm:text-[1.75rem] font-black leading-none text-center`}>{title}</h2>
       <div className={`rounded-[1rem] bg-[#1d1d1f] text-[#edecec] shadow-[0_4px_8px_rgba(0,0,0,0.22)] px-4 py-4 text-[0.9rem] font-semibold leading-6 min-[380px]:text-[0.96rem] min-[380px]:leading-7 sm:px-6 sm:py-5 sm:text-[1.12rem] sm:leading-8`}>
         {children}
       </div>

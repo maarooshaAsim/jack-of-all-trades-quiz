@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { Logo } from '../components/Logo.jsx'
 import { NavArrow } from '../components/NavArrow.jsx'
@@ -43,12 +43,19 @@ export function Quiz() {
     totalQuestions,
   } = useQuiz(participant)
   const [submitError, setSubmitError] = useState(null)
+  const autoAdvanceTimeout = useRef(null)
 
   useEffect(() => {
     if (!participant) {
       navigate('/quiz/info', { replace: true })
     }
   }, [navigate, participant])
+
+  useEffect(() => {
+    return () => {
+      window.clearTimeout(autoAdvanceTimeout.current)
+    }
+  }, [])
 
   if (!participant) {
     return null
@@ -60,6 +67,8 @@ export function Quiz() {
   const progressPercentage = ((currentIndex + 1) / totalQuestions) * 100
 
   const handleAdvance = async () => {
+    window.clearTimeout(autoAdvanceTimeout.current)
+
     if (!hasAnswered || isSubmitting) {
       return
     }
@@ -85,6 +94,55 @@ export function Quiz() {
     } catch (error) {
       setSubmitError('Could not submit your quiz right now. Please try again.')
     }
+  }
+
+  const submitQuiz = async (answersToSubmit) => {
+    setSubmitError(null)
+
+    try {
+      const result = await submit(answersToSubmit)
+
+      navigate('/result', {
+        state: {
+          result: {
+            ...result,
+            participant,
+          },
+        },
+      })
+    } catch (error) {
+      setSubmitError('Could not submit your quiz right now. Please try again.')
+    }
+  }
+
+  const handleSelectAnswer = (option) => {
+    if (isSubmitting) {
+      return
+    }
+
+    window.clearTimeout(autoAdvanceTimeout.current)
+
+    const nextAnswers = {
+      ...answers,
+      [currentQuestion.id]: option,
+    }
+
+    selectAnswer(currentQuestion.id, option)
+
+    if (!isLast) {
+      autoAdvanceTimeout.current = window.setTimeout(() => {
+        goNext()
+      }, 180)
+
+      return
+    }
+
+    submitQuiz(nextAnswers)
+  }
+
+  const handlePrevious = () => {
+    window.clearTimeout(autoAdvanceTimeout.current)
+    goPrev()
   }
 
   return (
@@ -151,7 +209,8 @@ export function Quiz() {
                     key={option.key}
                     option={option}
                     isSelected={currentAnswer?.key === option.key}
-                    onSelect={() => selectAnswer(currentQuestion.id, option)}
+                    onSelect={() => handleSelectAnswer(option)}
+                    disabled={isSubmitting}
                   />
                 ))}
               </div>
@@ -165,7 +224,7 @@ export function Quiz() {
                   direction="prev"
                   disabled={isFirst || isSubmitting}
                   label="Previous question"
-                  onClick={goPrev}
+                  onClick={handlePrevious}
                 />
 
                 <NavArrow

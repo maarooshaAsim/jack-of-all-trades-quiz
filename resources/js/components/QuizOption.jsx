@@ -23,11 +23,12 @@ function colorWithOpacity(color, opacity = 1, mixWithWhite = 0.85) {
   return `rgba(${r}, ${g}, ${b}, ${opacity})`
 }
 
-export function QuizOption({ accentColor, accentTextColor, option, isSelected, onSelect }) {
+export function QuizOption({ accentColor, accentTextColor, option, isSelected, onSelect, disabled = false }) {
   return (
     <button
       type="button"
       onClick={onSelect}
+      disabled={disabled}
       className={`joat-button-motion flex min-h-[3.65rem] w-full overflow-hidden rounded-[12px] text-left focus:outline-none focus-visible:ring-4 focus-visible:ring-white/65 min-[380px]:min-h-[3.85rem] sm:min-h-[4.25rem] ${
         isSelected
           ? "scale-[1.015] ring-2 ring-white shadow-[0_10px_24px_rgba(0,0,0,0.22)]"

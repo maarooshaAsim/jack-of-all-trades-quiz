@@ -39,18 +39,27 @@ function MissingResult() {
 function LoadedResult({ result }) {
   const captureRef = useRef(null)
   const [isDownloading, setIsDownloading] = useState(false)
+  const [downloadError, setDownloadError] = useState('')
   const branchSlug = result.outcome.branch_slug ?? slugFrom(result.outcome.branch)
   const { resultType, isLoading, error } = useResultType(branchSlug)
 
   const downloadResult = async () => {
-    if (!captureRef.current || isDownloading) {
+    if (isDownloading) {
+      return
+    }
+
+    if (!captureRef.current) {
+      setDownloadError('Result is not ready to download yet.')
       return
     }
 
     setIsDownloading(true)
+    setDownloadError('')
 
     try {
       await downloadElementAsJpeg(captureRef.current, `joat-${branchSlug}-result.jpeg`)
+    } catch (error) {
+      setDownloadError('Could not prepare the result image. Please try again.')
     } finally {
       setIsDownloading(false)
     }
@@ -70,6 +79,7 @@ function LoadedResult({ result }) {
 
   return (
     <ResultPageShell showLogo={false} contentClassName="max-w-[488px]">
+      <div ref={captureRef} className="">
         <div className="flex flex-col items-center">
           <Logo className="max-w-[17rem] min-[390px]:max-w-[20rem]" />
         </div>
@@ -82,8 +92,14 @@ function LoadedResult({ result }) {
             variant="result"
           />
         </div>
+      </div>
 
       <div data-export-hidden="true" className="items-center mx-auto mb-16 flex w-full max-w-[449px] flex-col gap-3 px-5">
+        {downloadError ? (
+          <p className="w-full max-w-[320px] rounded-[0.75rem] bg-white px-4 py-3 text-center text-[0.82rem] font-bold text-[#8a0000] shadow-[0_3px_8px_rgba(0,0,0,0.12)]">
+            {downloadError}
+          </p>
+        ) : null}
         <button
           type="button"
           onClick={downloadResult}

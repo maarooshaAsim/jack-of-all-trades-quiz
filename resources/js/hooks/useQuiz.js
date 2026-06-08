@@ -42,7 +42,7 @@ export function useQuiz(participant) {
     }
   }
 
-  const submit = async () => {
+  const submit = async (answersToSubmit = answers) => {
     setIsSubmitting(true)
 
     try {
@@ -51,7 +51,7 @@ export function useQuiz(participant) {
         participant_name: participant.name,
         participant_age: participant.age,
         answers: questions.map((question, index) => {
-          const selectedOption = answers[question.id]
+          const selectedOption = answersToSubmit[question.id]
 
           return {
             question_id: question.id,
