@@ -110,9 +110,12 @@ export function Quiz() {
         />
 
         <div className="relative flex h-full min-h-0 flex-col">
-          <div className="flex justify-center">
-            <Logo variant="light" className="max-w-[9.75rem] min-[380px]:max-w-[10.75rem] sm:max-w-[13rem]" />
+       
+
+          <div className="relative z-10 mt-7 flex w-full justify-center min-[390px]:mt-9">
+            <Logo variant="light" className="max-w-[22rem] min-[390px]:max-w-[22rem]" />
           </div>
+          
 
           <div className="mx-auto mt-4 w-full max-w-[21rem] px-1 min-[380px]:mt-5 sm:mt-7 sm:max-w-[26rem]">
             <div className="h-[0.38rem] overflow-hidden rounded-full bg-white/65 shadow-[inset_0_1px_2px_rgba(0,0,0,0.08)]">
