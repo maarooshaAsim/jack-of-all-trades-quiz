@@ -1,4 +1,4 @@
-export const logoDarkPath = '/assets/joat_logo_dark.png'
+export const logoDarkPath = '/assets/joat_logo_dark.svg'
 export const logoLightPath = '/assets/joat_logo_light.svg'
 export const landingStarsPath = '/assets/landing_page_bg_stars.svg'
 export const questionStarsPath = '/assets/question_page_bg_stars.svg'
