@@ -31,8 +31,7 @@ export function ResultPageShell({
         />
 
         {/* Same soft center wash as landing, but stretched for scroll */}
-        <div
-        className="pointer-events-none absolute top-[18rem] bottom-0 left-1/2 z-[1]   w-[16rem] sm:w-[18rem]  md:w-[20rem] lg:w-[22rem]  -translate-x-1/2 bg-white"/>
+        <div className="pointer-events-none absolute bottom-0 left-1/2 top-[18rem] z-[1] w-[20rem] max-w-full -translate-x-1/2 bg-white" />
 
         <div className={`relative z-10 flex w-full flex-col items-center ${contentClassName}`}>
           {showLogo ? (

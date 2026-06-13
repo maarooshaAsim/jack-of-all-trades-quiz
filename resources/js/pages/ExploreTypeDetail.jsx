@@ -76,23 +76,23 @@ export function ResultTypeDetailContent({
         <DecorativeStar color={resultType.base_color} className="-left-8 -top-10" />
         <DecorativeStar color={resultType.base_color} className="-right-8 -top-10" />
 
-        <h1 className={`text-[1.05rem] min-[390px]:text-[1.2rem]'} font-black uppercase leading-none text-white`}>
+        <h1 className="text-[1.05rem] font-black uppercase leading-none text-white min-[390px]:text-[1.2rem]">
           {resultType.name}
         </h1>
 
         <div className={`mt-5 w-full`}>
-          <ResultGraph graphPath={resultType.graph_path} size={isResult ? 'large' : 'compact'} />
+          <ResultGraph graphPath={resultType.graph_path} />
         </div>
       </section>
       {quizResult ? (
         <section className={`mx-auto w-full text-left mt-6 max-w-[292px] min-[390px]:max-w-[320px]`}>
           {quizResult.participant ? (
-            <div className={`rounded-[0.9rem] px-4 py-4 sm:px-5 bg-white text-left shadow-[0_4px_8px_rgba(0,0,0,0.12)]`}>
-              <p className={`text-[0.68rem] sm:text-[0.72rem] text-center font-black uppercase tracking-[0.16em] sm:tracking-[0.18em]`}>Quiz Taker</p>
-              <p className={`mt-2 font-black leading-none text-[#1d1d1f] text-center text-[1.15rem] sm:text-[1.35rem]`}>
+            <div className="rounded-[0.9rem] bg-white px-4 py-4 text-left shadow-[0_4px_8px_rgba(0,0,0,0.12)]">
+              <p className="text-center text-[0.68rem] font-black uppercase tracking-[0.16em]">Quiz Taker</p>
+              <p className="mt-2 text-center text-[1.15rem] font-black leading-none text-[#1d1d1f]">
                 {quizResult.participant.name}
               </p>
-              <p className={`text-[0.9rem] mt-2 font-semibold text-[#1d1d1f]/70 text-center`}>
+              <p className="mt-2 text-center text-[0.9rem] font-semibold text-[#1d1d1f]/70">
                 Age {quizResult.participant.age}
               </p>
             </div>
@@ -131,13 +131,13 @@ export function ResultTypeDetailContent({
 
       {showBranches && resultType.branches.length > 0 ? (
         <section className="mx-auto mt-9 max-w-[292px] space-y-4 text-left min-[390px]:max-w-[320px]">
-          <h2 className="text-[1.55rem] text-center font-black uppercase leading-none sm:text-[1.85rem]">Branches</h2>
+          <h2 className="text-center text-[1.55rem] font-black uppercase leading-none">Branches</h2>
           <div className="space-y-4">
             {resultType.branches.map((branch) => (
               <Link
                 key={branch.slug}
                 to={`/explore/types/${branch.slug}`}
-                className="joat-button-motion block min-h-16 rounded-[0.9rem] px-4 py-5 text-center text-lg font-black uppercase leading-tight text-white shadow-[0_4px_8px_rgba(0,0,0,0.2)] min-[380px]:text-lg sm:text-lg"
+                className="joat-button-motion block min-h-16 rounded-[0.9rem] px-4 py-5 text-center text-lg font-black uppercase leading-tight text-white shadow-[0_4px_8px_rgba(0,0,0,0.2)]"
                 style={{ backgroundColor: resultType.base_color }}
               >
                 {branch.name}
@@ -159,7 +159,7 @@ export function ExploreTypeDetail() {
   if (isLoading || error || !resultType) {
     return (
       <ResultPageShell>
-        <div className="mt-14 w-full pb-24 sm:mt-18">
+        <div className="mt-14 w-full pb-24">
           <p className="rounded-[1rem] bg-[#1d1d1f] px-6 py-5 text-center text-xl font-black text-white shadow-[0_5px_9px_rgba(0,0,0,0.22)]">
             {error ?? 'Loading type'}
           </p>
