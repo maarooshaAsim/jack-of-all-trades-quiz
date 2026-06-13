@@ -1,8 +1,12 @@
 import React from 'react'
 
-export function Shell({ children, tone = 'from-[#fffaf2] via-[#fffdf8] to-[#fff7eb]', fullBleed = false }) {
+export function Shell({
+  children,
+  tone = 'bg-[#fffaf2]',
+  fullBleed = false,
+}) {
   return (
-    <main className={`min-h-[100svh] bg-gradient-to-br ${tone} text-[#18161d]`}>
+    <main className={`min-h-[100svh] ${tone} text-[#18161d]`}>
       <div
         className={
           fullBleed

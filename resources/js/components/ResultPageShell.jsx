@@ -10,11 +10,11 @@ export function ResultPageShell({
   contentClassName = 'max-w-[410px]',
 }) {
   return (
-    <Shell tone="from-[#fbfbfa] via-[#fffdf9] to-[#f8f8f7]" fullBleed>
+    <Shell tone="bg-white" fullBleed>
       <section
         id="bg"
         ref={shellRef}
-        className="relative flex min-h-[100svh] flex-1 flex-col items-center overflow-hidden bg-white px-4 py-4 text-center font-['Outfit']"
+        className="joat-artboard relative flex min-h-[100svh] flex-1 flex-col items-center overflow-hidden bg-white px-4 py-4 text-center font-['Outfit']"
       >
         {/* Same stars as landing, but repeat vertically for scroll pages */}
         <div

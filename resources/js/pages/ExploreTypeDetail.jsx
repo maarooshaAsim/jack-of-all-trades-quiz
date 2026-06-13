@@ -18,9 +18,9 @@ function PercentCard({ label, value, variant = 'explore' }) {
   const isResult = variant === 'result'
 
   return (
-    <div className={`w-full rounded-[0.85rem] bg-[#1d1d1f] px-2.5 py-3 text-center text-white shadow-[0_4px_8px_rgba(0,0,0,0.24)] sm:px-4 `}>
-      <p className={`text-[0.82rem] min-[380px]:text-[0.92rem] sm:text-[1.2rem] font-black leading-tight`}>{label}</p>
-      <p className={`mt-1 font-black leading-none text-[1.35rem] sm:text-[2rem]`}>{value}%</p>
+    <div className={`w-full rounded-[0.85rem] bg-[#1d1d1f] px-2.5 py-3 text-center text-white shadow-[0_4px_8px_rgba(0,0,0,0.24)] ${isResult ? 'max-w-[200px]' : ''}`}>
+      <p className="text-[0.82rem] font-black leading-tight min-[380px]:text-[0.92rem]">{label}</p>
+      <p className="mt-1 text-[1.35rem] font-black leading-none min-[380px]:text-[1.65rem]">{value}%</p>
     </div>
   )
 }
@@ -29,9 +29,9 @@ function CopyBlock({ title, children, variant = 'explore' }) {
   const isResult = variant === 'result'
 
   return (
-    <section className={`mx-auto space-y-3 text-left max-w-[292px] min-[390px]:max-w-[320px]`}>
-      <h2 className={`text-[1.35rem] sm:text-[1.75rem] font-black leading-none text-center`}>{title}</h2>
-      <div className={`rounded-[1rem] bg-[#1d1d1f] text-[#edecec] shadow-[0_4px_8px_rgba(0,0,0,0.22)] px-4 py-4 text-[0.9rem] font-semibold leading-6 min-[380px]:text-[0.96rem] min-[380px]:leading-7 sm:px-6 sm:py-5 sm:text-[1.12rem] sm:leading-8`}>
+    <section className={`mx-auto space-y-3 text-left ${isResult ? 'max-w-[449px]' : 'max-w-[292px] min-[390px]:max-w-[320px]'}`}>
+      <h2 className="text-center text-[1.35rem] font-black leading-none min-[390px]:text-[1.65rem]">{title}</h2>
+      <div className={`rounded-[1rem] bg-[#1d1d1f] text-[#edecec] shadow-[0_4px_8px_rgba(0,0,0,0.22)] ${isResult ? 'px-5 py-5 text-[1rem] font-semibold leading-7 min-[390px]:px-6 min-[390px]:text-[1.08rem] min-[390px]:leading-8' : 'px-4 py-4 text-[0.9rem] font-semibold leading-6 min-[380px]:text-[0.96rem] min-[380px]:leading-7'}`}>
         {children}
       </div>
     </section>
@@ -49,7 +49,7 @@ export function ResultTypeDetailContent({
   const isResult = variant === 'result'
 
   return (
-    <div className={`mt-7 w-full pb-10`} style={{ color: resultType.accent_color }}>
+    <div className="mt-7 w-full pb-10" style={{ color: resultType.accent_color }}>
             {showBackLink ? (
               <div className="mb-14 flex w-full justify-start">
                 <Link
@@ -67,22 +67,22 @@ export function ResultTypeDetailContent({
             ) : null}
 
       <section
-        className={`relative mx-auto flex aspect-square w-full flex-col items-center justify-center rounded-[14px] text-center text-white shadow-[0_7px_12px_rgba(0,0,0,0.22)] max-w-[292px] px-5 pb-5 pt-6 min-[390px]:max-w-[320px]`}
+        className={`relative mx-auto flex aspect-square w-full flex-col items-center justify-center rounded-[14px] text-center text-white shadow-[0_7px_12px_rgba(0,0,0,0.22)] ${isResult ? 'max-w-[449px] px-5 pb-7 pt-8 min-[390px]:px-7 min-[390px]:pt-10' : 'max-w-[292px] px-5 pb-5 pt-6 min-[390px]:max-w-[320px]'}`}
         style={{ backgroundColor: resultType.base_color }}
       >
         <DecorativeStar color={resultType.base_color} className="-left-8 -top-10" />
         <DecorativeStar color={resultType.base_color} className="-right-8 -top-10" />
 
-        <h1 className={'text-[1.05rem] min-[390px]:text-[1.2rem] font-black uppercase leading-none text-white'}>
+        <h1 className={`${isResult ? 'text-[1.35rem] min-[390px]:text-[1.8rem]' : 'text-[1.05rem] min-[390px]:text-[1.2rem]'} font-black uppercase leading-none text-white`}>
           {resultType.name}
         </h1>
 
-        <div className={'mt-5 w-full'}>
-          <ResultGraph graphPath={resultType.graph_path} size={'compact'} />
+        <div className={`${isResult ? 'mt-7' : 'mt-5'} w-full`}>
+          <ResultGraph graphPath={resultType.graph_path} size={isResult ? 'large' : 'compact'} />
         </div>
       </section>
       {quizResult ? (
-        <section className={`mx-auto w-full text-left mt-6 max-w-[292px] min-[390px]:max-w-[320px] sm:mt-8 `}>
+        <section className={`mx-auto w-full text-left ${isResult ? 'mt-8 max-w-[449px]' : 'mt-6 max-w-[292px] min-[390px]:max-w-[320px]'}`}>
           {quizResult.participant ? (
             <div className={`rounded-[0.9rem] px-4 py-4 sm:px-5 bg-white text-left shadow-[0_4px_8px_rgba(0,0,0,0.12)]`}>
               <p className={`text-[0.68rem] sm:text-[0.72rem] text-center font-black uppercase tracking-[0.16em] sm:tracking-[0.18em]`}>Quiz Taker</p>
@@ -97,17 +97,17 @@ export function ResultTypeDetailContent({
         </section>
       ) : null}
 
-      <section className={`mt-7 sm:mt-8 space-y-3 text-left`}>
-        <h2 className={`text-center text-[1.38rem] sm:text-[1.85rem] font-black leading-none`}>Your Profile</h2>
+      <section className="mt-7 space-y-3 text-left">
+        <h2 className={`${isResult ? 'mx-auto max-w-[449px]' : ''} text-center text-[1.38rem] font-black leading-none min-[390px]:text-[1.75rem]`}>Your Profile</h2>
         <div
-          className={`mx-auto w-full items-center rounded-[1rem] font-semibold text-white shadow-[0_4px_8px_rgba(0,0,0,0.2)] min-h-[220px] max-w-[292px] px-4 py-5 text-[0.9rem] leading-6 min-[380px]:text-[0.96rem] min-[380px]:leading-7 min-[390px]:max-w-[320px] sm:px-5 sm:text-[1.05rem] sm:text-center sm:leading-7`}
+          className={`mx-auto w-full items-center rounded-[1rem] text-white shadow-[0_4px_8px_rgba(0,0,0,0.2)] ${isResult ? 'min-h-[287px] max-w-[449px] px-5 py-6 text-[1rem] leading-7 min-[390px]:px-6 min-[390px]:text-[1.08rem] min-[390px]:leading-8' : 'min-h-[220px] max-w-[292px] px-4 py-5 text-[0.9rem] leading-6 min-[380px]:text-[0.96rem] min-[380px]:leading-7 min-[390px]:max-w-[320px]'}`}
           style={{ backgroundColor: resultType.accent_color }}
         >
           {resultType.description}
         </div>
       </section>
 
-      <section className={`mx-auto grid w-full grid-cols-2 justify-items-center gap-3 mt-7 max-w-[292px] sm:mt-8 min-[390px]:max-w-[320px] sm:gap-4`}>
+      <section className={`mx-auto mt-7 grid w-full grid-cols-2 justify-items-center gap-3 ${isResult ? 'max-w-[449px] gap-y-4' : 'max-w-[292px] min-[390px]:max-w-[320px]'}`}>
         {dimensions.map((dimension) => (
           <PercentCard
             key={dimension.key}

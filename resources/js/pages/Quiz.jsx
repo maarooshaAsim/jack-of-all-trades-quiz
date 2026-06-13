@@ -148,7 +148,7 @@ export function Quiz() {
   return (
     <Shell tone="from-[#ecfbff] via-[#f8ffff] to-[#fffdf7]" fullBleed>
       <section
-        className="relative h-[100svh] overflow-hidden px-3 py-3 min-[380px]:px-5 min-[380px]:py-4 sm:px-8 sm:py-6"
+        className="joat-artboard relative h-[100svh] overflow-hidden px-3 py-3 min-[380px]:px-5 min-[380px]:py-4"
         style={{ backgroundColor: category.color }}
       >
         <div
@@ -171,11 +171,11 @@ export function Quiz() {
        
 
           <div className="relative z-10 mt-7 flex w-full justify-center min-[390px]:mt-9">
-            <Logo variant="light" className="max-w-[22rem] min-[390px]:max-w-[22rem]" />
+            <Logo variant="light" className="max-w-[18.5rem] min-[390px]:max-w-[20rem]" />
           </div>
           
 
-          <div className="mx-auto mt-4 w-full max-w-[21rem] px-1 min-[380px]:mt-5 sm:mt-7 sm:max-w-[26rem]">
+          <div className="mx-auto mt-4 w-full max-w-[21rem] px-1 min-[380px]:mt-5">
             <div className="h-[0.38rem] overflow-hidden rounded-full bg-white/65 shadow-[inset_0_1px_2px_rgba(0,0,0,0.08)]">
               <div
                 className="h-full rounded-full transition-all duration-300"
@@ -187,17 +187,17 @@ export function Quiz() {
             </div>
           </div>
 
-          <div className="mx-auto flex min-h-0 w-full max-w-[21rem] flex-1 flex-col justify-center pb-2 pt-3 min-[380px]:max-w-[23rem] min-[380px]:pb-3 sm:max-w-[30rem] sm:pb-6 sm:pt-4">
+          <div className="mx-auto flex min-h-0 w-full max-w-[21rem] flex-1 flex-col justify-center pb-2 pt-3 min-[380px]:max-w-[23rem] min-[380px]:pb-3">
               <p
-                className="pb-2 text-center text-[1rem] font-bold uppercase leading-tight text-[#EDECEC] min-[380px]:text-[1.18rem] sm:pb-3 sm:text-[1.6rem]"
+                className="pb-2 text-center text-[1rem] font-bold uppercase leading-tight text-[#EDECEC] min-[380px]:text-[1.18rem]"
               >
                 {category.label}
               </p>
             <div
-              className="rounded-[1.05rem] px-2 py-2.5 shadow-[0_16px_32px_rgba(0,0,0,0.2)] min-[380px]:px-2.5 min-[380px]:py-3 sm:rounded-[1.15rem] sm:px-4 sm:py-4"
+              className="rounded-[1.05rem] px-2 py-2.5 shadow-[0_16px_32px_rgba(0,0,0,0.2)] min-[380px]:px-2.5 min-[380px]:py-3"
               style={{ backgroundColor: theme.card }}
             >
-              <h1 className="px-2 pb-2 pt-1.5 text-center text-[0.9rem] font-medium leading-[1.22] text-white min-[380px]:pb-3 min-[380px]:pt-2 min-[380px]:text-[0.98rem] sm:px-6 sm:pb-4 sm:text-[1.12rem] sm:leading-[1.45]">
+              <h1 className="px-2 pb-2 pt-1.5 text-center text-[0.9rem] font-medium leading-[1.22] text-white min-[380px]:pb-3 min-[380px]:pt-2 min-[380px]:text-[0.98rem]">
                 {currentQuestion.text}
               </h1>
 

@@ -29,6 +29,11 @@ body {
     min-height: 100svh;
 }
 
+.joat-artboard {
+    width: min(100vw, 488px);
+    margin-inline: auto;
+}
+
 .joat-button-motion {
     transform: translateZ(0);
     transition:

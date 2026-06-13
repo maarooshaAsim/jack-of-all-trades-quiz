@@ -5,18 +5,18 @@ export function ResultGraph({ graphPath, alt = '', size = 'compact' }) {
   const isLarge = size === 'large'
 
   return (
-    <div className={`relative mx-auto aspect-[1.18] max-w-full ${isLarge ? 'w-[18.5rem] min-[430px]:w-[22rem]' : 'w-[12.8rem] min-[380px]:w-[13.9rem] sm:w-[15.5rem]'}`}>
-      <span className="z-20 absolute left-1/2 top-0 -translate-x-1/2 text-[0.62rem] font-black text-white min-[380px]:text-[0.7rem] sm:text-[0.82rem]">
+    <div className={`relative mx-auto aspect-[1.18] max-w-full ${isLarge ? 'w-[17.75rem] min-[390px]:w-[20rem]' : 'w-[12.8rem] min-[380px]:w-[13.9rem]'}`}>
+      <span className="absolute left-1/2 top-0 z-20 -translate-x-1/2 text-[0.62rem] font-black text-white min-[380px]:text-[0.7rem]">
         Breadth
       </span>
-      <span className="z-20 absolute right-0 top-[38%] text-[0.62rem] font-black text-white min-[380px]:text-[0.7rem] sm:text-[0.82rem]">Depth</span>
-      <span className="z-20 absolute bottom-0 right-[5%] text-[0.62rem] font-black text-white min-[380px]:text-[0.7rem] sm:text-[0.82rem]">
+      <span className="absolute right-0 top-[38%] z-20 text-[0.62rem] font-black text-white min-[380px]:text-[0.7rem]">Depth</span>
+      <span className="absolute bottom-0 right-[5%] z-20 text-[0.62rem] font-black text-white min-[380px]:text-[0.7rem]">
         Integration
       </span>
-      <span className="z-20 absolute bottom-0 left-[4%] text-[0.62rem] font-black text-white min-[380px]:text-[0.7rem] sm:text-[0.82rem]">
+      <span className="absolute bottom-0 left-[4%] z-20 text-[0.62rem] font-black text-white min-[380px]:text-[0.7rem]">
         Recognition
       </span>
-      <span className="z-20 absolute -left-2 top-[38%] text-[0.62rem] font-black text-white min-[380px]:text-[0.7rem] sm:text-[0.82rem]">Output</span>
+      <span className="absolute -left-2 top-[38%] z-20 text-[0.62rem] font-black text-white min-[380px]:text-[0.7rem]">Output</span>
 
       <div className="absolute inset-[12%] flex items-center justify-center">
         {hasImageError || !graphPath ? (
