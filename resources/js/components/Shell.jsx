@@ -2,11 +2,15 @@ import React from 'react'
 
 export function Shell({
   children,
-  tone = 'bg-[#fffaf2]',
+  tone = 'bg-white',
+  backgroundColor,
   fullBleed = false,
 }) {
   return (
-    <main className={`min-h-[100svh] ${tone} text-[#18161d]`}>
+    <main
+      className={`min-h-[100svh] ${tone} text-[#18161d]`}
+      style={backgroundColor ? { backgroundColor } : undefined}
+    >
       <div
         className={
           fullBleed

@@ -146,7 +146,7 @@ export function Quiz() {
   }
 
   return (
-    <Shell tone="from-[#ecfbff] via-[#f8ffff] to-[#fffdf7]" fullBleed>
+    <Shell tone="" backgroundColor={category.color} fullBleed>    
       <section
         className="joat-artboard relative h-[100svh] overflow-hidden px-3 py-3 min-[380px]:px-5 min-[380px]:py-4"
         style={{ backgroundColor: category.color }}
@@ -155,8 +155,8 @@ export function Quiz() {
           className="pointer-events-none absolute inset-0 bg-center bg-no-repeat opacity-[0.9]"
           style={{
             backgroundImage: `url(${questionStarsPath})`,
-            backgroundPosition: 'center 22rem',
-            backgroundSize: '42rem auto',
+            backgroundPosition: 'center 20rem',
+            backgroundSize: '48rem auto',
           }}
         />
         <div
@@ -167,15 +167,12 @@ export function Quiz() {
           }}
         />
 
-        <div className="relative flex h-full min-h-0 flex-col">
-       
-
-          <div className="relative z-10 mt-7 flex w-full justify-center min-[390px]:mt-9">
-            <Logo variant="light" className="max-w-[18.5rem] min-[390px]:max-w-[20rem]" />
+        <div className="relative z-10 flex h-full min-h-0 flex-col items-center">
+          <div className="mt-7 flex w-full shrink-0 justify-center min-[390px]:mt-8">
+            <Logo variant="light" className="max-w-[16.5rem] min-[390px]:max-w-[18rem]" />
           </div>
-          
 
-          <div className="mx-auto mt-4 w-full max-w-[21rem] px-1 min-[380px]:mt-5">
+          <div className="mx-auto mt-4 w-full max-w-[21rem] shrink-0 px-1 min-[380px]:mt-5">
             <div className="h-[0.38rem] overflow-hidden rounded-full bg-white/65 shadow-[inset_0_1px_2px_rgba(0,0,0,0.08)]">
               <div
                 className="h-full rounded-full transition-all duration-300"
@@ -187,14 +184,14 @@ export function Quiz() {
             </div>
           </div>
 
-          <div className="mx-auto flex min-h-0 w-full max-w-[21rem] flex-1 flex-col justify-center pb-2 pt-3 min-[380px]:max-w-[23rem] min-[380px]:pb-3">
+          <div className="mx-auto mt-[clamp(1.75rem,6svh,4rem)] w-full max-w-[21rem] shrink-0 pb-2 min-[380px]:max-w-[23rem] min-[380px]:pb-3">
               <p
-                className="pb-2 text-center text-[1rem] font-bold uppercase leading-tight text-[#EDECEC] min-[380px]:text-[1.18rem]"
+                className="relative z-20 pb-2 text-center text-[1rem] font-bold uppercase leading-tight text-[#EDECEC] drop-shadow-[0_1px_2px_rgba(0,0,0,0.35)] min-[380px]:text-[1.18rem]"
               >
                 {category.label}
               </p>
             <div
-              className="rounded-[1.05rem] px-2 py-2.5 shadow-[0_16px_32px_rgba(0,0,0,0.2)] min-[380px]:px-2.5 min-[380px]:py-3"
+              className="relative z-10 rounded-[1.05rem] px-2 py-2.5 shadow-[0_16px_32px_rgba(0,0,0,0.2)] min-[380px]:px-2.5 min-[380px]:py-3"
               style={{ backgroundColor: theme.card }}
             >
               <h1 className="px-2 pb-2 pt-1.5 text-center text-[0.9rem] font-medium leading-[1.22] text-white min-[380px]:pb-3 min-[380px]:pt-2 min-[380px]:text-[0.98rem]">
