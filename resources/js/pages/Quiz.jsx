@@ -152,11 +152,10 @@ export function Quiz() {
         style={{ backgroundColor: category.color }}
       >
         <div
-          className="pointer-events-none absolute inset-0 bg-center bg-no-repeat opacity-[0.9]"
+          className="pointer-events-none absolute inset-0 bg-center bg-no-repeat opacity-[0.9] bg-[length:25rem_auto] md:bg-[length:32rem_auto] xl:bg-[length:34rem_auto]"
           style={{
             backgroundImage: `url(${questionStarsPath})`,
             backgroundPosition: 'center 20rem',
-            backgroundSize: '48rem auto',
           }}
         />
         <div
@@ -167,7 +166,7 @@ export function Quiz() {
           }}
         />
 
-        <div className="relative z-10 flex h-full min-h-0 flex-col items-center">
+        <div className="relative pb-10 z-10 flex h-full min-h-0 flex-col items-center">
           <div className="mt-7 flex w-full shrink-0 justify-center min-[390px]:mt-8">
             <Logo variant="light" className="max-w-[16.5rem] min-[390px]:max-w-[18rem]" />
           </div>
@@ -186,7 +185,7 @@ export function Quiz() {
 
           <div className="mx-auto mt-[clamp(1.75rem,6svh,4rem)] w-full max-w-[21rem] shrink-0 pb-2 min-[380px]:max-w-[23rem] min-[380px]:pb-3">
               <p
-                className="relative z-20 pb-2 text-center text-[1rem] font-bold uppercase leading-tight text-[#EDECEC] drop-shadow-[0_1px_2px_rgba(0,0,0,0.35)] min-[380px]:text-[1.18rem]"
+                className="relative z-20 pb-2 text-center font-['Outfit'] text-[1rem] font-bold uppercase leading-tight text-[#EDECEC] min-[380px]:text-[1.40rem]"
               >
                 {category.label}
               </p>
@@ -194,7 +193,7 @@ export function Quiz() {
               className="relative z-10 rounded-[1.05rem] px-2 py-2.5 shadow-[0_16px_32px_rgba(0,0,0,0.2)] min-[380px]:px-2.5 min-[380px]:py-3"
               style={{ backgroundColor: theme.card }}
             >
-              <h1 className="px-2 pb-2 pt-1.5 text-center text-[0.9rem] font-medium leading-[1.22] text-white min-[380px]:pb-3 min-[380px]:pt-2 min-[380px]:text-[0.98rem]">
+              <h1 className="px-2 pb-2 pt-1.5 text-center font-['Outfit'] text-[0.78rem] leading-[1.22] text-white min-[380px]:pb-3 min-[380px]:pt-2 min-[380px]:text-[0.98rem]">
                 {currentQuestion.text}
               </h1>
 

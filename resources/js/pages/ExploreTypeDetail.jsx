@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { DecorativeStar } from '../components/DecorativeStar.jsx'
 import { HistoryBackButton } from '../components/HistoryBackButton.jsx'
@@ -20,7 +20,7 @@ function PercentCard({ label, value, variant = 'explore' }) {
   return (
     <div className={`w-full rounded-[0.85rem] bg-[#1d1d1f] px-2.5 py-3 text-center text-white shadow-[0_4px_8px_rgba(0,0,0,0.24)] `}>
       <p className="text-[0.82rem] font-black leading-tight min-[380px]:text-[0.92rem]">{label}</p>
-      <p className="mt-1 text-[1.35rem] font-black leading-none min-[380px]:text-[1.65rem]">{value}%</p>
+      <p className="mt-1 text-[1.50rem] font-black leading-none min-[380px]:text-[1.65rem]">{value}%</p>
     </div>
   )
 }
@@ -147,6 +147,10 @@ export function ResultTypeDetailContent({
 export function ExploreTypeDetail() {
   const { baseType } = useParams()
   const { resultType, isLoading, error } = useResultType(baseType)
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
+  }, [baseType])
 
   if (isLoading || error || !resultType) {
     return (

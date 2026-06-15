@@ -18,11 +18,11 @@ export function ResultPageShell({
       >
         {/* Same stars as landing, but repeat vertically for scroll pages */}
         <div
-          className="pointer-events-none absolute inset-0 bg-repeat-y opacity-[0.82]"
+          className="pointer-events-none absolute inset-0 opacity-[0.82] bg-[length:25rem_auto] md:bg-[length:32rem_auto] xl:bg-[length:34rem_auto]"
           style={{
             backgroundImage: `url(${landingStarsPath})`,
             backgroundPosition: 'center 14.8rem',
-            backgroundSize: '34rem auto',
+            // backgroundSize: '25rem auto',
           }}
         />
 
