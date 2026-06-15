@@ -4,6 +4,7 @@ import { DecorativeStar } from '../components/DecorativeStar.jsx'
 import { HistoryBackButton } from '../components/HistoryBackButton.jsx'
 import { ResultGraph } from '../components/ResultGraph.jsx'
 import { ResultPageShell } from '../components/ResultPageShell.jsx'
+import { resultBoxWidthClass } from '../config/resultLayout.js'
 import { useResultType } from '../hooks/useResultTypes.js'
 
 const dimensions = [
@@ -15,8 +16,6 @@ const dimensions = [
 ]
 
 function PercentCard({ label, value, variant = 'explore' }) {
-  const isResult = variant === 'result'
-
   return (
     <div className={`w-full rounded-[0.85rem] bg-[#1d1d1f] px-2.5 py-3 text-center text-white shadow-[0_4px_8px_rgba(0,0,0,0.24)] `}>
       <p className="text-[0.82rem] font-black leading-tight min-[380px]:text-[0.92rem]">{label}</p>
@@ -26,10 +25,8 @@ function PercentCard({ label, value, variant = 'explore' }) {
 }
 
 function CopyBlock({ title, children, variant = 'explore' }) {
-  const isResult = variant === 'result'
-
   return (
-    <section className={`mx-auto space-y-3 text-left max-w-[292px] min-[390px]:max-w-[320px]`}>
+    <section className={`mx-auto space-y-3 text-left ${resultBoxWidthClass}`}>
       <h2 className="text-center text-[1.35rem] font-black leading-none min-[390px]:text-[1.65rem]">{title}</h2>
       <div className={` text-justify rounded-[1rem] bg-[#1d1d1f] text-[#edecec] shadow-[0_4px_8px_rgba(0,0,0,0.22)] px-4 py-4 text-[0.9rem] leading-6 min-[380px]:text-[0.96rem] min-[380px]:leading-7`}>
         {children}
@@ -46,27 +43,24 @@ export function ResultTypeDetailContent({
   actions = null,
   variant = 'explore',
 }) {
-  const isResult = variant === 'result'
-
   return (
 
-        <div className="mt-5 flex w-full flex-col items-center gap-10 pb-10" style={{ color: resultType.accent_color }}>
+        <div className="flex w-full flex-col items-center gap-10 pb-10" style={{ color: resultType.accent_color }}>
             {showBackLink ? (
                  <div className="mt-7 mb-5 flex w-full justify-start">
                         <HistoryBackButton />
                       </div>
             
             ) : (
-              <div className="my-20 flex w-full justify-start">
+              <div className="my-10 flex w-full justify-start">
                 </div>
             )}
-
                <div
-                    className="relative rounded-[14px] px-5 pb-5 pt-5 text-center shadow-[0_7px_12px_rgba(0,0,0,0.22)] min-[390px]:max-w-[320px]"
+                    className={`group relative mx-auto rounded-[14px] px-5 pb-5 pt-5 text-center shadow-[0_7px_12px_rgba(0,0,0,0.22)] ${resultBoxWidthClass}`}
                     style={{ backgroundColor: resultType.base_color }}
                   >
-                                <DecorativeStar color={resultType.base_color} className="-left-8 -top-9" />
-                                <DecorativeStar color={resultType.base_color} className="-right-8 -top-9" />
+                                <DecorativeStar color={resultType.base_color} className="-left-8 -top-8" />
+                                <DecorativeStar color={resultType.base_color} className="-right-8 -top-8" />
               
                                 <h1 className="text-[1.05rem] font-black uppercase leading-none text-white min-[390px]:text-[1.2rem]">
                                   {resultType.name}
@@ -77,7 +71,7 @@ export function ResultTypeDetailContent({
                                 </div>
                   </div>
             {quizResult ? (
-              <section className={`mx-auto w-full text-left mt-6 max-w-[292px] min-[390px]:max-w-[320px]`}>
+              <section className={`mx-auto mt-6 text-left ${resultBoxWidthClass}`}>
                 {quizResult.participant ? (
                   <div className="rounded-[0.9rem] bg-white px-4 py-4 text-left shadow-[0_4px_8px_rgba(0,0,0,0.12)]">
                     <p className="text-center text-[0.68rem] font-black uppercase tracking-[0.16em]">Quiz Taker</p>
@@ -92,17 +86,17 @@ export function ResultTypeDetailContent({
               </section>
             ) : null}
 
-            <section className="mt-7 space-y-3 text-left">
-              <h2 className={`text-center text-[1.38rem] font-black leading-none min-[390px]:text-[1.75rem]`}>Your Profile</h2>
+            <section className="mt-7 flex w-full flex-col items-center space-y-3 text-left">
+                <h2 className={`text-center text-[1.38rem] font-black leading-none min-[390px]:text-[1.75rem]`}>Your Profile</h2>
               <div
-                className={` text-justify mx-auto w-full items-center rounded-[1rem] text-white shadow-[0_4px_8px_rgba(0,0,0,0.2)] min-h-[220px] max-w-[292px] px-4 py-5 text-[0.9rem] leading-6 min-[380px]:text-[0.96rem] min-[380px]:leading-7 min-[390px]:max-w-[320px]`}
+                className={`mx-auto min-h-[220px] items-center rounded-[1rem] px-4 py-5 text-justify text-[0.9rem] leading-6 text-white shadow-[0_4px_8px_rgba(0,0,0,0.2)] min-[380px]:text-[0.96rem] min-[380px]:leading-7 ${resultBoxWidthClass}`}
                 style={{ backgroundColor: resultType.accent_color }}
               >
                 {resultType.description}
               </div>
             </section>
 
-            <section className={`mx-auto mt-7 grid w-full grid-cols-2 justify-items-center gap-3 max-w-[292px] min-[390px]:max-w-[320px]`}>
+            <section className={`mx-auto mt-7 grid grid-cols-2 justify-items-center gap-3 ${resultBoxWidthClass}`}>
               {dimensions.map((dimension) => (
                 <PercentCard
                   key={dimension.key}
@@ -122,7 +116,7 @@ export function ResultTypeDetailContent({
             </div>
 
             {showBranches && resultType.branches.length > 0 ? (
-              <section className="mx-auto mt-9 max-w-[292px] space-y-4 text-left min-[390px]:max-w-[320px]">
+              <section className={`mx-auto mt-9 space-y-4 text-left ${resultBoxWidthClass}`}>
                 <h2 className="text-center text-[1.55rem] font-black uppercase leading-none">Branches</h2>
                 <div className="space-y-4">
                   {resultType.branches.map((branch) => (
@@ -139,7 +133,7 @@ export function ResultTypeDetailContent({
               </section>
             ) : null}
 
-            {actions ? <div className="mx-auto mt-9 max-w-[449px]">{actions}</div> : null}
+            {actions ? <div className={`mx-auto mt-9 ${resultBoxWidthClass}`}>{actions}</div> : null}
             </div>
   )
 }

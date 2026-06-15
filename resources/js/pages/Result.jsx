@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { Logo } from '../components/Logo.jsx'
 import { ResultPageShell } from '../components/ResultPageShell.jsx'
+import { resultBoxWidthClass } from '../config/resultLayout.js'
 import { ResultTypeDetailContent } from './ExploreTypeDetail.jsx'
 import { useResultType } from '../hooks/useResultTypes.js'
 import { downloadElementAsJpeg } from '../utils/downloadElementAsJpeg.js'
@@ -18,7 +19,7 @@ function MissingResult() {
   return (
     <ResultPageShell showLogo={false}>
       <div className="mt-16 w-full pb-16">
-        <div className="mx-auto max-w-[449px] rounded-[1rem] bg-[#1d1d1f] px-6 py-6 text-center text-white shadow-[0_4px_8px_rgba(0,0,0,0.24)]">
+        <div className={`mx-auto rounded-[1rem] bg-[#1d1d1f] px-6 py-6 text-center text-white shadow-[0_4px_8px_rgba(0,0,0,0.24)] ${resultBoxWidthClass}`}>
           <p className="text-[0.8rem] font-black uppercase tracking-[0.2em] text-white/60">Result</p>
           <h1 className="mt-3 text-[1.75rem] font-black uppercase leading-none">No result loaded</h1>
           <p className="mt-4 text-[1rem] font-semibold leading-7 text-white/80">
@@ -69,7 +70,7 @@ function LoadedResult({ result }) {
     return (
       <ResultPageShell>
         <div className="mt-16 w-full pb-16">
-          <p className="mx-auto max-w-[449px] rounded-[1rem] bg-[#1d1d1f] px-6 py-5 text-center text-xl font-black text-white shadow-[0_5px_9px_rgba(0,0,0,0.22)]">
+          <p className={`mx-auto rounded-[1rem] bg-[#1d1d1f] px-6 py-5 text-center text-xl font-black text-white shadow-[0_5px_9px_rgba(0,0,0,0.22)] ${resultBoxWidthClass}`}>
             {error ?? 'Loading your result'}
           </p>
         </div>
@@ -78,7 +79,7 @@ function LoadedResult({ result }) {
   }
 
   return (
-    <ResultPageShell showLogo={false} contentClassName="max-w-[488px]">
+    <ResultPageShell showLogo={false}>
       <div ref={captureRef} className="">
         <div className="flex flex-col items-center">
           <Logo className="max-w-[17rem] min-[390px]:max-w-[20rem]" />
@@ -94,9 +95,9 @@ function LoadedResult({ result }) {
         </div>
       </div>
 
-      <div data-export-hidden="true" className="items-center mx-auto mb-16 flex w-full max-w-[449px] flex-col gap-3 px-5">
+      <div data-export-hidden="true" className={`mx-auto mb-16 flex flex-col items-center gap-3 ${resultBoxWidthClass}`}>
         {downloadError ? (
-          <p className="w-full max-w-[320px] rounded-[0.75rem] bg-white px-4 py-3 text-center text-[0.82rem] font-bold text-[#8a0000] shadow-[0_3px_8px_rgba(0,0,0,0.12)]">
+          <p className="w-full rounded-[0.75rem] bg-white px-4 py-3 text-center text-[0.82rem] font-bold text-[#8a0000] shadow-[0_3px_8px_rgba(0,0,0,0.12)]">
             {downloadError}
           </p>
         ) : null}
@@ -104,13 +105,13 @@ function LoadedResult({ result }) {
           type="button"
           onClick={downloadResult}
           disabled={isDownloading}
-          className="joat-button-motion min-h-12 w-full max-w-[320px] rounded-[0.85rem] bg-[#1d1d1f] px-5 py-4 text-center text-[0.95rem] font-black uppercase tracking-[0.14em] text-white shadow-[0_4px_8px_rgba(0,0,0,0.24)] disabled:cursor-wait disabled:opacity-60"
+          className="joat-button-motion min-h-12 w-full rounded-[0.85rem] bg-[#1d1d1f] px-5 py-4 text-center text-[0.95rem] font-black uppercase tracking-[0.14em] text-white shadow-[0_4px_8px_rgba(0,0,0,0.24)] disabled:cursor-wait disabled:opacity-60"
         >
           {isDownloading ? 'Preparing Result' : 'Download Result'}
         </button>
         <Link
           to="/"
-          className="joat-button-motion min-h-12 w-full max-w-[320px] rounded-[0.85rem] bg-white px-5 py-4 text-center text-[0.95rem] font-black uppercase tracking-[0.14em] text-[#1d1d1f] shadow-[0_4px_8px_rgba(0,0,0,0.12)]"
+          className="joat-button-motion min-h-12 w-full rounded-[0.85rem] bg-white px-5 py-4 text-center text-[0.95rem] font-black uppercase tracking-[0.14em] text-[#1d1d1f] shadow-[0_4px_8px_rgba(0,0,0,0.12)]"
         >
           Retake Quiz
         </Link>

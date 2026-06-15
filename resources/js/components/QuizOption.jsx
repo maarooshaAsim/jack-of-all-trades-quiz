@@ -29,7 +29,7 @@ export function QuizOption({ accentColor, accentTextColor, option, isSelected, o
       type="button"
       onClick={onSelect}
       disabled={disabled}
-      className={`joat-button-motion flex min-h-[3.65rem] w-full overflow-hidden rounded-[12px] text-left focus:outline-none focus-visible:ring-4 focus-visible:ring-white/65 min-[380px]:min-h-[3.85rem] ${
+      className={`joat-button-motion flex min-h-[3.25rem] w-full overflow-hidden rounded-[12px] text-left focus:outline-none focus-visible:ring-4 focus-visible:ring-white/65 min-[380px]:min-h-[3.45rem] min-[850px]:min-h-[3.85rem] ${
         isSelected
           ? "scale-[1.015] ring-2 ring-white shadow-[0_10px_24px_rgba(0,0,0,0.22)]"
           : "bg-[#EDECEC] shadow-[0_6px_14px_rgba(0,0,0,0.12)]"
@@ -39,19 +39,19 @@ export function QuizOption({ accentColor, accentTextColor, option, isSelected, o
       }}
     >
       <div
-        className="flex w-[38px] shrink-0 items-center justify-center rounded-[0.78rem] min-[380px]:w-[42px]"
+        className="flex w-[36px] shrink-0 items-center justify-center rounded-[0.78rem] min-[380px]:w-[40px] min-[850px]:w-[42px]"
         style={{ backgroundColor: accentColor || "#68B6F7" }}
       >
         <span
-          className="font-['Outfit'] text-[0.95rem] font-bold"
+          className="font-['Outfit'] text-[0.88rem] font-bold min-[850px]:text-[0.95rem]"
           style={{ color: "#FFFFFF" }}
         >
           {option.key}
         </span>
       </div>
 
-      <div className="flex flex-1 items-center px-3 py-2.5">
-        <span className="break-words font-['Outfit'] text-[0.78rem] font-normal leading-[1.24] text-[#1E1E1E] min-[380px]:text-[0.84rem]">
+      <div className="flex flex-1 items-center px-2.5 py-2 min-[850px]:px-3 min-[850px]:py-2.5">
+        <span className="break-words font-['Outfit'] text-[0.74rem] font-normal leading-[1.22] text-[#1E1E1E] min-[380px]:text-[0.8rem] min-[850px]:text-[0.84rem]">
           {option.text}
         </span>
       </div>

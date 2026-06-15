@@ -147,31 +147,29 @@ export function Quiz() {
 
   return (
     <Shell tone="" backgroundColor={category.color} fullBleed>    
-      <section
-        className="joat-artboard relative h-[100svh] overflow-hidden px-3 py-3 min-[380px]:px-5 min-[380px]:py-4"
-        style={{ backgroundColor: category.color }}
-      >
-        <div
-          className="pointer-events-none absolute inset-0 bg-center bg-no-repeat opacity-[0.9] bg-[length:25rem_auto] md:bg-[length:32rem_auto] xl:bg-[length:34rem_auto]"
+        <section
+          className="joat-artboard relative min-h-[100svh] overflow-x-hidden px-3 py-3 pb-[max(1.5rem,env(safe-area-inset-bottom))] min-[380px]:px-5 min-[380px]:py-4 min-[380px]:pb-[max(2rem,env(safe-area-inset-bottom))]"
+          style={{ backgroundColor: category.color }}
+        >
+            <div
+          className="pointer-events-none absolute inset-0 bg-center bg-y-repeat opacity-[0.9] bg-[length:25rem_auto] md:bg-[length:32rem_auto] xl:bg-[length:34rem_auto]"
           style={{
             backgroundImage: `url(${questionStarsPath})`,
             backgroundPosition: 'center 20rem',
           }}
         />
-        <div
-          className="pointer-events-none absolute inset-x-0 bottom-0 top-[10rem]"
-          style={{
-            background:
-              'linear-gradient(180deg, rgba(255,255,255,0.01) 0%, rgba(255,255,255,0.015) 38%, rgba(255,255,255,0.03) 100%)',
+                <div
+          className="pointer-events-none absolute inset-x-0 top-0 z-[1] h-[20rem]" style={{
+            backgroundColor: category.color
           }}
         />
 
-        <div className="relative pb-10 z-10 flex h-full min-h-0 flex-col items-center">
-          <div className="mt-7 flex w-full shrink-0 justify-center min-[390px]:mt-8">
-            <Logo variant="light" className="max-w-[16.5rem] min-[390px]:max-w-[18rem]" />
+        <div className="relative z-10 flex min-h-[calc(100svh-1.5rem)] flex-col items-center pb-4 min-[380px]:pb-6">
+          <div className="mt-4 flex w-full shrink-0 justify-center min-[390px]:mt-6 min-[850px]:mt-8">
+            <Logo variant="light" className="max-w-[14.75rem] min-[390px]:max-w-[16.5rem] min-[850px]:max-w-[18rem]" />
           </div>
 
-          <div className="mx-auto mt-4 w-full max-w-[21rem] shrink-0 px-1 min-[380px]:mt-5">
+          <div className="mx-auto mt-3 w-full max-w-[21rem] shrink-0 px-1 min-[380px]:mt-4 min-[850px]:mt-5">
             <div className="h-[0.38rem] overflow-hidden rounded-full bg-white/65 shadow-[inset_0_1px_2px_rgba(0,0,0,0.08)]">
               <div
                 className="h-full rounded-full transition-all duration-300"
@@ -183,21 +181,21 @@ export function Quiz() {
             </div>
           </div>
 
-          <div className="mx-auto mt-[clamp(1.75rem,6svh,4rem)] w-full max-w-[21rem] shrink-0 pb-2 min-[380px]:max-w-[23rem] min-[380px]:pb-3">
+          <div className="mx-auto mt-[clamp(1rem,4svh,3.5rem)] w-full max-w-[21rem] shrink-0 pb-2 min-[380px]:max-w-[23rem] min-[380px]:pb-3 min-[850px]:mt-[clamp(1.75rem,6svh,4rem)]">
               <p
-                className="relative z-20 pb-2 text-center font-['Outfit'] text-[1rem] font-bold uppercase leading-tight text-[#EDECEC] min-[380px]:text-[1.40rem]"
+                className="relative z-20 pb-1.5 text-center font-['Outfit'] text-[0.96rem] font-bold uppercase leading-tight text-[#EDECEC] min-[380px]:pb-2 min-[380px]:text-[1.25rem] min-[850px]:text-[1.40rem]"
               >
                 {category.label}
               </p>
             <div
-              className="relative z-10 rounded-[1.05rem] px-2 py-2.5 shadow-[0_16px_32px_rgba(0,0,0,0.2)] min-[380px]:px-2.5 min-[380px]:py-3"
+              className="relative z-10 rounded-[1.05rem] px-2 py-2 shadow-[0_16px_32px_rgba(0,0,0,0.2)] min-[380px]:px-2.5 min-[380px]:py-2.5 min-[850px]:py-3"
               style={{ backgroundColor: theme.card }}
             >
-              <h1 className="px-2 pb-2 pt-1.5 text-center font-['Outfit'] text-[0.78rem] leading-[1.22] text-white min-[380px]:pb-3 min-[380px]:pt-2 min-[380px]:text-[0.98rem]">
+              <h1 className="px-2 pb-2 pt-1 text-center font-['Outfit'] text-[0.78rem] leading-[1.22] text-white min-[380px]:pb-2.5 min-[380px]:pt-1.5 min-[380px]:text-[0.92rem] min-[850px]:pb-3 min-[850px]:pt-2 min-[850px]:text-[0.98rem]">
                 {currentQuestion.text}
               </h1>
 
-              <div className="space-y-2.5 min-[380px]:space-y-3">
+              <div className="space-y-2 min-[380px]:space-y-2.5 min-[850px]:space-y-3">
                 {currentQuestion.options.map((option) => (
                   <QuizOption
                     accentColor={theme.accent}

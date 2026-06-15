@@ -6,24 +6,24 @@ use App\Models\ResultType;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 use RuntimeException;
-use ZipArchive;
 
 class ResultTypeSeeder extends Seeder
 {
-    private const SourceWorkbook = 'final_quiz_info.xlsx';
-
-    private const ResultTypeSheet = 'xl/worksheets/sheet5.xml';
-
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
+        $rows = $this->rows();
+        $slugs = collect($rows)
+            ->map(fn (array $row): string => Str::slug($row['name']))
+            ->all();
+
         $baseTypesByCode = [];
         $baseTypeSortOrder = 1;
         $branchSortOrders = [];
 
-        foreach ($this->rows() as $row) {
+        foreach ($rows as $row) {
             if ($row['parent_code'] !== '') {
                 continue;
             }
@@ -41,7 +41,7 @@ class ResultTypeSeeder extends Seeder
             $branchSortOrders[$row['code']] = 1;
         }
 
-        foreach ($this->rows() as $row) {
+        foreach ($rows as $row) {
             if ($row['parent_code'] === '') {
                 continue;
             }
@@ -62,6 +62,16 @@ class ResultTypeSeeder extends Seeder
                 ],
             );
         }
+
+        ResultType::query()
+            ->whereNotIn('slug', $slugs)
+            ->whereNotNull('parent_id')
+            ->delete();
+
+        ResultType::query()
+            ->whereNotIn('slug', $slugs)
+            ->whereNull('parent_id')
+            ->delete();
     }
 
     /**
@@ -170,12 +180,6 @@ class ResultTypeSeeder extends Seeder
      */
     private function rows(): array
     {
-        $spreadsheetRows = $this->spreadsheetRows();
-
-        if ($spreadsheetRows !== []) {
-            return $spreadsheetRows;
-        }
-
         return [
             [
                 'name' => 'Linear Specialist',
@@ -214,8 +218,8 @@ class ResultTypeSeeder extends Seeder
                 'base_color' => '#00395D',
             ],
             [
-                'name' => 'Settling Generalist',
-                'code' => 'SETTLING_GENERALIST',
+                'name' => 'Operational Generalist',
+                'code' => 'OPERATIONAL_GENERALIST',
                 'description' => 'You once moved more freely across domains, but you have gradually narrowed your range. Whether by choice or by exhaustion, you have consolidated into a more manageable path. The broader curiosity is still there, dormant, but you no longer feed it. You have made peace with less, or you have told yourself that less is enough.',
                 'breadth' => '16%   Your range is moderate but shrinking. You remember when you explored more widely, and some part of you misses it.',
                 'depth' => '35%   You have functional competence in a few areas, but you rarely push toward mastery. Depth feels like a luxury you no longer have time for.',
@@ -238,8 +242,8 @@ class ResultTypeSeeder extends Seeder
                 'base_color' => '#F3BE26',
             ],
             [
-                'name' => 'Suppressed Explorer',
-                'code' => 'SUPPRESSED_EXPLORER',
+                'name' => 'Cross-Domain Learner',
+                'code' => 'CROSS_DOMAIN_LEARNER',
                 'description' => 'Your curiosity is alive but constrained. External systems-family expectations, economic pressure, cultural norms, or institutional gatekeeping-have compressed your exploration into private margins. You think about other paths constantly but rarely walk them. The polymath in you is not absent; it is held in reserve, waiting for permission you may never receive.',
                 'breadth' => '70%   Your interests are wide, perhaps wider than you acknowledge publicly. You follow multiple domains in your mind, through books, through conversations, through quiet observation.',
                 'depth' => '20%   You have gone deep enough in one area to survive or succeed, but the depth feels like a cage. Your true capacity is distributed across interests you cannot fully pursue.',
@@ -250,8 +254,8 @@ class ResultTypeSeeder extends Seeder
                 'base_color' => '#6D3E00',
             ],
             [
-                'name' => 'Contained Polymath',
-                'code' => 'CONTAINED_POLYMATH',
+                'name' => 'Multidisciplinary Strategist',
+                'code' => 'MULTIDISCIPLINARY_STRATEGIST',
                 'description' => 'You contain multitudes, but you contain them carefully. Your polymathic nature is real but managed, kept within boundaries that feel safe or necessary. You may have learned early that breadth is punished, or you may have punished yourself for it. The result is the same: a rich inner life that does not fully express itself in your outer work.',
                 'breadth' => '80%   Your range is wider than your life suggests. You maintain interests across domains but in controlled doses. The breadth is genuine but rationed.',
                 'depth' => '30%   You have moderate depth in a few areas, but you stop before reaching mastery. The stopping is strategic, not lazy.',
@@ -274,8 +278,8 @@ class ResultTypeSeeder extends Seeder
                 'base_color' => '#FF2B2B',
             ],
             [
-                'name' => 'Perfectionist Dropper',
-                'code' => 'PERFECTIONIST_DROPPER',
+                'name' => 'Iterative Designer',
+                'code' => 'ITERATIVE_DESIGNER',
                 'description' => 'You start with intensity and abandon when difficulty demands long-term commitment. The barrier is not lack of interest but fear of imperfection, of falling short of an internalized standard of expertise. Your polymathic potential is real, but it is filtered through a performance trap that values only finished, polished outcomes. You are blocked not by inability but by the gap between your vision and your tolerance for imperfect execution.',
                 'breadth' => '100%   Your range is wide and genuine. You are drawn to many domains and you enter them with enthusiasm. The breadth is not the problem; the problem is what happens when the initial excitement fades.',
                 'depth' => "11%   Depth is where you falter. You reach a point where mastery requires repetition, failure, and incremental progress, and you stop. The stopping is not laziness; it is a perfectionist's paralysis.",
@@ -286,8 +290,8 @@ class ResultTypeSeeder extends Seeder
                 'base_color' => '#720000',
             ],
             [
-                'name' => 'Passive Accumulator',
-                'code' => 'PASSIVE_ACCUMULATOR',
+                'name' => 'Research Sythesist',
+                'code' => 'RESEARCH_SYNTHESIST',
                 'description' => 'You learn voraciously and create sparingly. Knowledge accumulates without direction or output. The pleasure is in acquisition, not application. You may feel secretly wealthy in understanding while appearing inactive to others. The bridge from knowing to doing remains unbuilt, not because you cannot build it, but because building it was never the point. You are a collector of capabilities, not a deployer of them.',
                 'breadth' => '20%   Your range is extensive, perhaps exhaustive. You have sampled widely and accumulated a vast internal library. The breadth is your pride and your hiding place.',
                 'depth' => '80%   Depth is shallow across the board. You know enough to discuss, to appreciate, to navigate, but not enough to build, to teach, or to lead.',
@@ -298,8 +302,8 @@ class ResultTypeSeeder extends Seeder
                 'base_color' => '#720000',
             ],
             [
-                'name' => 'Drifting Aspirant',
-                'code' => 'DRIFTING_ASPIRANT',
+                'name' => 'Creative Explorer',
+                'code' => 'CREATIVE_EXPLORER',
                 'description' => 'You move between interests without accumulating depth or coherence. The drift may follow trends, escapism, or a vague sense that something better exists elsewhere. Without an anchor or direction, your breadth becomes circular rather than compounding. You are not building a polymathic system; you are fleeing from commitment. The aspiration is real, but it is disconnected from the discipline required to realize it.',
                 'breadth' => '80%   Your range is moderate to wide, but it is reactive, not strategic. You follow what is interesting in the moment, then abandon it when the next interest appears.',
                 'depth' => '27%   Depth is minimal. You rarely stay long enough in any domain to develop real capability. The shallowness is not a choice but a consequence of perpetual motion.',
@@ -334,8 +338,8 @@ class ResultTypeSeeder extends Seeder
                 'base_color' => '#390B50',
             ],
             [
-                'name' => 'Survival Synthesizer',
-                'code' => 'SURVIVAL_SYNTHESIZER',
+                'name' => 'Resource Synthesizer',
+                'code' => 'RESOURCE_SYNTHESIZER',
                 'description' => 'Your integration emerged from necessity, not luxury. Limited resources, unstable environments, or multiple responsibilities forced you to combine skills creatively. Your polymathy is hard-won and pragmatic. You may not call it polymathy-you call it getting by-but the result is the same: a body of capabilities that works as a system because it had to. You are proof that integration can be born from pressure, not just from privilege.',
                 'breadth' => '80%   Your range is wide because survival demanded it. You learned what you needed to learn, when you needed to learn it. The breadth is not decorative; it is functional.',
                 'depth' => '81%   You have solid capability in multiple areas, though not always mastery. The depth is sufficient for the task at hand, and the task at hand has often been urgent.',
@@ -370,8 +374,8 @@ class ResultTypeSeeder extends Seeder
                 'base_color' => '#96C016',
             ],
             [
-                'name' => 'Systems Architect',
-                'code' => 'SYSTEMS_ARCHITECT',
+                'name' => 'Field Architect',
+                'code' => 'FIELD_ARCHITECT',
                 'description' => 'You have moved beyond personal integration into systemic transformation. Your polymathy is not just a configuration of skills; it is a force that redesigns the territories it touches. You create new fields by merging old ones, new methods by combining existing ones, new possibilities by seeing what others cannot yet see. The architect in you does not just inhabit systems; you redesign them. This is rare. This is not a goal for everyone. But for you, it is the natural outcome of a lifetime of building bridges that others did not know were needed.',
                 'breadth' => '90%    Your range is extensive and strategic. You know which domains to enter, when to enter them, and how they will serve the larger system you are designing. The breadth is not accumulation; it is architecture.',
                 'depth' => '91%   You have gone deep in multiple areas, deep enough to generate not just capability but authority. The depth is concentrated at the intersections, where it creates force that single-domain expertise cannot match.',
@@ -384,132 +388,4 @@ class ResultTypeSeeder extends Seeder
         ];
     }
 
-    /**
-     * @return array<int, array{
-     *     name: string,
-     *     code: string,
-     *     description: string,
-     *     breadth: string,
-     *     depth: string,
-     *     integration: string,
-     *     output: string,
-     *     recognition: string,
-     *     parent_code: string,
-     *     base_color: string,
-     *     accent_color: string
-     * }>
-     */
-    private function spreadsheetRows(): array
-    {
-        $path = base_path(self::SourceWorkbook);
-
-        if (! is_file($path)) {
-            return [];
-        }
-
-        $zip = new ZipArchive();
-
-        if ($zip->open($path) !== true) {
-            throw new RuntimeException('Unable to open result type workbook.');
-        }
-
-        $sharedStrings = $this->sharedStringsFrom($zip);
-        $sheetXml = $zip->getFromName(self::ResultTypeSheet);
-
-        if ($sheetXml === false) {
-            throw new RuntimeException('Unable to find the result type sheet in the workbook.');
-        }
-
-        $sheet = simplexml_load_string($sheetXml);
-
-        if ($sheet === false) {
-            throw new RuntimeException('Unable to parse the result type sheet.');
-        }
-
-        $rows = [];
-
-        foreach ($sheet->sheetData->row as $sheetRow) {
-            $cells = $this->cellsFrom($sheetRow, $sharedStrings);
-            $name = trim($cells['A'] ?? '');
-
-            if ($name === '' || strcasecmp($name, 'Branch') === 0) {
-                continue;
-            }
-
-            $rows[] = [
-                'name' => $name,
-                'code' => trim($cells['B'] ?? ''),
-                'description' => trim($cells['C'] ?? ''),
-                'breadth' => trim($cells['D'] ?? ''),
-                'depth' => trim($cells['E'] ?? ''),
-                'integration' => trim($cells['F'] ?? ''),
-                'output' => trim($cells['G'] ?? ''),
-                'recognition' => trim($cells['H'] ?? ''),
-                'parent_code' => trim($cells['I'] ?? ''),
-                'base_color' => trim($cells['K'] ?? ''),
-                'accent_color' => trim($cells['L'] ?? ($cells['K'] ?? '')),
-            ];
-        }
-
-        return $rows;
-    }
-
-    /**
-     * @return array<int, string>
-     */
-    private function sharedStringsFrom(ZipArchive $zip): array
-    {
-        $xml = $zip->getFromName('xl/sharedStrings.xml');
-
-        if ($xml === false) {
-            return [];
-        }
-
-        $sharedStrings = simplexml_load_string($xml);
-
-        if ($sharedStrings === false) {
-            throw new RuntimeException('Unable to parse workbook shared strings.');
-        }
-
-        $values = [];
-
-        foreach ($sharedStrings->si as $sharedString) {
-            $parts = [];
-
-            if (isset($sharedString->t)) {
-                $parts[] = (string) $sharedString->t;
-            }
-
-            foreach ($sharedString->r as $run) {
-                $parts[] = (string) $run->t;
-            }
-
-            $values[] = implode('', $parts);
-        }
-
-        return $values;
-    }
-
-    /**
-     * @param  array<int, string>  $sharedStrings
-     * @return array<string, string>
-     */
-    private function cellsFrom(mixed $sheetRow, array $sharedStrings): array
-    {
-        $cells = [];
-
-        foreach ($sheetRow->c as $cell) {
-            $reference = (string) $cell['r'];
-            $column = preg_replace('/[0-9]/', '', $reference) ?? '';
-            $value = (string) $cell->v;
-
-            if ((string) $cell['t'] === 's') {
-                $value = $sharedStrings[(int) $value] ?? $value;
-            }
-
-            $cells[$column] = $value;
-        }
-
-        return $cells;
-    }
 }

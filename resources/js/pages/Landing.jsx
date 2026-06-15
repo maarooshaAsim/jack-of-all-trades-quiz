@@ -13,7 +13,7 @@ export function Landing() {
           className="pointer-events-none absolute inset-0 bg-cover bg-no-repeat "
           style={{
             backgroundImage: `url(${landingStarsPath})`,
-            backgroundPosition: 'center 18rem',
+            backgroundPosition: 'center 14.8rem',
             backgroundSize: '34rem auto',
           }}
         />

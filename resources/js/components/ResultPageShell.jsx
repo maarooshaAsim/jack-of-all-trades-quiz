@@ -2,12 +2,13 @@ import React from 'react'
 import { Logo } from './Logo.jsx'
 import { Shell } from './Shell.jsx'
 import { landingStarsPath } from '../config/assets.js'
+import { resultBoxWidthClass } from '../config/resultLayout.js'
 
 export function ResultPageShell({
   children,
   shellRef = null,
   showLogo = true,
-  contentClassName = 'max-w-[410px]',
+  contentClassName = resultBoxWidthClass,
 }) {
   return (
     <Shell tone="bg-white" fullBleed>
