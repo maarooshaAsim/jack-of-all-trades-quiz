@@ -5,7 +5,7 @@ export function ResultGraph({ graphPath, alt = '', size = 'compact' }) {
   const isLarge = size === 'large'
 
   return (
-    <div className={`relative mx-auto aspect-[1.18] max-w-full ${isLarge ? 'w-[17.75rem] min-[390px]:w-[20rem]' : 'w-[12.8rem] min-[380px]:w-[13.9rem]'}`}>
+    <div className={`relative mx-auto aspect-[1.18] max-w-full w-[17.75rem] min-[390px]:w-[20rem]`}>
       <span className="absolute left-1/2 top-0 z-20 -translate-x-1/2 text-[0.62rem] font-black text-white min-[380px]:text-[0.7rem]">
         Breadth
       </span>

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { ArrowIcon } from '../components/ArrowIcon.jsx'
 import { DecorativeStar } from '../components/DecorativeStar.jsx'
+import { HistoryBackButton } from '../components/HistoryBackButton.jsx'
 import { ResultGraph } from '../components/ResultGraph.jsx'
 import { ResultPageShell } from '../components/ResultPageShell.jsx'
 import { useResultType } from '../hooks/useResultTypes.js'
@@ -49,106 +49,98 @@ export function ResultTypeDetailContent({
   const isResult = variant === 'result'
 
   return (
-    <div className="mt-2 w-full pb-10" style={{ color: resultType.accent_color }}>
+
+        <div className="mt-5 flex w-full flex-col items-center gap-10 pb-10" style={{ color: resultType.accent_color }}>
             {showBackLink ? (
-              <div className="mb-14 flex w-full justify-start">
-                <Link
-                  to="/explore/types"
-                  className="joat-button-motion inline-flex items-center"
-                  aria-label="Back to result types"
-                >
-                  <ArrowIcon
-                    direction="back"
-                    color="#1d1d1f"
-                    className="h-[2.35rem] w-[4.25rem]"
-                  />
-                </Link>
-              </div>
+                 <div className="mt-7 mb-5 flex w-full justify-start">
+                        <HistoryBackButton />
+                      </div>
+            
             ) : (
               <div className="my-20 flex w-full justify-start">
                 </div>
             )}
 
-      <section
-        className={`relative mx-auto flex aspect-square w-full flex-col items-center justify-center rounded-[14px] text-center text-white shadow-[0_7px_12px_rgba(0,0,0,0.22)] max-w-[292px] px-5 pb-5 pt-6 min-[390px]:max-w-[320px]`}
-        style={{ backgroundColor: resultType.base_color }}
-      >
-        <DecorativeStar color={resultType.base_color} className="-left-8 -top-10" />
-        <DecorativeStar color={resultType.base_color} className="-right-8 -top-10" />
+               <div
+                    className="relative rounded-[14px] px-5 pb-5 pt-5 text-center shadow-[0_7px_12px_rgba(0,0,0,0.22)] min-[390px]:max-w-[320px]"
+                    style={{ backgroundColor: resultType.base_color }}
+                  >
+                                <DecorativeStar color={resultType.base_color} className="-left-8 -top-9" />
+                                <DecorativeStar color={resultType.base_color} className="-right-8 -top-9" />
+              
+                                <h1 className="text-[1.05rem] font-black uppercase leading-none text-white min-[390px]:text-[1.2rem]">
+                                  {resultType.name}
+                                </h1>
+              
+                                <div className="mt-5 w-full">
+                                  <ResultGraph graphPath={resultType.graph_path} />
+                                </div>
+                  </div>
+            {quizResult ? (
+              <section className={`mx-auto w-full text-left mt-6 max-w-[292px] min-[390px]:max-w-[320px]`}>
+                {quizResult.participant ? (
+                  <div className="rounded-[0.9rem] bg-white px-4 py-4 text-left shadow-[0_4px_8px_rgba(0,0,0,0.12)]">
+                    <p className="text-center text-[0.68rem] font-black uppercase tracking-[0.16em]">Quiz Taker</p>
+                    <p className="mt-2 text-center text-[1.15rem] font-black leading-none text-[#1d1d1f]">
+                      {quizResult.participant.name}
+                    </p>
+                    <p className="mt-2 text-center text-[0.9rem] font-semibold text-[#1d1d1f]/70">
+                      Age {quizResult.participant.age}
+                    </p>
+                  </div>
+                ) : null}
+              </section>
+            ) : null}
 
-        <h1 className="text-[1.05rem] font-black uppercase leading-none text-white min-[390px]:text-[1.2rem]">
-          {resultType.name}
-        </h1>
-
-        <div className={`mt-5 w-full`}>
-          <ResultGraph graphPath={resultType.graph_path} />
-        </div>
-      </section>
-      {quizResult ? (
-        <section className={`mx-auto w-full text-left mt-6 max-w-[292px] min-[390px]:max-w-[320px]`}>
-          {quizResult.participant ? (
-            <div className="rounded-[0.9rem] bg-white px-4 py-4 text-left shadow-[0_4px_8px_rgba(0,0,0,0.12)]">
-              <p className="text-center text-[0.68rem] font-black uppercase tracking-[0.16em]">Quiz Taker</p>
-              <p className="mt-2 text-center text-[1.15rem] font-black leading-none text-[#1d1d1f]">
-                {quizResult.participant.name}
-              </p>
-              <p className="mt-2 text-center text-[0.9rem] font-semibold text-[#1d1d1f]/70">
-                Age {quizResult.participant.age}
-              </p>
-            </div>
-          ) : null}
-        </section>
-      ) : null}
-
-      <section className="mt-7 space-y-3 text-left">
-        <h2 className={`text-center text-[1.38rem] font-black leading-none min-[390px]:text-[1.75rem]`}>Your Profile</h2>
-        <div
-          className={` text-justify mx-auto w-full items-center rounded-[1rem] text-white shadow-[0_4px_8px_rgba(0,0,0,0.2)] min-h-[220px] max-w-[292px] px-4 py-5 text-[0.9rem] leading-6 min-[380px]:text-[0.96rem] min-[380px]:leading-7 min-[390px]:max-w-[320px]`}
-          style={{ backgroundColor: resultType.accent_color }}
-        >
-          {resultType.description}
-        </div>
-      </section>
-
-      <section className={`mx-auto mt-7 grid w-full grid-cols-2 justify-items-center gap-3 max-w-[292px] min-[390px]:max-w-[320px]`}>
-        {dimensions.map((dimension) => (
-          <PercentCard
-            key={dimension.key}
-            label={dimension.label}
-            value={resultType[dimension.key].percentage}
-            variant={variant}
-          />
-        ))}
-      </section>
-
-      <div className={`mt-9 space-y-8`}>
-        {dimensions.map((dimension) => (
-          <CopyBlock key={dimension.key} title={dimension.label} variant={variant}>
-            {resultType[dimension.key].description}
-          </CopyBlock>
-        ))}
-      </div>
-
-      {showBranches && resultType.branches.length > 0 ? (
-        <section className="mx-auto mt-9 max-w-[292px] space-y-4 text-left min-[390px]:max-w-[320px]">
-          <h2 className="text-center text-[1.55rem] font-black uppercase leading-none">Branches</h2>
-          <div className="space-y-4">
-            {resultType.branches.map((branch) => (
-              <Link
-                key={branch.slug}
-                to={`/explore/types/${branch.slug}`}
-                className="joat-button-motion block min-h-16 rounded-[0.9rem] px-4 py-5 text-center text-lg font-black uppercase leading-tight text-white shadow-[0_4px_8px_rgba(0,0,0,0.2)]"
-                style={{ backgroundColor: resultType.base_color }}
+            <section className="mt-7 space-y-3 text-left">
+              <h2 className={`text-center text-[1.38rem] font-black leading-none min-[390px]:text-[1.75rem]`}>Your Profile</h2>
+              <div
+                className={` text-justify mx-auto w-full items-center rounded-[1rem] text-white shadow-[0_4px_8px_rgba(0,0,0,0.2)] min-h-[220px] max-w-[292px] px-4 py-5 text-[0.9rem] leading-6 min-[380px]:text-[0.96rem] min-[380px]:leading-7 min-[390px]:max-w-[320px]`}
+                style={{ backgroundColor: resultType.accent_color }}
               >
-                {branch.name}
-              </Link>
-            ))}
-          </div>
-        </section>
-      ) : null}
+                {resultType.description}
+              </div>
+            </section>
 
-      {actions ? <div className="mx-auto mt-9 max-w-[449px]">{actions}</div> : null}
-    </div>
+            <section className={`mx-auto mt-7 grid w-full grid-cols-2 justify-items-center gap-3 max-w-[292px] min-[390px]:max-w-[320px]`}>
+              {dimensions.map((dimension) => (
+                <PercentCard
+                  key={dimension.key}
+                  label={dimension.label}
+                  value={resultType[dimension.key].percentage}
+                  variant={variant}
+                />
+              ))}
+            </section>
+
+            <div className={`mt-9 space-y-8`}>
+              {dimensions.map((dimension) => (
+                <CopyBlock key={dimension.key} title={dimension.label} variant={variant}>
+                  {resultType[dimension.key].description}
+                </CopyBlock>
+              ))}
+            </div>
+
+            {showBranches && resultType.branches.length > 0 ? (
+              <section className="mx-auto mt-9 max-w-[292px] space-y-4 text-left min-[390px]:max-w-[320px]">
+                <h2 className="text-center text-[1.55rem] font-black uppercase leading-none">Branches</h2>
+                <div className="space-y-4">
+                  {resultType.branches.map((branch) => (
+                    <Link
+                      key={branch.slug}
+                      to={`/explore/types/${branch.slug}`}
+                      className="joat-button-motion block min-h-16 rounded-[0.9rem] px-4 py-5 text-center text-lg font-black uppercase leading-tight text-white shadow-[0_4px_8px_rgba(0,0,0,0.2)]"
+                      style={{ backgroundColor: resultType.base_color }}
+                    >
+                      {branch.name}
+                    </Link>
+                  ))}
+                </div>
+              </section>
+            ) : null}
+
+            {actions ? <div className="mx-auto mt-9 max-w-[449px]">{actions}</div> : null}
+            </div>
   )
 }
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowIcon } from '../components/ArrowIcon.jsx'
 import { DecorativeStar } from '../components/DecorativeStar.jsx'
+import { HistoryBackButton } from '../components/HistoryBackButton.jsx'
 import { ResultGraph } from '../components/ResultGraph.jsx'
 import { ResultPageShell } from '../components/ResultPageShell.jsx'
 import { useResultTypes } from '../hooks/useResultTypes.js'
@@ -11,18 +11,8 @@ export function ExploreTypes() {
 
   return (
         <ResultPageShell>
-          <div className="mt-7 mb-7 flex w-full justify-start">
-            <Link
-              to="/"
-              className="joat-button-motion inline-flex items-center"
-              aria-label="Back to home"
-            >
-              <ArrowIcon
-                direction="back"
-                color="#1d1d1f"
-                className="h-[2.35rem] w-[4.25rem]"
-              />
-            </Link>
+          <div className="my-7 flex w-full justify-start">
+            <HistoryBackButton />
           </div>
 
           <div className="mt-7 flex w-full flex-col items-center gap-10 pb-10">
@@ -37,8 +27,8 @@ export function ExploreTypes() {
                   className="relative rounded-[14px] my-5 px-5 pb-5 pt-6 text-center shadow-[0_7px_12px_rgba(0,0,0,0.22)]"
                   style={{ backgroundColor: resultType.base_color }}
                 >
-                  <DecorativeStar color={resultType.base_color} className="-left-8 -top-10" />
-                  <DecorativeStar color={resultType.base_color} className="-right-8 -top-10" />
+                  <DecorativeStar color={resultType.base_color} className="-left-8 -top-9" />
+                  <DecorativeStar color={resultType.base_color} className="-right-8 -top-9" />
 
                   <h1 className="text-[1.05rem] font-black uppercase leading-none text-white min-[390px]:text-[1.2rem]">
                     {resultType.name}
