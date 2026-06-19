@@ -43,7 +43,7 @@ export function ParticipantInfo() {
 
   return (
         <Shell tone="bg-white" fullBleed>
-          <section className="joat-artboard relative flex h-[100svh] flex-1 flex-col items-center overflow-hidden bg-white px-4 py-4 text-center font-['Outfit']">
+          <section className="joat-artboard joat-fixed-screen relative flex flex-col items-center overflow-hidden bg-white px-4 py-4 text-center font-['Outfit']">
             <div
               className="pointer-events-none absolute inset-0 bg-cover bg-no-repeat opacity-[0.82]"
               style={{

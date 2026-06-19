@@ -59,8 +59,8 @@ export function ResultTypeDetailContent({
                     className={`group relative mx-auto rounded-[14px] px-5 pb-5 pt-5 text-center shadow-[0_7px_12px_rgba(0,0,0,0.22)] ${resultBoxWidthClass}`}
                     style={{ backgroundColor: resultType.base_color }}
                   >
-                                <DecorativeStar color={resultType.base_color} className="-left-8 -top-8" />
-                                <DecorativeStar color={resultType.base_color} className="-right-8 -top-8" />
+                                <DecorativeStar color={resultType.base_color} className="-left-7 -top-8" />
+                                <DecorativeStar color={resultType.base_color} className="-right-7 -top-8" />
               
                                 <h1 className="text-[1.05rem] font-black uppercase leading-none text-white min-[390px]:text-[1.2rem]">
                                   {resultType.name}

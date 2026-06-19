@@ -157,6 +157,14 @@ class ResultTypeSeeder extends Seeder
     {
         return match ($code) {
             'ASSIGNED_SPEICALIST' => 'ASSIGNED_SPECIALIST',
+            'OPERATIONAL_GENERALIST' => 'SETTLING_GENERALIST',
+            'CROSS_DOMAIN_LEARNER' => 'SUPPRESSED_EXPLORER',
+            'MULTIDISCIPLINARY_STRATEGIST' => 'CONTAINED_POLYMATH',
+            'ITERATIVE_DESIGNER' => 'PERFECTIONIST_DROPPER',
+            'RESEARCH_SYNTHESIST' => 'PASSIVE_ACCUMULATOR',
+            'CREATIVE_EXPLORER' => 'DRIFTING_ASPIRANT',
+            'RESOURCE_SYNTHESIZER' => 'SURVIVAL_SYNTHESIZER',
+            'FIELD_ARCHITECT' => 'SYSTEMS_ARCHITECT',
             'active_syntehesizer' => 'active_synthesizer',
             'integrated_architect' => 'integrated_acrchitect',
             default => $code,

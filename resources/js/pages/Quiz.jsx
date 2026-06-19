@@ -148,7 +148,7 @@ export function Quiz() {
   return (
     <Shell tone="" backgroundColor={category.color} fullBleed>    
         <section
-          className="joat-artboard relative min-h-[100svh] overflow-x-hidden px-3 py-3 pb-[max(1.5rem,env(safe-area-inset-bottom))] min-[380px]:px-5 min-[380px]:py-4 min-[380px]:pb-[max(2rem,env(safe-area-inset-bottom))]"
+          className="joat-artboard joat-fixed-screen joat-scroll-screen relative min-h-[100svh] overflow-x-hidden px-3 py-3 pb-[max(1.5rem,env(safe-area-inset-bottom))] min-[380px]:px-5 min-[380px]:py-4 min-[380px]:pb-[max(2rem,env(safe-area-inset-bottom))]"
           style={{ backgroundColor: category.color }}
         >
             <div
@@ -164,7 +164,7 @@ export function Quiz() {
           }}
         />
 
-        <div className="relative z-10 flex min-h-[calc(100svh-1.5rem)] flex-col items-center pb-4 min-[380px]:pb-6">
+        <div className="relative z-10 flex min-h-[calc(100svh-1.5rem)] flex-col items-center pb-4 min-[380px]:pb-6 min-[700px]:min-h-full">
           <div className="mt-4 flex w-full shrink-0 justify-center min-[390px]:mt-6 min-[850px]:mt-8">
             <Logo variant="light" className="max-w-[14.75rem] min-[390px]:max-w-[16.5rem] min-[850px]:max-w-[18rem]" />
           </div>

@@ -60,6 +60,7 @@ function LoadedResult({ result }) {
     try {
       await downloadElementAsJpeg(captureRef.current, `joat-${branchSlug}-result.jpeg`)
     } catch (error) {
+      console.error('Result download failed', error)
       setDownloadError('Could not prepare the result image. Please try again.')
     } finally {
       setIsDownloading(false)

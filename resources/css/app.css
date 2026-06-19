@@ -34,6 +34,22 @@ body {
     margin-inline: auto;
 }
 
+.joat-fixed-screen {
+    min-height: 100svh;
+}
+
+@media (min-width: 700px) and (min-height: 960px) {
+    .joat-fixed-screen {
+        height: min(920px, calc(100svh - 2rem));
+        min-height: min(920px, calc(100svh - 2rem));
+        margin-block: auto;
+    }
+
+    .joat-scroll-screen {
+        overflow-y: auto;
+    }
+}
+
 .joat-button-motion {
     transform: translateZ(0);
     transition:
