@@ -42,24 +42,36 @@ export function ParticipantInfo() {
   }
 
   return (
-        <Shell tone="bg-white" fullBleed>
-          <section className="joat-artboard joat-fixed-screen relative flex flex-col items-center overflow-hidden bg-white px-4 py-4 text-center font-['Outfit']">
-            <div
-              className="pointer-events-none absolute inset-0 bg-cover bg-no-repeat opacity-[0.82]"
-              style={{
-                backgroundImage: `url(${landingStarsPath})`,
-                backgroundPosition: 'center 14.8rem',
-                backgroundSize: '34rem auto',
-              }}
-            />
-    
-            <div className="relative z-10 mt-7 flex w-full justify-center min-[390px]:mt-9">
-              <Logo className="max-w-[15rem] min-[390px]:max-w-[17rem]" />
+       <Shell tone="bg-white" fullBleed>
+         <section
+           id="bg"
+           ref={null}
+           className="joat-artboard  relative flex h-[100svh] flex-1 flex-col items-center overflow-hidden bg-white px-4 py-4 text-center font-['Outfit']"
+         >
+           {/* Same stars as landing, but repeat vertically for scroll pages */}
+           <div
+             className="pointer-events-none absolute inset-0 bg-[length:25rem_auto] md:bg-[length:32rem_auto] xl:bg-[length:34rem_auto]"
+             style={{
+               backgroundImage: `url(${landingStarsPath})`,
+               backgroundPosition: 'center 14.8rem',
+               // backgroundSize: '25rem auto',
+             }}
+           />
+   
+           <div
+             className="pointer-events-none absolute inset-x-0 top-0 z-[1] h-[18.3rem] bg-white"
+           />
+   
+        
+           <div className={`relative z-10 flex w-full flex-col items-center`}>
+               <div className="mt-7 flex w-full justify-center min-[390px]:mt-9">
+                 <Logo className="max-w-[30rem] min-[690px]:max-w-[27rem]" />
+               </div>
             </div>
-    
+
             <div className="relative z-10 flex min-h-0 flex-1 flex-col items-center justify-center pb-5 pt-4">
               <div
-                className="pointer-events-none absolute left-1/2 top-[45%] -z-10 h-[24rem] w-[27rem] -translate-x-1/2 -translate-y-1/2 rounded-[999px] blur-2xl"
+                className="pointer-events-none absolute left-1/2 top-[45%] -z-10 h-[24rem] md:h-[48rem] w-[27rem] md:w-[47rem] -translate-x-1/2 -translate-y-1/2 rounded-[999px] blur-2xl"
                 style={{
                   background:
                     'radial-gradient(ellipse at center, rgba(255,255,255,1) 0%, rgba(255,255,255,.98) 34%, rgba(255,255,255,.9) 55%, rgba(255,255,255,.58) 73%, rgba(255,255,255,.16) 90%, rgba(255,255,255,0) 100%)',

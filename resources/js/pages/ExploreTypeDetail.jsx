@@ -47,7 +47,7 @@ export function ResultTypeDetailContent({
 
         <div className="flex w-full flex-col items-center gap-10 pb-10" style={{ color: resultType.accent_color }}>
             {showBackLink ? (
-                 <div className="mt-7 mb-5 flex w-full justify-start">
+                 <div className="mt-7 mb-5 flex w-full justify-center">
                         <HistoryBackButton />
                       </div>
             

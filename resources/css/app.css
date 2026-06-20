@@ -30,9 +30,15 @@ body {
 }
 
 .joat-artboard {
-    width: min(100vw, 488px);
+    width: min(100vw);
     margin-inline: auto;
 }
+/* 
+@media (orientation: portrait) {
+    .joat-artboard {
+        width: clamp(488px, 70vw, 720px);
+    }
+} */
 
 .joat-fixed-screen {
     min-height: 100svh;

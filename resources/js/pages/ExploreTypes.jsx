@@ -12,7 +12,7 @@ export function ExploreTypes() {
 
   return (
         <ResultPageShell>
-          <div className="my-7 flex w-full justify-start">
+          <div className="my-7 flex w-full justify-center-safe">
             <HistoryBackButton />
           </div>
 

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 export function Logo({ variant = 'dark', className = '' }) {
   return (
-    <Link to="/" className={`inline-flex w-full max-w-[17rem] justify-center ${className}`}>
+    <Link to="/" className={`inline-flex w-full max-w-[27rem] justify-center ${className}`}>
       <img
         src={variant === 'light' ? logoLightPath : logoDarkPath}
         alt="Jack of All Trades"

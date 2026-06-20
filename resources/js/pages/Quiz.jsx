@@ -146,31 +146,34 @@ export function Quiz() {
   }
 
   return (
-    <Shell tone="" backgroundColor={category.color} fullBleed>    
-        <section
-          className="joat-artboard joat-fixed-screen joat-scroll-screen relative min-h-[100svh] overflow-x-hidden px-3 py-3 pb-[max(1.5rem,env(safe-area-inset-bottom))] min-[380px]:px-5 min-[380px]:py-4 min-[380px]:pb-[max(2rem,env(safe-area-inset-bottom))]"
-          style={{ backgroundColor: category.color }}
-        >
+          <Shell tone="" backgroundColor={category.color} fullBleed>
+            <section
+              id="bg"
+              ref={null}
+              className="joat-artboard  relative flex h-[100svh] flex-1 flex-col items-center overflow-hidden px-4 py-4 text-center font-['Outfit']"
+              style={{ backgroundColor: category.color }}
+            >
+     
+            {/* Same stars as landing, but repeat vertically for scroll pages */}
             <div
-          className="pointer-events-none absolute inset-0 bg-center bg-y-repeat opacity-[0.9] bg-[length:25rem_auto] md:bg-[length:32rem_auto] xl:bg-[length:34rem_auto]"
-          style={{
-            backgroundImage: `url(${questionStarsPath})`,
-            backgroundPosition: 'center 20rem',
-          }}
-        />
-                <div
-          className="pointer-events-none absolute inset-x-0 top-0 z-[1] h-[20rem]" style={{
-            backgroundColor: category.color
-          }}
-        />
-
-        <div className="relative z-10 flex min-h-[calc(100svh-1.5rem)] flex-col items-center pb-4 min-[380px]:pb-6 min-[700px]:min-h-full">
-          <div className="mt-4 flex w-full shrink-0 justify-center min-[390px]:mt-6 min-[850px]:mt-8">
-            <Logo variant="light" className="max-w-[14.75rem] min-[390px]:max-w-[16.5rem] min-[850px]:max-w-[18rem]" />
+              className="pointer-events-none absolute inset-0 bg-[length:25rem_auto] md:bg-[length:32rem_auto] xl:bg-[length:34rem_auto]"
+              style={{
+                backgroundImage: `url(${questionStarsPath})`,
+                backgroundPosition: 'center 14.8rem',
+                // backgroundSize: '25rem auto',
+              }}
+            />
+    
+            <div className="pointer-events-none absolute inset-x-0 top-0 z-[1] h-[20rem] " style={{ backgroundColor: category.color }}/>
+    
+          <div className={`relative z-10 flex w-full flex-col items-center`}>
+                     <div className="mt-7 flex w-full justify-center min-[390px]:mt-9">
+                       <Logo variant='light' className="max-w-[30rem] min-[690px]:max-w-[27rem]" />
+                     </div>
           </div>
 
-          <div className="mx-auto mt-3 w-full max-w-[21rem] shrink-0 px-1 min-[380px]:mt-4 min-[850px]:mt-5">
-            <div className="h-[0.38rem] overflow-hidden rounded-full bg-white/65 shadow-[inset_0_1px_2px_rgba(0,0,0,0.08)]">
+          <div className="mx-auto mt-3 w-full max-w-[21rem] shrink-0 px-1 min-[680px]:mt-4 min-[1650px]:mt-5">
+            <div className="h-[0.38rem] md:h-[.68rem] overflow-hidden rounded-full bg-white/65 shadow-[inset_0_1px_2px_rgba(0,0,0,0.08)]">
               <div
                 className="h-full rounded-full transition-all duration-300"
                 style={{
@@ -181,14 +184,14 @@ export function Quiz() {
             </div>
           </div>
 
-          <div className="mx-auto mt-[clamp(1rem,4svh,3.5rem)] w-full max-w-[21rem] shrink-0 pb-2 min-[380px]:max-w-[23rem] min-[380px]:pb-3 min-[850px]:mt-[clamp(1.75rem,6svh,4rem)]">
+          <div className=" mx-auto mt-[clamp(1rem,4svh,3.5rem)] w-full max-w-[41rem] shrink-0 pb-2 min-[380px]:max-w-[23rem] min-[380px]:pb-3 min-[850px]:mt-[clamp(1.75rem,6svh,4rem)]">
               <p
                 className="relative z-20 pb-1.5 text-center font-['Outfit'] text-[0.96rem] font-bold uppercase leading-tight text-[#EDECEC] min-[380px]:pb-2 min-[380px]:text-[1.25rem] min-[850px]:text-[1.40rem]"
               >
                 {category.label}
               </p>
             <div
-              className="relative z-10 rounded-[1.05rem] px-2 py-2 shadow-[0_16px_32px_rgba(0,0,0,0.2)] min-[380px]:px-2.5 min-[380px]:py-2.5 min-[850px]:py-3"
+              className=" xl:top-[10rem] relative z-10 rounded-[1.05rem] px-2 py-2 shadow-[0_16px_32px_rgba(0,0,0,0.2)] min-[380px]:px-2.5 min-[380px]:py-2.5 min-[850px]:py-3"
               style={{ backgroundColor: theme.card }}
             >
               <h1 className="px-2 pb-2 pt-1 text-center font-['Outfit'] text-[0.78rem] leading-[1.22] text-white min-[380px]:pb-2.5 min-[380px]:pt-1.5 min-[380px]:text-[0.92rem] min-[850px]:pb-3 min-[850px]:pt-2 min-[850px]:text-[0.98rem]">
@@ -232,7 +235,6 @@ export function Quiz() {
           </div>
 
 
-        </div>
       </section>
     </Shell>
   )
