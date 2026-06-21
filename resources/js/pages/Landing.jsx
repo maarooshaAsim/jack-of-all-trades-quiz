@@ -8,14 +8,13 @@ import { beginButtonImage } from '../config/assets.js'
 
 export function Landing({
     shellRef = null,
-    showLogo = true,
 }) {
   return (
       <Shell tone="bg-white" fullBleed>
       <section
         id="bg"
         ref={shellRef}
-        className="joat-artboard  relative flex h-[100svh] flex-1 flex-col items-center overflow-hidden bg-white px-4 py-4 text-center font-['Outfit']"
+        className="joat-artboard relative flex h-[100svh] flex-col items-center justify-center overflow-hidden bg-white px-4 py-4 text-center font-['Outfit']"
       >
         {/* Same stars as landing, but repeat vertically for scroll pages */}
         <div
@@ -31,16 +30,11 @@ export function Landing({
           className="pointer-events-none absolute inset-x-0 top-0 z-[1] h-[18.3rem] bg-white"
         />
 
-     
-        <div className={`relative z-10 flex w-full flex-col items-center`}>
-          {showLogo ? (
-            <div className="mt-7 flex w-full justify-center min-[390px]:mt-9">
-              <Logo className="max-w-[30rem] min-[690px]:max-w-[27rem]" />
+          <div className="absolute left-0 right-0 top-7 z-20 flex w-full justify-center min-[390px]:top-9">
+                <Logo className="max-w-[30rem] min-[690px]:max-w-[27rem]" />
             </div>
-          ) : null}
-
-          <div id="position-box" 
-            className="absolute left-1/2 top-1/2 z-10 flex w-full -translate-x-1/2 -translate-y-1/2 flex-col items-center">
+    
+          <div id="position-box"   className="relative z-10 flex w-full flex-col items-center">
               <div className="w-full max-w-[620px] rounded-[3rem] bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.98)_0%,rgba(255,255,255,0.98)_43%,rgba(255,255,255,0.9)_63%,rgba(255,255,255,0.62)_82%,rgba(255,255,255,0)_100%)] px-7 py-8 min-[690px]:max-w-[640px] min-[690px]:py-9">
                 <h1 className="text-center text-[1.4rem] font-bold leading-tight text-black min-[690px]:text-[2rem]">
                   THE POLYMATH TYPE QUIZ
@@ -85,7 +79,6 @@ export function Landing({
                 </Link>
               </div>
             </div>
-        </div>
       </section>
     </Shell>
   )

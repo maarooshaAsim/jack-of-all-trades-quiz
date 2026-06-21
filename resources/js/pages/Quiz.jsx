@@ -150,7 +150,7 @@ export function Quiz() {
             <section
               id="bg"
               ref={null}
-              className="joat-artboard relative flex h-[100svh] flex-1 flex-col items-center overflow-hidden px-4 py-4 text-center font-['Outfit']"
+              className="joat-artboard relative flex h-[100svh] flex-col items-center justify-center overflow-hidden bg-white px-4 py-4 text-center font-['Outfit']"
               style={{ backgroundColor: category.color }}
             >
      
@@ -165,15 +165,13 @@ export function Quiz() {
             />
     
             <div className="pointer-events-none absolute inset-x-0 top-0 z-[1] h-[18.3rem] " style={{ backgroundColor: category.color }}/>
-            <div className="relative z-10 flex w-full flex-col items-center">
-                <div className="mt-7 flex w-full justify-center min-[390px]:mt-9">
-                  <Logo variant="light" className="max-w-[30rem] min-[690px]:max-w-[27rem]" />
-                </div>
-            </div>
-
+              <div className="absolute left-0 right-0 top-7 z-20 flex w-full justify-center min-[390px]:top-9">
+                      <Logo variant='light' className="max-w-[30rem] min-[690px]:max-w-[27rem]" />
+                  </div>
           
-            <div className="relative z-10 flex min-h-screen flex-col items-center md:top-[27rem] top-[10rem]">
-                    <div className="w-full max-w-[620px] rounded-[3rem] px-7 py-8 min-[690px]:max-w-[640px] min-[690px]:py-9" style={{backgroundColor:category.color}}>
+          
+              <div id="position-box"     className="relative z-10 flex w-full translate-y-6 flex-col items-center landscape:translate-y-12">
+                    <div className="w-full max-w-[620px] rounded-[3rem] px-3 py-3 min-[690px]:max-w-[640px] min-[690px]:py-9" style={{backgroundColor:category.color}}>
             
                    
                     <div className="joat-quiz-progress mx-auto my-3 w-full max-w-[21rem] shrink-0 px-1 min-[680px]:my-4 min-[1650px]:my-5">

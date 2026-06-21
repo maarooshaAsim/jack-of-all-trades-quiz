@@ -46,7 +46,7 @@ export function ParticipantInfo() {
          <section
            id="bg"
            ref={null}
-           className="joat-artboard  relative flex h-[100svh] flex-1 flex-col items-center overflow-hidden bg-white px-4 py-4 text-center font-['Outfit']"
+            className="joat-artboard relative flex h-[100svh] flex-col items-center justify-center overflow-hidden bg-white px-4 py-4 text-center font-['Outfit']"
          >
            {/* Same stars as landing, but repeat vertically for scroll pages */}
            <div
@@ -63,13 +63,11 @@ export function ParticipantInfo() {
            />
    
         
-           <div className={`relative z-10 flex w-full flex-col items-center`}>
-               <div className="mt-7 flex w-full justify-center min-[390px]:mt-9">
-                 <Logo className="max-w-[30rem] min-[690px]:max-w-[27rem]" />
-               </div>
+            <div className="absolute left-0 right-0 top-7 z-20 flex w-full justify-center min-[390px]:top-9">
+                <Logo className="max-w-[30rem] min-[690px]:max-w-[27rem]" />
             </div>
-
-            <div className="relative z-10 flex min-h-0 flex-1 flex-col items-center justify-center pb-5 pt-4">
+    
+          <div id="position-box"   className="relative z-10 flex w-full flex-col items-center">
               <div
                 className="pointer-events-none absolute left-1/2 top-[45%] -z-10 h-[24rem] md:h-[48rem] w-[27rem] md:w-[47rem] -translate-x-1/2 -translate-y-1/2 rounded-[999px] blur-2xl"
                 style={{
