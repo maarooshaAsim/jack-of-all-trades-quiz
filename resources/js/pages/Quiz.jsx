@@ -170,8 +170,8 @@ export function Quiz() {
                   </div>
           
           
-              <div id="position-box"     className="relative z-10 flex w-full translate-y-6 flex-col items-center landscape:translate-y-12">
-                    <div className="w-full max-w-[620px] rounded-[3rem] px-3 py-3 min-[690px]:max-w-[640px] min-[690px]:py-9" style={{backgroundColor:category.color}}>
+              <div id="position-box"      className="relative z-10 flex w-full translate-y-[4.5rem] flex-col items-center landscape:translate-y-[6rem]">
+                    <div className="w-full max-w-[520px] rounded-[3rem] px-3 py-3 min-[690px]:max-w-[680px] min-[690px]:py-9" style={{backgroundColor:category.color}}>
             
                    
                     <div className="joat-quiz-progress mx-auto my-3 w-full max-w-[21rem] shrink-0 px-1 min-[680px]:my-4 min-[1650px]:my-5">

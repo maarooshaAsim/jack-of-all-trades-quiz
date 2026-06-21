@@ -34,7 +34,7 @@ export function Landing({
                 <Logo className="max-w-[30rem] min-[690px]:max-w-[27rem]" />
             </div>
     
-          <div id="position-box"   className="relative z-10 flex w-full flex-col items-center">
+          <div id="position-box"   className="relative z-10 flex w-full flex-col items-center landscape:translate-y-12">
               <div className="w-full max-w-[620px] rounded-[3rem] bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.98)_0%,rgba(255,255,255,0.98)_43%,rgba(255,255,255,0.9)_63%,rgba(255,255,255,0.62)_82%,rgba(255,255,255,0)_100%)] px-7 py-8 min-[690px]:max-w-[640px] min-[690px]:py-9">
                 <h1 className="text-center text-[1.4rem] font-bold leading-tight text-black min-[690px]:text-[2rem]">
                   THE POLYMATH TYPE QUIZ

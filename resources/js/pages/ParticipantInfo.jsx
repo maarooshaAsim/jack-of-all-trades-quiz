@@ -67,7 +67,7 @@ export function ParticipantInfo() {
                 <Logo className="max-w-[30rem] min-[690px]:max-w-[27rem]" />
             </div>
     
-          <div id="position-box"   className="relative z-10 flex w-full flex-col items-center">
+          <div id="position-box"   className="relative z-10 flex w-full flex-col items-center landscape:translate-y-30">
               <div
                 className="pointer-events-none absolute left-1/2 top-[45%] -z-10 h-[24rem] md:h-[48rem] w-[27rem] md:w-[47rem] -translate-x-1/2 -translate-y-1/2 rounded-[999px] blur-2xl"
                 style={{
