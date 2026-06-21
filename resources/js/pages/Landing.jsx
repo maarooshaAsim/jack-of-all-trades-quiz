@@ -39,7 +39,8 @@ export function Landing({
             </div>
           ) : null}
 
-          <div className="relative z-10 flex min-h-screen flex-col items-center md:top-[37rem] top-[10rem]">
+          <div id="position-box" 
+            className="absolute left-1/2 top-1/2 z-10 flex w-full -translate-x-1/2 -translate-y-1/2 flex-col items-center">
               <div className="w-full max-w-[620px] rounded-[3rem] bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.98)_0%,rgba(255,255,255,0.98)_43%,rgba(255,255,255,0.9)_63%,rgba(255,255,255,0.62)_82%,rgba(255,255,255,0)_100%)] px-7 py-8 min-[690px]:max-w-[640px] min-[690px]:py-9">
                 <h1 className="text-center text-[1.4rem] font-bold leading-tight text-black min-[690px]:text-[2rem]">
                   THE POLYMATH TYPE QUIZ

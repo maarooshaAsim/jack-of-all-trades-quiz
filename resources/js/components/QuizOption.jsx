@@ -43,7 +43,7 @@ export function QuizOption({ accentColor, accentTextColor, option, isSelected, o
         style={{ backgroundColor: accentColor || "#68B6F7" }}
       >
         <span
-          className="font-['Outfit'] text-[0.88rem] font-bold min-[850px]:text-[0.95rem]"
+          className="font-['Outfit'] text-[0.88rem] font-bold min-[850px]:text-[1.25rem]"
           style={{ color: "#FFFFFF" }}
         >
           {option.key}
@@ -51,7 +51,7 @@ export function QuizOption({ accentColor, accentTextColor, option, isSelected, o
       </div>
 
       <div className="flex flex-1 items-center px-2.5 py-2 min-[850px]:px-3 min-[850px]:py-2.5">
-        <span className="break-words font-['Outfit'] text-[0.74rem] font-normal leading-[1.22] text-[#1E1E1E] min-[380px]:text-[0.8rem] min-[850px]:text-[0.84rem]">
+        <span className="break-words font-['Outfit'] text-[0.74rem] font-normal leading-[1.22] text-[#1E1E1E] min-[380px]:text-[0.8rem] min-[850px]:text-[1rem]">
           {option.text}
         </span>
       </div>

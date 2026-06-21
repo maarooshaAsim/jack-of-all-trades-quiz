@@ -44,6 +44,63 @@ body {
     min-height: 100svh;
 }
 
+.joat-quiz-logo,
+.joat-quiz-progress,
+.joat-quiz-question {
+    transition: margin 180ms ease;
+}
+
+/* Keep the complete quiz interface visible on short phones and landscape devices. */
+@media (max-height: 740px) {
+    .joat-quiz-screen {
+        padding-block: 0.5rem;
+    }
+
+    .joat-quiz-logo {
+        margin-top: 0.25rem;
+    }
+
+    .joat-quiz-logo > a {
+        max-width: 12rem;
+    }
+
+    .joat-quiz-progress {
+        margin-top: 0.35rem;
+    }
+
+    .joat-quiz-question {
+        margin-top: 0.55rem;
+    }
+}
+
+@media (orientation: landscape) and (max-height: 500px) {
+    .joat-quiz-logo > a {
+        max-width: 8.5rem;
+    }
+
+    .joat-quiz-question {
+        margin-top: 0.35rem;
+        max-width: 30rem;
+    }
+}
+
+/* Match the vertical rhythm used by the landing and explore screens. */
+@media (orientation: portrait) and (min-width: 700px) and (min-height: 1000px) {
+    .joat-quiz-logo {
+        margin-top: clamp(2.25rem, 5svh, 5.5rem);
+    }
+
+    .joat-quiz-progress {
+        margin-top: clamp(1.5rem, 3svh, 3.25rem);
+        max-width: 27rem;
+    }
+
+    .joat-quiz-question {
+        margin-top: clamp(4rem, 9svh, 10rem);
+        max-width: 30rem;
+    }
+}
+
 @media (min-width: 700px) and (min-height: 960px) {
     .joat-fixed-screen {
         height: min(920px, calc(100svh - 2rem));

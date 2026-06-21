@@ -60,14 +60,18 @@ export async function downloadElementAsJpeg(element, filename = 'joat-result.jpe
   await document.fonts?.ready
 
   const bounds = element.getBoundingClientRect()
+  const requestedWidth = Number.parseInt(element.dataset.exportWidth ?? '', 10)
+  const exportWidth = Number.isFinite(requestedWidth) && requestedWidth > 0
+    ? requestedWidth
+    : Math.ceil(bounds.width)
   const clone = element.cloneNode(true)
   copyComputedStyles(element, clone)
   clone.querySelectorAll('[data-export-hidden="true"]').forEach((node) => node.remove())
 
   clone.style.boxSizing = 'border-box'
-  clone.style.width = `${Math.ceil(bounds.width)}px`
-  clone.style.minWidth = `${Math.ceil(bounds.width)}px`
-  clone.style.maxWidth = `${Math.ceil(bounds.width)}px`
+  clone.style.width = `${exportWidth}px`
+  clone.style.minWidth = `${exportWidth}px`
+  clone.style.maxWidth = `${exportWidth}px`
   clone.style.background = '#f4f4f3'
 
   const host = document.createElement('div')

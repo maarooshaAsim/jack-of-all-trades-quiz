@@ -150,7 +150,7 @@ export function Quiz() {
             <section
               id="bg"
               ref={null}
-              className="joat-artboard  relative flex h-[100svh] flex-1 flex-col items-center overflow-hidden px-4 py-4 text-center font-['Outfit']"
+              className="joat-artboard relative flex h-[100svh] flex-1 flex-col items-center overflow-hidden px-4 py-4 text-center font-['Outfit']"
               style={{ backgroundColor: category.color }}
             >
      
@@ -164,75 +164,81 @@ export function Quiz() {
               }}
             />
     
-            <div className="pointer-events-none absolute inset-x-0 top-0 z-[1] h-[20rem] " style={{ backgroundColor: category.color }}/>
-    
-          <div className={`relative z-10 flex w-full flex-col items-center`}>
-                     <div className="mt-7 flex w-full justify-center min-[390px]:mt-9">
-                       <Logo variant='light' className="max-w-[30rem] min-[690px]:max-w-[27rem]" />
-                     </div>
-          </div>
-
-          <div className="mx-auto mt-3 w-full max-w-[21rem] shrink-0 px-1 min-[680px]:mt-4 min-[1650px]:mt-5">
-            <div className="h-[0.38rem] md:h-[.68rem] overflow-hidden rounded-full bg-white/65 shadow-[inset_0_1px_2px_rgba(0,0,0,0.08)]">
-              <div
-                className="h-full rounded-full transition-all duration-300"
-                style={{
-                  width: `${progressPercentage}%`,
-                  backgroundColor: theme.card,
-                }}
-              />
+            <div className="pointer-events-none absolute inset-x-0 top-0 z-[1] h-[18.3rem] " style={{ backgroundColor: category.color }}/>
+            <div className="relative z-10 flex w-full flex-col items-center">
+                <div className="mt-7 flex w-full justify-center min-[390px]:mt-9">
+                  <Logo variant="light" className="max-w-[30rem] min-[690px]:max-w-[27rem]" />
+                </div>
             </div>
-          </div>
 
-          <div className=" mx-auto mt-[clamp(1rem,4svh,3.5rem)] w-full max-w-[41rem] shrink-0 pb-2 min-[380px]:max-w-[23rem] min-[380px]:pb-3 min-[850px]:mt-[clamp(1.75rem,6svh,4rem)]">
-              <p
-                className="relative z-20 pb-1.5 text-center font-['Outfit'] text-[0.96rem] font-bold uppercase leading-tight text-[#EDECEC] min-[380px]:pb-2 min-[380px]:text-[1.25rem] min-[850px]:text-[1.40rem]"
-              >
-                {category.label}
-              </p>
-            <div
-              className=" xl:top-[10rem] relative z-10 rounded-[1.05rem] px-2 py-2 shadow-[0_16px_32px_rgba(0,0,0,0.2)] min-[380px]:px-2.5 min-[380px]:py-2.5 min-[850px]:py-3"
-              style={{ backgroundColor: theme.card }}
-            >
-              <h1 className="px-2 pb-2 pt-1 text-center font-['Outfit'] text-[0.78rem] leading-[1.22] text-white min-[380px]:pb-2.5 min-[380px]:pt-1.5 min-[380px]:text-[0.92rem] min-[850px]:pb-3 min-[850px]:pt-2 min-[850px]:text-[0.98rem]">
-                {currentQuestion.text}
-              </h1>
+          
+            <div className="relative z-10 flex min-h-screen flex-col items-center md:top-[27rem] top-[10rem]">
+                    <div className="w-full max-w-[620px] rounded-[3rem] px-7 py-8 min-[690px]:max-w-[640px] min-[690px]:py-9" style={{backgroundColor:category.color}}>
+            
+                   
+                    <div className="joat-quiz-progress mx-auto my-3 w-full max-w-[21rem] shrink-0 px-1 min-[680px]:my-4 min-[1650px]:my-5">
+                      <div className="h-[0.38rem] md:h-[.72rem] overflow-hidden rounded-full bg-white/65 shadow-[inset_0_1px_2px_rgba(0,0,0,0.08)]">
+                        <div
+                          className="h-full rounded-full transition-all duration-300"
+                          style={{
+                            width: `${progressPercentage}%`,
+                            backgroundColor: theme.card,
+                          }}
+                        />
+                      </div>
+                    </div>
 
-              <div className="space-y-2 min-[380px]:space-y-2.5 min-[850px]:space-y-3">
-                {currentQuestion.options.map((option) => (
-                  <QuizOption
-                    accentColor={theme.accent}
-                    accentTextColor={theme.accentText}
-                    key={option.key}
-                    option={option}
-                    isSelected={currentAnswer?.key === option.key}
-                    onSelect={() => handleSelectAnswer(option)}
-                    disabled={isSubmitting}
-                  />
-                ))}
+                    <div className=" mx-auto mt-[clamp(1rem,4svh,3.5rem)] w-full max-w-[30rem] shrink-0 pb-2 min-[380px]:pb-3 min-[850px]:mt-[clamp(1.75rem,6svh,4rem)]">
+                        <p
+                          className="relative z-20 pb-1.5 text-center font-['Outfit'] text-[0.96rem] font-bold uppercase leading-tight text-[#EDECEC] min-[380px]:pb-2 min-[380px]:text-[1.25rem] min-[850px]:text-[1.40rem]"
+                        >
+                          {category.label}
+                        </p>
+                      <div
+                        className="relative z-10 rounded-[1.05rem] px-2 py-2 shadow-[0_16px_32px_rgba(0,0,0,0.2)] min-[380px]:px-2.5 min-[380px]:py-2.5 min-[850px]:py-3"
+                        style={{ backgroundColor: theme.card }}
+                      >
+                        <h1 className="px-2 pb-2 pt-1 text-center font-['Outfit'] text-[0.78rem] leading-[1.22] text-white min-[380px]:pb-2.5 min-[380px]:pt-1.5 min-[380px]:text-[1rem] min-[850px]:pb-3 min-[850px]:pt-2 min-[850px]:text-[0.98rem]">
+                          {currentQuestion.text}
+                        </h1>
+
+                        <div className="space-y-2 min-[380px]:space-y-2.5 min-[850px]:space-y-3">
+                          {currentQuestion.options.map((option) => (
+                            <QuizOption
+                              accentColor={theme.accent}
+                              accentTextColor={theme.accentText}
+                              key={option.key}
+                              option={option}
+                              isSelected={currentAnswer?.key === option.key}
+                              onSelect={() => handleSelectAnswer(option)}
+                              disabled={isSubmitting}
+                            />
+                          ))}
+                        </div>
+
+                        {submitError ? (
+                          <p className="px-2 pt-3 pb-1 text-center text-xs font-semibold text-[#ffd5d5]">{submitError}</p>
+                        ) : null}
+
+                        <div className="flex w-full items-center justify-between px-3 pb-1 pt-2.5 min-[380px]:pb-2 min-[380px]:pt-3">
+                          <NavArrow
+                            direction="prev"
+                            disabled={isFirst || isSubmitting}
+                            label="Previous question"
+                            onClick={handlePrevious}
+                          />
+
+                          <NavArrow
+                            direction="next"
+                            disabled={!hasAnswered || isSubmitting}
+                            label={isLast ? "Submit quiz" : "Next question"}
+                            onClick={handleAdvance}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
               </div>
-
-              {submitError ? (
-                <p className="px-2 pt-3 pb-1 text-center text-xs font-semibold text-[#ffd5d5]">{submitError}</p>
-              ) : null}
-
-              <div className="flex w-full items-center justify-between px-3 pb-1 pt-2.5 min-[380px]:pb-2 min-[380px]:pt-3">
-                <NavArrow
-                  direction="prev"
-                  disabled={isFirst || isSubmitting}
-                  label="Previous question"
-                  onClick={handlePrevious}
-                />
-
-                <NavArrow
-                  direction="next"
-                  disabled={!hasAnswered || isSubmitting}
-                  label={isLast ? "Submit quiz" : "Next question"}
-                  onClick={handleAdvance}
-                />
-              </div>
-            </div>
-          </div>
 
 
       </section>

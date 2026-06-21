@@ -81,11 +81,15 @@ function LoadedResult({ result }) {
 
   return (
     <ResultPageShell showLogo={false}>
-      <div ref={captureRef} className="">
+      <div
+        ref={captureRef}
+        data-export-width="488"
+        className="w-full max-w-[30.5rem]"
+      >
         <div className="flex flex-col items-center">
-          <Logo className="max-w-[17rem] min-[390px]:max-w-[20rem]" />
+          <Logo className="max-w-[30rem] min-[690px]:max-w-[27rem]" />
         </div>
-        <div>
+        <div className="w-full">
           <ResultTypeDetailContent
             resultType={resultType}
             quizResult={result}
