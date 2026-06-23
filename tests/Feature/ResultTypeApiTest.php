@@ -47,4 +47,18 @@ class ResultTypeApiTest extends TestCase
             ->assertJsonPath('data.slug', 'active-synthesizer')
             ->assertJsonPath('data.name', 'Active Synthesizer');
     }
+
+    public function test_it_resolves_a_legacy_result_type_slug(): void
+    {
+        ResultType::factory()->create([
+            'slug' => 'iterative-designer',
+            'name' => 'Iterative Designer',
+        ]);
+
+        $response = $this->getJson('/api/result-types/perfectionist-dropper');
+
+        $response->assertOk()
+            ->assertJsonPath('data.slug', 'iterative-designer')
+            ->assertJsonPath('data.name', 'Iterative Designer');
+    }
 }

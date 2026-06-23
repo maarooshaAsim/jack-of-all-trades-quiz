@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use Illuminate\Support\Str;
+use App\Support\ResultTypeSlug;
 use RuntimeException;
 
 class OutcomeCalculator
@@ -58,7 +58,7 @@ class OutcomeCalculator
             if ($this->scoreIsWithinRange($totalScore, $scoreTypeLink)) {
                 return [
                     'base_type' => $scoreTypeLink['base_type'],
-                    'branch_slug' => Str::slug($scoreTypeLink['branch']),
+                    'branch_slug' => ResultTypeSlug::fromName($scoreTypeLink['branch']),
                     'branch' => $scoreTypeLink['branch'],
                     'score_range' => $scoreTypeLink['score_range'],
                     'description' => $scoreTypeLink['description'],

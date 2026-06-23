@@ -31,4 +31,29 @@ class OutcomeCalculatorTest extends TestCase
             'description' => 'Specialization chosen by external pressure. Inherited path, not elected.',
         ], $result['outcome']);
     }
+
+    public function test_it_returns_the_current_slug_for_a_legacy_branch_name(): void
+    {
+        $scoreTypeLinkPath = tempnam(sys_get_temp_dir(), 'score-type-link-');
+
+        file_put_contents(
+            $scoreTypeLinkPath,
+            "Base Type,Branch,Total Score Range,Description\nActive Synthesizer,Perfectionist Dropper,18-90,Legacy branch\n",
+        );
+
+        try {
+            $calculator = new OutcomeCalculator($scoreTypeLinkPath);
+            $result = $calculator->calculate([
+                [
+                    'question_id' => 'q_01',
+                    'answer_key' => 'A',
+                    'score_value' => 18,
+                ],
+            ]);
+
+            $this->assertSame('iterative-designer', $result['outcome']['branch_slug']);
+        } finally {
+            unlink($scoreTypeLinkPath);
+        }
+    }
 }
